@@ -46,8 +46,13 @@ export default function Contact({ personal }: ContactProps) {
       return;
     }
 
-    // Determine PHP API endpoint (fallback to local PHP server at port 8000)
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+    // Determine PHP API endpoint dynamically
+    let apiBase = "http://localhost:8000";
+    if (process.env.NEXT_PUBLIC_API_URL) {
+      apiBase = process.env.NEXT_PUBLIC_API_URL;
+    } else if (typeof window !== "undefined") {
+      apiBase = window.location.port === "3000" ? "http://localhost:8000" : "";
+    }
     const endpoint = `${apiBase}/api/contact.php`;
 
     try {

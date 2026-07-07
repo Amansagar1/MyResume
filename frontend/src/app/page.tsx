@@ -22,7 +22,12 @@ export default function Home() {
     setLoading(true);
     setError(false);
     setMongodbError(null);
-    const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+    let apiBase = "http://localhost:8000";
+    if (process.env.NEXT_PUBLIC_API_URL) {
+      apiBase = process.env.NEXT_PUBLIC_API_URL;
+    } else if (typeof window !== "undefined") {
+      apiBase = window.location.port === "3000" ? "http://localhost:8000" : "";
+    }
     
     try {
       const response = await fetch(`${apiBase}/api/resume.php`);
