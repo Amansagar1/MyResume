@@ -15,9 +15,9 @@ $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // Check paths relative to script
 if (strpos($request_uri, 'resume.php') !== false || strpos($request_uri, 'api/resume') !== false) {
-    require_once __DIR__ . '/api/resume.php';
+    require_once __DIR__ . '/resume.php';
 } elseif (strpos($request_uri, 'contact.php') !== false || strpos($request_uri, 'api/contact') !== false) {
-    require_once __DIR__ . '/api/contact.php';
+    require_once __DIR__ . '/contact.php';
 } else {
     header("Content-Type: application/json");
     echo json_encode([
