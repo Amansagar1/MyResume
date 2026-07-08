@@ -53,6 +53,12 @@ export default function Contact({ personal }: ContactProps) {
     } else if (typeof window !== "undefined") {
       apiBase = window.location.port === "3000" ? "http://localhost:8000" : "";
     }
+    
+    // Normalize URL: remove trailing slash if present
+    if (apiBase.endsWith("/")) {
+      apiBase = apiBase.slice(0, -1);
+    }
+    
     const endpoint = `${apiBase}/api/contact.php`;
 
     try {

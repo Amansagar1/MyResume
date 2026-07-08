@@ -29,6 +29,11 @@ export default function Home() {
       apiBase = window.location.port === "3000" ? "http://localhost:8000" : "";
     }
     
+    // Normalize URL: remove trailing slash if present
+    if (apiBase.endsWith("/")) {
+      apiBase = apiBase.slice(0, -1);
+    }
+    
     try {
       const response = await fetch(`${apiBase}/api/resume.php`);
       if (response.ok) {
