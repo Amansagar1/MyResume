@@ -49,12 +49,9 @@ export default function ClickSparkles() {
     window.addEventListener("resize", handleResize);
 
     const sparkleColors = [
-      "#a855f7", // Electric Purple
-      "#c084fc", // Bright Lavender
+      "#a855f7", // Violet
+      "#c084fc", // Soft Lavender
       "#818cf8", // Indigo
-      "#ec4899", // Neon Fuchsia
-      "#f43f5e", // Rose
-      "#fbbf24", // Cyber Amber Gold
       "#ffffff", // Pure White
     ];
 
@@ -92,35 +89,35 @@ export default function ClickSparkles() {
     };
 
     const spawnSparkleBurst = (x: number, y: number) => {
-      // 1. Expanding shockwave ring
+      // 1. Subtle expanding shockwave ring
       ripples.push({
         x,
         y,
-        radius: 4,
-        maxRadius: 45,
-        alpha: 0.8,
+        radius: 2,
+        maxRadius: 28,
+        alpha: 0.5,
         color: sparkleColors[Math.floor(Math.random() * sparkleColors.length)],
       });
 
-      // 2. Exploding particles (18-24 sparkles)
-      const count = 20;
+      // 2. Crisp micro-particles (only 8 particles)
+      const count = 8;
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 1.5 + Math.random() * 5.5;
+        const speed = 1.2 + Math.random() * 3.0;
         const color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
 
         particles.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 0.5,
-          size: 2 + Math.random() * 4.5,
+          vy: Math.sin(angle) * speed - 0.4,
+          size: 1.5 + Math.random() * 2.5,
           color,
-          alpha: 1,
-          decay: 0.018 + Math.random() * 0.025,
+          alpha: 0.9,
+          decay: 0.03 + Math.random() * 0.02,
           rotation: Math.random() * Math.PI * 2,
           rotSpeed: (Math.random() - 0.5) * 0.2,
-          isStar: Math.random() > 0.35,
+          isStar: true,
         });
       }
     };
@@ -129,30 +126,7 @@ export default function ClickSparkles() {
       spawnSparkleBurst(e.clientX, e.clientY);
     };
 
-    // Also gentle trail on drag/move
-    let lastTrailTime = 0;
-    const handleMouseMove = (e: MouseEvent) => {
-      const now = performance.now();
-      if (now - lastTrailTime > 60 && Math.random() > 0.5) {
-        lastTrailTime = now;
-        particles.push({
-          x: e.clientX,
-          y: e.clientY,
-          vx: (Math.random() - 0.5) * 1.2,
-          vy: (Math.random() - 0.5) * 1.2 - 0.5,
-          size: 1.5 + Math.random() * 2,
-          color: sparkleColors[Math.floor(Math.random() * sparkleColors.length)],
-          alpha: 0.7,
-          decay: 0.035,
-          rotation: 0,
-          rotSpeed: 0.05,
-          isStar: true,
-        });
-      }
-    };
-
     window.addEventListener("click", handleClick);
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     let animationId: number;
 
@@ -223,7 +197,6 @@ export default function ClickSparkles() {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("click", handleClick);
-      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 

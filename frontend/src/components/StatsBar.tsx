@@ -38,7 +38,7 @@ export default function StatsBar() {
   ];
 
   return (
-    <section className="relative z-20 -mt-6 mb-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative z-20 my-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {stats.map((stat, idx) => (
           <motion.div

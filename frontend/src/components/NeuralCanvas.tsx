@@ -51,24 +51,24 @@ export default function NeuralCanvas() {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseout", handleMouseLeave);
 
-    // Initialize network nodes
-    const nodeCount = Math.min(Math.floor((width * height) / 22000), 55);
+    // Initialize network nodes (minimal & elegant)
+    const nodeCount = Math.min(Math.floor((width * height) / 45000), 22);
     const nodes: Node[] = [];
 
     for (let i = 0; i < nodeCount; i++) {
-      const radius = Math.random() * 1.8 + 1.2;
+      const radius = Math.random() * 1.2 + 0.8;
       nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
         radius,
         baseRadius: radius,
-        alpha: Math.random() * 0.4 + 0.2,
+        alpha: Math.random() * 0.3 + 0.15,
       });
     }
 
-    const maxDistance = 140;
+    const maxDistance = 110;
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -84,30 +84,24 @@ export default function NeuralCanvas() {
         if (node.x < 0 || node.x > width) node.vx *= -1;
         if (node.y < 0 || node.y > height) node.vy *= -1;
 
-        // Mouse interaction: slight gravitation & node size boost
+        // Subtle mouse interaction
         const dxMouse = mouse.x - node.x;
         const dyMouse = mouse.y - node.y;
         const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
 
         if (distMouse < mouse.radius) {
-          const force = (1 - distMouse / mouse.radius) * 0.6;
-          node.x += (dxMouse / distMouse) * force * 1.5;
-          node.y += (dyMouse / distMouse) * force * 1.5;
-          node.radius = node.baseRadius * 1.6;
-        } else {
-          node.radius = node.baseRadius;
+          const force = (1 - distMouse / mouse.radius) * 0.4;
+          node.x += (dxMouse / distMouse) * force;
+          node.y += (dyMouse / distMouse) * force;
         }
 
-        // Draw node (Electric Violet)
+        // Draw node
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(168, 85, 247, ${node.alpha})`;
-        ctx.shadowColor = "#a855f7";
-        ctx.shadowBlur = 6;
         ctx.fill();
-        ctx.shadowBlur = 0;
 
-        // Draw connecting lines between nodes
+        // Draw subtle connecting lines between nodes
         for (let j = i + 1; j < nodes.length; j++) {
           const other = nodes[j];
           const dx = node.x - other.x;
@@ -115,25 +109,14 @@ export default function NeuralCanvas() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDistance) {
-            const alpha = (1 - dist / maxDistance) * 0.18;
+            const alpha = (1 - dist / maxDistance) * 0.08;
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
             ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
-        }
-
-        // Draw connection line to mouse (Neon Fuchsia)
-        if (distMouse < mouse.radius) {
-          const alpha = (1 - distMouse / mouse.radius) * 0.35;
-          ctx.beginPath();
-          ctx.moveTo(node.x, node.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(236, 72, 153, ${alpha})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
         }
       }
 
@@ -153,7 +136,7 @@ export default function NeuralCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-60"
+      className="fixed inset-0 pointer-events-none z-0 opacity-30"
       aria-hidden="true"
     />
   );

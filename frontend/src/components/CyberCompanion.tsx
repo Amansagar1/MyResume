@@ -36,15 +36,14 @@ const suggestedPrompts = [
 ];
 
 export default function CyberCompanion() {
-  // Avatar position state
-  const [pos, setPos] = useState({ x: 84, y: 72 });
+  // Floating Avatar Position & Roaming state
+  const [pos, setPos] = useState({ x: 86, y: 70 });
   const [rotation, setRotation] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [speech, setSpeech] = useState<string | null>("Hi! 👋 Click me to test Python RAG!");
+  const [speech, setSpeech] = useState<string | null>("Hey! 👋 Click me to chat with Python RAG!");
   const [faceExpression, setFaceExpression] = useState<"normal" | "happy" | "speed" | "sparkle">("normal");
   const [isSpinning, setIsSpinning] = useState(false);
   const speechTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   // Chat Terminal State
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
@@ -58,7 +57,7 @@ export default function CyberCompanion() {
     {
       id: "welcome-1",
       sender: "bot",
-      text: "Greetings! 🤖 I'm **Amnu**, Kumar Aman Sagar's personal AI Avatar.\n\nI am powered by a **Python 3.11 FastAPI RAG engine** supporting open-source models (Llama 3.3, DeepSeek R1, Ollama) and LLMs.\n\nAsk me anything about Kumar's background, AI projects, tech stack, or availability!",
+      text: "Greetings! 🤖 I'm **Amnu**, Kumar Aman Sagar's personal AI Avatar.\n\nI'm powered by a **Python 3.11 FastAPI RAG engine** supporting open-source models (Ollama, Groq Llama 3.3, DeepSeek R1) and cloud LLMs.\n\nAsk me anything about Kumar's background, AI projects, tech stack, or full-time availability!",
       citations: ["Python RAG Knowledge Base"],
       providerUsed: "Python FastAPI RAG Microservice"
     }
@@ -91,16 +90,26 @@ export default function CyberCompanion() {
     }
   }, [messages, isChatOpen]);
 
-  // 1. Roaming behavior across the window (paused when chat is open)
+  // Auto-dismiss initial greeting after 6 seconds
   useEffect(() => {
-    if (isChatOpen) return;
+    speechTimeoutRef.current = setTimeout(() => {
+      setSpeech(null);
+    }, 6000);
+    return () => {
+      if (speechTimeoutRef.current) clearTimeout(speechTimeoutRef.current);
+    };
+  }, []);
+
+  // Roaming floating motion across the peripheral viewport
+  useEffect(() => {
+    if (isChatOpen || isHovered) return;
 
     const roamInterval = setInterval(() => {
-      const isMobile = window.innerWidth < 768;
-      const minX = isMobile ? 65 : 45;
-      const maxX = isMobile ? 85 : 88;
-      const minY = 35;
-      const maxY = 80;
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+      const minX = isMobile ? 68 : 65;
+      const maxX = isMobile ? 86 : 88;
+      const minY = 28;
+      const maxY = 76;
 
       const nextX = minX + Math.random() * (maxX - minX);
       const nextY = minY + Math.random() * (maxY - minY);
@@ -109,13 +118,13 @@ export default function CyberCompanion() {
       setRotation(deltaX > 0 ? 8 : -8);
       setPos({ x: nextX, y: nextY });
 
-      setTimeout(() => setRotation(0), 1800);
-    }, 9000);
+      setTimeout(() => setRotation(0), 1600);
+    }, 7500);
 
     return () => clearInterval(roamInterval);
-  }, [pos.x, isChatOpen]);
+  }, [pos.x, isChatOpen, isHovered]);
 
-  // 2. Scroll interaction
+  // Dynamic scroll reaction: aerodynamic tilt and thruster speed
   useEffect(() => {
     if (isChatOpen) return;
 
@@ -127,14 +136,14 @@ export default function CyberCompanion() {
       const isScrollingDown = currentScrollY > lastScrollY;
       lastScrollY = currentScrollY;
 
-      setRotation(isScrollingDown ? 10 : -10);
+      setRotation(isScrollingDown ? 12 : -12);
       setFaceExpression("speed");
 
       if (scrollTimer) clearTimeout(scrollTimer);
       scrollTimer = setTimeout(() => {
         setRotation(0);
         setFaceExpression("normal");
-      }, 500);
+      }, 400);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -260,53 +269,65 @@ export default function CyberCompanion() {
 
   return (
     <>
-      {/* 1. Roaming Drone Companion */}
-      <div
-        className={`fixed z-[70] select-none transition-all duration-[2200ms] ease-out ${
-          isChatOpen ? "pointer-events-none" : "pointer-events-auto"
+      {/* 1. Floating Autonomous Cyber Companion ("Amnu") */}
+      <motion.div
+        drag
+        dragConstraints={{ left: -120, right: 120, top: -120, bottom: 120 }}
+        dragElastic={0.2}
+        className={`fixed z-[75] select-none transition-opacity duration-300 ${
+          isChatOpen ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
         }`}
+        animate={{
+          left: `${pos.x}vw`,
+          top: `${pos.y}vh`,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 45,
+          damping: 18,
+          mass: 0.8,
+        }}
         style={{
-          left: isChatOpen ? "calc(100vw - 120px)" : `${pos.x}vw`,
-          top: isChatOpen ? "calc(100vh - 120px)" : `${pos.y}vh`,
           transform: "translate(-50%, -50%)",
         }}
       >
         <div className="relative group cursor-pointer" onClick={handleBotClick}>
-          {/* Interactive Speech Bubble */}
+          {/* Interactive Non-Intrusive Speech Bubble / Tooltip */}
           <AnimatePresence>
-            {!isChatOpen && speech && (
+            {!isChatOpen && (speech || isHovered) && (
               <motion.div
-                initial={{ opacity: 0, y: 10, scale: 0.85 }}
+                initial={{ opacity: 0, y: 8, scale: 0.92 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 5, scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                className="absolute bottom-full mb-3 right-1/2 translate-x-1/2 w-52 sm:w-60 p-3 rounded-2xl bg-zinc-950/95 border border-violet-500/40 shadow-[0_0_30px_rgba(139,92,246,0.35)] backdrop-blur-xl text-left"
+                exit={{ opacity: 0, y: 6, scale: 0.92 }}
+                className="absolute bottom-full right-1/2 translate-x-1/2 sm:right-0 sm:translate-x-0 mb-3 w-56 p-3 rounded-2xl bg-zinc-950/95 border border-violet-500/40 shadow-[0_10px_35px_rgba(0,0,0,0.85),0_0_20px_rgba(139,92,246,0.3)] backdrop-blur-xl text-left"
               >
                 <div className="flex items-start justify-between gap-1.5 mb-1">
                   <span className="text-[10px] font-mono font-bold text-violet-400 flex items-center gap-1 uppercase tracking-wider">
                     <Cpu className="w-3 h-3" />
-                    PYTHON RAG AGENT
+                    AMNU • FLOATING AI
                   </span>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSpeech(null);
-                    }}
-                    className="text-zinc-500 hover:text-white cursor-pointer"
-                  >
-                    <X className="w-3 h-3" />
-                  </button>
+                  {speech && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSpeech(null);
+                      }}
+                      className="text-zinc-500 hover:text-white cursor-pointer"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  )}
                 </div>
                 <p className="text-xs text-zinc-200 font-sans leading-relaxed">
-                  {speech}
+                  {speech || "Floating companion ready! Click me to chat with Python RAG & Open-Source LLMs."}
                 </p>
-                <div className="mt-2 pt-1 border-t border-zinc-800 flex items-center justify-between text-[10px] text-violet-400 font-mono font-semibold">
-                  <span>TAP TO CHAT WITH AI</span>
+                <div className="mt-2 pt-1 border-t border-zinc-850 flex items-center justify-between text-[10px] text-violet-400 font-mono font-semibold">
+                  <span>CLICK OR DRAG</span>
                   <span>⚡</span>
                 </div>
                 {/* Pointer triangle */}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-6 border-x-transparent border-t-6 border-t-zinc-950" />
+                <div className="absolute top-full right-1/2 -translate-x-1/2 sm:right-6 sm:translate-x-0 w-0 h-0 border-x-6 border-x-transparent border-t-6 border-t-zinc-950" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -318,8 +339,8 @@ export default function CyberCompanion() {
               rotate: isSpinning ? [0, 360] : rotation,
             }}
             transition={{
-              y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
-              rotate: isSpinning ? { duration: 0.6, ease: "easeInOut" } : { duration: 1.2 },
+              y: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
+              rotate: isSpinning ? { duration: 0.6, ease: "easeInOut" } : { duration: 1.0 },
             }}
             onMouseEnter={() => {
               setIsHovered(true);
@@ -329,22 +350,22 @@ export default function CyberCompanion() {
               setIsHovered(false);
               setFaceExpression("normal");
             }}
-            className="relative w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center filter drop-shadow-[0_0_20px_rgba(139,92,246,0.5)]"
-            title="Click to Chat with Kumar's Python RAG AI Avatar!"
+            className="relative w-15 h-15 sm:w-16 sm:h-16 flex items-center justify-center filter drop-shadow-[0_0_22px_rgba(139,92,246,0.55)] cursor-grab active:cursor-grabbing"
+            title="Amnu Floating AI Companion (Click to chat, Drag to move)"
           >
             {/* Outer Halo Pulsing Ring */}
-            <div className="absolute inset-0 rounded-full border border-violet-500/30 animate-ping opacity-30" />
+            <div className="absolute inset-0 rounded-full border border-violet-500/30 animate-ping opacity-25" />
             <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-violet-600/30 via-fuchsia-600/20 to-indigo-600/30 blur-md pointer-events-none" />
 
             {/* Bot Body (Aerodynamic Cyber Sphere) */}
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-b from-zinc-850 via-zinc-900 to-black border-2 border-violet-400/60 shadow-2xl flex flex-col items-center justify-center overflow-hidden">
+            <div className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-b from-zinc-850 via-zinc-900 to-black border-2 border-violet-400/60 shadow-2xl flex flex-col items-center justify-center overflow-hidden">
               {/* Top Antenna Beacon */}
               <div className="absolute -top-1 w-2.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
 
               {/* Glowing Visor */}
-              <div className="w-10 sm:w-12 h-6 sm:h-7 rounded-xl bg-black/90 border border-violet-500/50 flex items-center justify-center shadow-inner relative overflow-hidden">
+              <div className="w-9 sm:w-11 h-5 sm:h-6 rounded-xl bg-black/90 border border-violet-500/50 flex items-center justify-center shadow-inner relative overflow-hidden">
                 <div className="absolute -top-2 -left-2 w-8 h-4 bg-white/20 rounded-full rotate-12 blur-[1px]" />
-                <div className="flex items-center gap-2 font-mono font-black text-xs sm:text-sm select-none">
+                <div className="flex items-center gap-1.5 font-mono font-black text-xs select-none">
                   {faceExpression === "normal" && (
                     <span className="text-violet-400 animate-pulse tracking-widest">&bull; &bull;</span>
                   )}
@@ -361,33 +382,33 @@ export default function CyberCompanion() {
               </div>
 
               {/* Micro Chest Core Light */}
-              <div className="mt-1 flex items-center gap-1">
+              <div className="mt-0.5 flex items-center gap-1">
                 <span className="w-1 h-1 rounded-full bg-violet-400 animate-ping" />
-                <span className="w-4 h-0.5 rounded-full bg-violet-500/60" />
+                <span className="w-3.5 h-0.5 rounded-full bg-violet-500/60" />
               </div>
             </div>
 
-            {/* Levitating Micro Thruster Flame */}
-            <div className="absolute -bottom-1.5 flex gap-2">
+            {/* Levitating Micro Thruster Flame with Jet Glow */}
+            <div className="absolute -bottom-1.5 flex gap-1.5">
               <span className="w-1.5 h-3 rounded-full bg-gradient-to-b from-violet-400 to-transparent animate-pulse" />
               <span className="w-1.5 h-4 rounded-full bg-gradient-to-b from-fuchsia-400 to-transparent animate-bounce" />
               <span className="w-1.5 h-3 rounded-full bg-gradient-to-b from-violet-400 to-transparent animate-pulse" />
             </div>
 
-            {/* Prompt Tag */}
+            {/* Floating Tag */}
             {!isChatOpen && isHovered && (
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="absolute -top-7 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold text-[9px] font-mono tracking-wider shadow-lg flex items-center gap-1 whitespace-nowrap"
+                className="absolute -top-6 px-2 py-0.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold text-[9px] font-mono tracking-wider shadow-lg flex items-center gap-1 whitespace-nowrap"
               >
-                <Zap className="w-2.5 h-2.5 text-amber-300 fill-amber-300" />
-                CHAT WITH AI
+                <Zap className="w-2 h-2 text-amber-300 fill-amber-300" />
+                CHAT
               </motion.div>
             )}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* 2. Interactive Python RAG & LLM Chat Terminal Modal */}
       <AnimatePresence>

@@ -37,43 +37,29 @@ export default function Hero({ personal }: HeroProps) {
         {/* Modern Interactive Availability Beacon & Telemetry Drawer */}
         <AvailabilityBeacon location={personal.location} email={personal.email} />
 
-        {/* Massive Kitanga-style Split Branding */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center text-center md:text-left mb-8">
-          {/* Left Title: Name */}
-          <div className="space-y-1">
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-violet-400 font-bold block mb-2">
-              // LEAD ARCHITECT &amp; ENGINEER
-            </span>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white tracking-tight uppercase leading-[0.95]">
-              Kumar <br />
-              <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(139,92,246,0.3)]">
-                Aman Sagar
+        {/* Cohesive Clean Hero Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mt-4">
+          {/* Left Column: Core Identity & Actions */}
+          <div className="lg:col-span-6 text-center lg:text-left space-y-5">
+            <div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-3">
+                <Sparkles className="w-3 h-3 text-violet-400" />
+                FULL STACK &amp; AI APPLICATION ENGINEER
               </span>
-            </h1>
-          </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-[1.05]">
+                Kumar{" "}
+                <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(139,92,246,0.3)]">
+                  Aman Sagar
+                </span>
+              </h1>
+            </div>
 
-          {/* Right Title: Role */}
-          <div className="md:text-right space-y-1">
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-zinc-500 font-bold block mb-2">
-              // PRODUCTION SPECIALIZATION
-            </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-zinc-300 tracking-tight uppercase leading-[0.98]">
-              AI &amp; Full <br />
-              <span className="text-white">Stack</span>
-            </h2>
-          </div>
-        </div>
-
-        {/* Main Content Row: Bio & 3D Interactive Terminal */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-6">
-          {/* Left: Summary & Quick Pills */}
-          <div className="lg:col-span-6 space-y-6">
-            <p className="text-sm sm:text-base text-zinc-350 leading-relaxed font-light">
-              Full Stack &amp; AI Application Engineer with <strong className="text-white font-semibold">3+ years</strong> of hands-on experience building production AI agent frameworks, RAG vector pipelines, and high-concurrency microservices on AWS ECS, Docker, and Redis.
+            <p className="text-sm sm:text-base text-zinc-350 leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
+              Full Stack &amp; AI Engineer with <strong className="text-white font-semibold">3+ years</strong> of production experience building autonomous AI agent networks, RAG vector pipelines, and high-concurrency microservices on AWS ECS, Docker, and Redis.
             </p>
 
             {/* Quick Contacts Pills */}
-            <div className="flex flex-wrap gap-2 text-xs text-zinc-350">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2 text-xs text-zinc-350 pt-1">
               <a
                 href={`mailto:${personal.email}`}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-violet-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
@@ -117,17 +103,17 @@ export default function Hero({ personal }: HeroProps) {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3.5 pt-2">
               <button
                 onClick={handleScrollToContact}
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-violet-500 via-indigo-500 to-fuchsia-500 text-white font-extrabold hover:brightness-110 active:scale-95 transition-all shadow-[0_0_25px_rgba(139,92,246,0.35)] cursor-pointer text-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-violet-500 via-indigo-500 to-fuchsia-500 text-white font-bold hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(139,92,246,0.35)] cursor-pointer text-xs sm:text-sm"
               >
                 Get In Touch
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 font-bold border border-zinc-800 hover:border-violet-500/40 transition-all cursor-pointer text-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 font-semibold border border-zinc-800 hover:border-violet-500/40 transition-all cursor-pointer text-xs sm:text-sm"
               >
                 <Terminal className="w-4 h-4 text-violet-400" />
                 Explore Systems
@@ -135,8 +121,8 @@ export default function Hero({ personal }: HeroProps) {
             </div>
           </div>
 
-          {/* Right: 3D AI Engineering Terminal */}
-          <div className="lg:col-span-6">
+          {/* Right Column: 3D AI Engineering Terminal */}
+          <div className="lg:col-span-6 flex justify-center">
             <AgentTerminal3D />
           </div>
         </div>
