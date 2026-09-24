@@ -54,7 +54,7 @@ $context = implode("\n\n", $matchedChunks);
 // 2. Call Google Gemini if API Key provided
 if (!empty($apiKey)) {
     $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" . urlencode($apiKey);
-    $prompt = "You are Nexus, the AI Avatar and Assistant for Kumar Aman Sagar (Full Stack & AI Application Engineer with 3+ years experience in Bengaluru).\n" .
+    $prompt = "You are Amnu, the AI Avatar and Assistant for Kumar Aman Sagar (Full Stack & AI Application Engineer with 3+ years experience in Bengaluru).\n" .
               "Answer concisely, enthusiastically, and professionally based strictly on the verified context below:\n\n" .
               "CONTEXT:\n$context\n\n" .
               "USER QUESTION: $query";

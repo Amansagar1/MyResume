@@ -147,7 +147,7 @@ export default function Home() {
       {/* Interactive Sparkle Burst on Mouse Click */}
       <ClickSparkles />
 
-      {/* Roaming Autonomous AI Drone Companion ("Nexus Bot") */}
+      {/* Roaming Autonomous AI Drone Companion ("Amnu") */}
       <CyberCompanion />
 
       <Navbar githubUrl={resumeData.personal.github} personalName={resumeData.personal.name} />

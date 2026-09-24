@@ -58,7 +58,7 @@ export default function CyberCompanion() {
     {
       id: "welcome-1",
       sender: "bot",
-      text: "Greetings! 🤖 I'm **Nexus**, Kumar Aman Sagar's personal AI Avatar.\n\nI am powered by a **Python 3.11 FastAPI RAG engine** indexing Kumar's verified resume data, LLM integrations, and microservices architecture.\n\nAsk me anything about Kumar's background, AI projects, tech stack, or availability!",
+      text: "Greetings! 🤖 I'm **Amnu**, Kumar Aman Sagar's personal AI Avatar.\n\nI am powered by a **Python 3.11 FastAPI RAG engine** indexing Kumar's verified resume data, LLM integrations, and microservices architecture.\n\nAsk me anything about Kumar's background, AI projects, tech stack, or availability!",
       citations: ["Python RAG Knowledge Base"],
       providerUsed: "Python FastAPI RAG Microservice"
     }
@@ -67,9 +67,9 @@ export default function CyberCompanion() {
   // Read saved API key if previously entered
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const savedKey = localStorage.getItem("nexus_avatar_llm_key");
+      const savedKey = localStorage.getItem("amnu_avatar_llm_key");
       if (savedKey) setApiKey(savedKey);
-      const savedProvider = localStorage.getItem("nexus_avatar_llm_provider");
+      const savedProvider = localStorage.getItem("amnu_avatar_llm_provider");
       if (savedProvider === "openai" || savedProvider === "gemini") setProvider(savedProvider);
     }
   }, []);
@@ -78,8 +78,8 @@ export default function CyberCompanion() {
     setApiKey(key);
     setProvider(prov);
     if (typeof window !== "undefined") {
-      localStorage.setItem("nexus_avatar_llm_key", key);
-      localStorage.setItem("nexus_avatar_llm_provider", prov);
+      localStorage.setItem("amnu_avatar_llm_key", key);
+      localStorage.setItem("amnu_avatar_llm_provider", prov);
     }
     setShowSettings(false);
   };
@@ -408,7 +408,7 @@ export default function CyberCompanion() {
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h3 className="text-xs font-bold text-white font-heading">Nexus AI Avatar</h3>
+                    <h3 className="text-xs font-bold text-white font-heading">Amnu AI Avatar</h3>
                     <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-violet-500/20 text-violet-300 border border-violet-500/30">
                       Python 3.11 RAG
                     </span>
@@ -477,7 +477,7 @@ export default function CyberCompanion() {
                     </button>
                   </div>
                   <p className="text-[10px] text-zinc-400 leading-tight">
-                    * Without a cloud key, Nexus automatically uses the high-accuracy <strong>Python Local RAG Engine</strong> with zero latency!
+                    * Without a cloud key, Amnu automatically uses the high-accuracy <strong>Python Local RAG Engine</strong> with zero latency!
                   </p>
                 </motion.div>
               )}
@@ -578,7 +578,7 @@ export default function CyberCompanion() {
             >
               <input
                 type="text"
-                placeholder="Ask Nexus about Kumar's AI skills, projects..."
+                placeholder="Ask Amnu about Kumar's AI skills, projects..."
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 disabled={isGenerating}

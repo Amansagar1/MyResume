@@ -160,88 +160,112 @@ class PythonRAGPipeline:
         return top_matches
 
     def synthesize_local(self, query: str, retrieved_chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """High-accuracy fallback answer generator without external API dependencies"""
-        q = query.lower()
+        """Conversational ChatGPT-style persona generator for Amnu"""
+        q = query.lower().strip()
         citations = [c["title"] for c in retrieved_chunks]
 
-        if any(w in q for w in ["available", "notice", "hire", "join", "immediate", "salary", "bengaluru", "relocat"]):
+        # 1. Greetings & Identity ("hi", "who are you", "what can you do")
+        if any(w in q for w in ["who are you", "who r u", "your name", "what is your name", "introduce yourself", "tell me about yourself"]) or q in ["hi", "hello", "hey", "hola", "yo", "sup"]:
             return {
-                "text": "Kumar Aman Sagar is actively **AVAILABLE FOR FULL-TIME ROLES** in **Bengaluru**! He is an **immediate joiner** (< 15 days notice) and open to On-site in Bengaluru, Hybrid, or Global Remote roles as a Full Stack or AI Application Engineer.",
-                "citations": ["Availability & Notice Period", "Contact Information & Coordinates"],
+                "text": "Hello there! 👋 I'm **Amnu**, the personal AI Avatar and Assistant for **Kumar Aman Sagar**.\n\nThink of me like your interactive guide to Kumar's engineering career! I can walk you through his **3+ years of experience** building AI agent architectures, his work at **I2 Global**, his production tech stack (React, Next.js, Node.js, Python, AWS ECS, Redis), or his availability for full-time opportunities in Bengaluru.\n\nWhat would you like to explore first?",
+                "citations": ["Kumar Aman Sagar - Overview & Bio"],
+                "suggestedAction": {"label": "Explore Kumar's Story ↗", "href": "#about"}
+            }
+
+        # 2. Why hire Kumar / What makes him great
+        if any(w in q for w in ["why hire", "why should", "great", "stand out", "unique", "special", "strengths"]):
+            return {
+                "text": "What makes Kumar stand out is his battle-tested blend of **deep full-stack fundamentals** and **modern AI agent engineering**:\n\n• ⚡ **Production AI Integration:** He architected an interactive AI assistant with LLM APIs & Server-Sent Events (SSE) for low-latency streaming responses.\n• 🚀 **High-Concurrency Systems:** Built microservices on AWS ECS sustaining 99.9% uptime and configured Redis caching to cut latency by 40% (220ms → 128ms).\n• 📦 **Frontend Performance:** Reduced React client-side bundles by 30% for ultra-fast load times.\n• ⏱️ **Immediate Availability:** He is an immediate joiner (< 15 days notice) based in Bengaluru, open to Hybrid, On-site, or Remote roles!\n\nWould you like his direct contact details?",
+                "citations": ["I2 Global Virtual Learning", "Full Stack Tech Stack", "Availability & Notice Period"],
                 "suggestedAction": {"label": "Contact Kumar Directly ↗", "href": "#contact"}
             }
 
-        if any(w in q for w in ["i2", "experience", "current", "job", "work", "latency", "redis"]):
+        # 3. Availability, notice period, location, salary
+        if any(w in q for w in ["available", "notice", "hire", "join", "immediate", "salary", "bengaluru", "relocat", "open to work"]):
             return {
-                "text": "Kumar has **3+ years** of production engineering experience. Currently, he is a **Full Stack & AI Developer at I2 Global Virtual Learning** (Bengaluru), where he architected an interactive AI student assistant using LLM APIs & Server-Sent Events (SSE), built microservices on AWS ECS (99.9% uptime), and implemented Redis caching to cut query latency by 40% (220ms → 128ms).",
-                "citations": ["I2 Global Virtual Learning - Full Stack & AI Developer"],
-                "suggestedAction": {"label": "Explore Experience Section ↗", "href": "#experience"}
+                "text": "Yes! Kumar Aman Sagar is actively **AVAILABLE FOR FULL-TIME ROLES** in **Bengaluru**! 🚀\n\nHere are his hiring parameters:\n• ⏱️ **Notice Period:** Immediate Joiner (< 15 days available)\n• 📍 **Location:** Bengaluru, Karnataka (Open to Relocation)\n• 💼 **Preferred Modes:** On-Site, Hybrid, or Global Remote\n• 🎯 **Target Positions:** Full Stack Engineer, AI Application Developer, Frontend Specialist, or Microservices Architect.\n\nYou can reach him directly via email at `kumaramansagar01@gmail.com` or call `+91 8434120273`.",
+                "citations": ["Availability & Notice Period", "Contact Information & Coordinates"],
+                "suggestedAction": {"label": "Initiate Discussion ↗", "href": "#contact"}
             }
 
+        # 4. Work Experience & I2 Global
+        if any(w in q for w in ["i2", "experience", "current", "job", "work", "latency", "redis", "company", "career"]):
+            return {
+                "text": "Kumar has **3+ years** of professional experience delivering scalable production software:\n\n1. **I2 Global Virtual Learning (Nov 2025 – Present | Full Stack & AI Developer):**\n   • Engineered an AI student assistant with LLM APIs and SSE streaming for sub-second responses.\n   • Deployed containerized microservices on AWS ECS maintaining 99.9% platform availability.\n   • Cut API latency by 40% using Redis caching and PostgreSQL query optimization.\n   • Automated zero-downtime CI/CD workflows using Docker and GitHub Actions.\n\n2. **Digital-Sync Technologies (Feb 2024 – Nov 2025 | Full Stack Developer):**\n   • Built real-time IoT energy monitoring dashboards and ingestion pipelines with Redis rate-limiting.\n\n3. **Achintya Solutions (Jun 2023 – Feb 2024 | Web Developer Intern):**\n   • Developed responsive React.js interfaces and consumed RESTful APIs.",
+                "citations": ["I2 Global Virtual Learning - Full Stack & AI Developer", "Digital-Sync Technologies"],
+                "suggestedAction": {"label": "View Career Timeline ↗", "href": "#experience"}
+            }
+
+        # 5. AI, LLM, RAG, and Agents
         if any(w in q for w in ["ai", "llm", "rag", "agent", "prompt", "vector", "embedding", "openai", "gemini", "claude"]):
             return {
-                "text": "Kumar specializes in **AI Engineering & LLM Orchestration**!\n• **RAG Pipelines:** Vector search and document context augmentation using Pinecone and pgvector.\n• **LLM APIs:** OpenAI GPT-4, Google Gemini, Anthropic Claude with structured function calling.\n• **Autonomous AI Agents:** Automated student query resolution and low-latency streaming via SSE.",
-                "citations": ["AI Engineering & LLM Orchestration Skills"],
+                "text": "Kumar has dedicated hands-on expertise in **AI Engineering & LLM Orchestration**! 🧠\n\nHere is what he builds with AI:\n• **RAG Pipelines:** Designs vector indexing and contextual document augmentation using Pinecone and pgvector embeddings.\n• **LLM API Integration:** Seamless orchestration with Google Gemini, OpenAI GPT-4, and Anthropic Claude, utilizing structured tool/function calling.\n• **Real-Time Streaming:** Implements Server-Sent Events (SSE) and WebSockets so users get instant streaming tokens without long waiting times.\n• **Autonomous AI Workflows:** Automated content customization and query resolution bots.",
+                "citations": ["AI Engineering & LLM Orchestration Skills", "Enterprise AI Automation Platform"],
                 "suggestedAction": {"label": "View AI Skill Stack ↗", "href": "#skills"}
             }
 
-        if any(w in q for w in ["skill", "stack", "react", "next", "python", "node", "aws", "docker", "tech"]):
+        # 6. Tech Stack, Frontend, Backend, Cloud
+        if any(w in q for w in ["skill", "stack", "react", "next", "python", "node", "aws", "docker", "tech", "database", "postgres", "mongo"]):
             return {
-                "text": "Kumar's production tech stack includes:\n• **Frontend:** React.js, Next.js, TypeScript, Tailwind CSS, WebGL.\n• **Backend:** Python (FastAPI, Flask), Node.js, Express.js, RESTful microservices.\n• **Databases & Caching:** PostgreSQL, MongoDB, Redis (task queues & caching).\n• **Cloud & DevOps:** AWS (ECS, S3, RDS, Lambda), Docker, GitHub Actions CI/CD.",
+                "text": "Here is an overview of Kumar's production tech stack: 💻\n\n• **Frontend:** React.js, Next.js (App Router, Server Components), TypeScript, JavaScript (ES6+), Tailwind CSS, Framer Motion, Three.js WebGL.\n• **Backend & APIs:** Python (FastAPI, Flask), Node.js, Express.js, REST microservices, asynchronous task queues.\n• **Databases & Cache:** PostgreSQL, MongoDB, Redis (caching, pub/sub, rate-limiting), MySQL.\n• **Cloud & DevOps:** AWS (ECS, S3, RDS, Lambda, CloudWatch), Docker, Kubernetes, GitHub Actions CI/CD, Terraform, Linux.\n\nEverything is built with clean architecture, strict TypeScript typing, and high availability in mind!",
                 "citations": ["Full Stack Tech Stack", "Cloud Architecture & DevOps Systems"],
                 "suggestedAction": {"label": "Inspect Full Tech Stack ↗", "href": "#skills"}
             }
 
-        if any(w in q for w in ["project", "built", "portfolio", "smartdoc", "automation"]):
+        # 7. Projects
+        if any(w in q for w in ["project", "built", "portfolio", "smartdoc", "automation", "pipeline"]):
             return {
-                "text": "Kumar has engineered production-proven systems:\n1. **Enterprise AI Automation & Agent Platform:** Next.js + Python/Flask with LLM APIs, async Redis queues, and MongoDB.\n2. **Cloud-Native Automated CI/CD & AI Microservices:** Containerized AWS ECS deployment via Docker, GitHub Actions, and Terraform.",
-                "citations": ["Enterprise AI Automation & Agent Workflow Platform", "Cloud-Native Automated CI/CD Pipeline"],
+                "text": "Kumar has engineered several impressive production-grade projects: 🛠️\n\n1. **Enterprise AI Automation & Agent Platform:**\n   • A full-stack automation system featuring a Next.js frontend and an asynchronous Python/Flask backend.\n   • Integrates LLM APIs with high-throughput Redis task queues and MongoDB to process distributed agent tasks smoothly.\n\n2. **Cloud-Native Automated CI/CD & AI Microservices Pipeline:**\n   • End-to-end continuous deployment architecture using GitHub Actions, Docker, and AWS ECS.\n   • Deploys containerized endpoints with zero downtime and automated Terraform cloud provisioning.\n\nWould you like me to take you to the live project showcase?",
+                "citations": ["Enterprise AI Automation Platform", "Cloud-Native CI/CD Pipeline"],
                 "suggestedAction": {"label": "Inspect Projects ↗", "href": "#projects"}
             }
 
-        if any(w in q for w in ["contact", "email", "phone", "reach", "linkedin", "github"]):
+        # 8. Certifications & Education
+        if any(w in q for w in ["certif", "oracle", "degree", "education", "college", "university", "mca", "study"]):
             return {
-                "text": "Connect with Kumar directly:\n• 📧 **Email:** kumaramansagar01@gmail.com\n• 📱 **Phone:** +91 8434120273\n• 🌐 **LinkedIn:** linkedin.com/in/kumaramansagar\n• 💻 **GitHub:** github.com/Amansagar1\n• 📍 **Location:** Bengaluru, Karnataka",
-                "citations": ["Contact Information & Coordinates"],
-                "suggestedAction": {"label": "Send Message ↗", "href": "#contact"}
+                "text": "Kumar has backed his practical skills with verified credentials: 🎓\n\n• 🏆 **Oracle Cloud Infrastructure (OCI) 2025 Certified AI Foundations Associate**\n• 🏆 **Oracle Fusion AI Agent Studio Certified Foundations Associate**\n• 📜 **React JS Developer Certification** — EdYoda Digital University\n• 🎓 **Master of Computer Applications (MCA)** — IGNOU (Bangalore Institute of Technology Center) [Pursuing]\n• 🎓 **Executive Certification in Full Stack Engineering** — EdYoda (Score: 89%)\n• 🎓 **Bachelor of Arts (BA)** — Muslim Minority Degree College\n\nHis certifications validate both his cloud infrastructure readiness and applied AI mastery!",
+                "citations": ["Industry Certifications", "Formal Education"],
+                "suggestedAction": {"label": "View Credentials ↗", "href": "#skills"}
             }
 
-        # Fallback to direct chunk compilation
-        content = "\n\n".join([f"• **{c['title']}:** {c['content']}" for c in retrieved_chunks])
+        # 9. Contact details
+        if any(w in q for w in ["contact", "email", "phone", "reach", "linkedin", "github", "connect"]):
+            return {
+                "text": "You can connect with Kumar directly through any of these channels: 📬\n\n• 📧 **Email:** kumaramansagar01@gmail.com\n• 📱 **Phone:** +91 8434120273\n• 🌐 **LinkedIn:** [linkedin.com/in/kumaramansagar](https://linkedin.com/in/kumaramansagar)\n• 💻 **GitHub:** [github.com/Amansagar1](https://github.com/Amansagar1)\n• 📍 **Location:** Bengaluru, Karnataka\n\nHe responds quickly to messages and emails!",
+                "citations": ["Contact Information & Coordinates"],
+                "suggestedAction": {"label": "Send Message Now ↗", "href": "#contact"}
+            }
+
+        # Conversational contextual synthesis for any other query
+        highlights = "\n".join([f"• **{c['title']}:** {c['content'][:180]}..." for c in retrieved_chunks[:2]])
         return {
-            "text": f"Here is the verified information regarding your query:\n\n{content}",
-            "citations": citations,
-            "suggestedAction": {"label": "View Portfolio ↗", "href": "#about"}
+            "text": f"That's a great question! Based on Kumar Aman Sagar's verified background:\n\n{highlights}\n\nIs there a specific project, technical skill, or aspect of his work you'd like me to dive deeper into?",
+            "citations": citations[:2],
+            "suggestedAction": {"label": "Explore Portfolio ↗", "href": "#about"}
         }
 
     def generate(self, query: str, api_key: Optional[str] = None, provider: str = "gemini") -> Dict[str, Any]:
-        """RAG Generation with Google Gemini or OpenAI, or fallback to local semantic RAG"""
+        """RAG Generation with Google Gemini, OpenAI, or high-speed ChatGPT model"""
         retrieved_chunks = self.retrieve(query, top_k=4)
         citations = [c["title"] for c in retrieved_chunks]
         context = "\n\n".join([f"[DOCUMENT: {c['title']}]\n{c['content']}" for c in retrieved_chunks])
 
-        # If no API key provided, look up environment variables or fallback
-        key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("OPENAI_API_KEY")
-        if not key:
-            local_ans = self.synthesize_local(query, retrieved_chunks)
-            return {
-                "text": local_ans["text"],
-                "citations": citations,
-                "suggestedAction": local_ans.get("suggestedAction"),
-                "providerUsed": "Python Local RAG Engine"
-            }
-
         system_prompt = (
-            "You are 'Nexus', the intelligent and friendly AI Avatar and Assistant for Kumar Aman Sagar.\n"
+            "You are 'Amnu', the intelligent, charismatic, and expert AI Avatar for Kumar Aman Sagar.\n"
             "Kumar is a Full Stack & AI Application Engineer with 3+ years experience based in Bengaluru.\n"
-            "Answer the question concisely, enthusiastically, and accurately using ONLY the verified resume context below.\n"
-            "If asked about hiring, emphasize he is an immediate joiner (< 15 days) in Bengaluru, open to Hybrid, On-site, or Remote.\n"
-            "Use clear markdown bullet points where helpful.\n\n"
+            "Respond naturally just like ChatGPT: conversational, smart, articulate, and helpful.\n"
+            "Speak as Amnu ('I can share that Kumar...', 'Kumar and our team engineered...').\n"
+            "Use the verified resume context below to provide accurate, production-level details.\n"
+            "If asked about hiring/availability, emphasize he is an immediate joiner (< 15 days notice) in Bengaluru, open to Hybrid, On-site, or Remote.\n"
+            "Format your answers with clean markdown points and bold highlights.\n\n"
             f"VERIFIED RESUME CONTEXT:\n{context}"
         )
 
-        try:
-            if provider == "gemini" or (not provider and "AIza" in key):
+        key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("OPENAI_API_KEY")
+
+        # 1. Custom Google Gemini Key if provided
+        if key and (provider == "gemini" or "AIza" in key):
+            try:
                 url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={key}"
                 payload = {
                     "contents": [{
@@ -249,11 +273,11 @@ class PythonRAGPipeline:
                         "parts": [{"text": f"{system_prompt}\n\nUSER QUESTION: {query}"}]
                     }],
                     "generationConfig": {
-                        "temperature": 0.3,
-                        "maxOutputTokens": 500
+                        "temperature": 0.4,
+                        "maxOutputTokens": 600
                     }
                 }
-                res = requests.post(url, json=payload, timeout=8)
+                res = requests.post(url, json=payload, timeout=9)
                 if res.status_code == 200:
                     data = res.json()
                     text = data["candidates"][0]["content"]["parts"][0]["text"]
@@ -262,8 +286,12 @@ class PythonRAGPipeline:
                         "citations": citations,
                         "providerUsed": "Google Gemini 1.5 Flash (Python RAG)"
                     }
-            else:
-                # OpenAI
+            except Exception as e:
+                print(f"[RAG Gemini error]: {e}")
+
+        # 2. Custom OpenAI Key if provided
+        if key and (provider == "openai" or key.startswith("sk-")):
+            try:
                 url = "https://api.openai.com/v1/chat/completions"
                 headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
                 payload = {
@@ -272,10 +300,10 @@ class PythonRAGPipeline:
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": query}
                     ],
-                    "temperature": 0.3,
-                    "max_tokens": 500
+                    "temperature": 0.4,
+                    "max_tokens": 600
                 }
-                res = requests.post(url, headers=headers, json=payload, timeout=8)
+                res = requests.post(url, headers=headers, json=payload, timeout=9)
                 if res.status_code == 200:
                     data = res.json()
                     text = data["choices"][0]["message"]["content"]
@@ -284,16 +312,37 @@ class PythonRAGPipeline:
                         "citations": citations,
                         "providerUsed": "OpenAI GPT-4o-mini (Python RAG)"
                     }
-        except Exception as e:
-            print(f"[RAG Pipeline] API Call exception: {e}")
+            except Exception as e:
+                print(f"[RAG OpenAI error]: {e}")
 
-        # Fallback if API fails
+        # 3. Fast Online LLM Attempt if reachable within 3.5s
+        try:
+            chatgpt_url = "https://text.pollinations.ai/"
+            chatgpt_payload = {
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": query}
+                ],
+                "model": "openai",
+                "seed": 42
+            }
+            res = requests.post(chatgpt_url, json=chatgpt_payload, timeout=3.5)
+            if res.status_code == 200 and res.text.strip():
+                return {
+                    "text": res.text.strip(),
+                    "citations": citations,
+                    "providerUsed": "ChatGPT (OpenAI GPT-4o Engine • Python RAG)"
+                }
+        except Exception:
+            pass
+
+        # 4. Instant Conversational RAG Generation
         local_ans = self.synthesize_local(query, retrieved_chunks)
         return {
             "text": local_ans["text"],
             "citations": citations,
             "suggestedAction": local_ans.get("suggestedAction"),
-            "providerUsed": "Python Local RAG Engine (Fallback)"
+            "providerUsed": "Amnu AI • Python RAG Engine"
         }
 
 rag_pipeline = PythonRAGPipeline()

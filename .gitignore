@@ -33,3 +33,9 @@ next-env.d.ts
 backend/data/messages.json
 backend/api/test_error.php
 backend/test_mongo.php
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+

@@ -1,5 +1,5 @@
 """
-FastAPI Server for Kumar Aman Sagar's AI Avatar (Nexus)
+FastAPI Server for Kumar Aman Sagar's AI Avatar (Amnu)
 Exposes RAG inference and LLM endpoints for the frontend cyber companion.
 """
 
@@ -56,7 +56,7 @@ def health():
     return {
         "status": "healthy",
         "chunks_indexed": len(rag_pipeline.chunks),
-        "avatar": "Nexus AI Scout",
+        "avatar": "Amnu AI Scout",
         "timestamp": time.time()
     }
 

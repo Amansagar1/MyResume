@@ -246,25 +246,54 @@ export async function generateLLMRAGResponse(
   const context = retrievedChunks.map(c => `[DOCUMENT: ${c.title}]\n${c.content}`).join("\n\n");
   const citations = retrievedChunks.map(c => c.title);
 
-  // If no API key provided, use local semantic RAG synthesis
-  if (!apiKey) {
-    const localResult = synthesizeLocalRAGAnswer(userQuery, retrievedChunks);
-    return {
-      text: localResult.answer,
-      citations: localResult.citations,
-      providerUsed: "Local RAG Engine (Verified Resume Data)"
-    };
-  }
-
-  const systemPrompt = `You are "Nexus", the intelligent, friendly, and ultra-professional AI Avatar and Assistant for Kumar Aman Sagar.
-Kumar is a Full Stack & AI Application Engineer with 3+ years of experience based in Bengaluru.
-Answer the user's question concisely, enthusiastically, and accurately using ONLY the verified resume context below.
-If asked about hiring, mention he is an immediate joiner in Bengaluru and open to Hybrid, On-site, or Remote roles.
-Keep answers formatted with crisp markdown bullet points.
+  const systemPrompt = `You are "Amnu", the intelligent, friendly, and expert AI Avatar for Kumar Aman Sagar.
+Kumar is a Full Stack & AI Application Engineer with 3+ years experience based in Bengaluru.
+Respond naturally just like ChatGPT: conversational, smart, articulate, and helpful.
+Speak as Amnu ('I can share that Kumar...', 'Kumar and our team engineered...').
+Use the verified resume context below to provide accurate, production-level details.
+If asked about hiring/availability, emphasize he is an immediate joiner (< 15 days notice) in Bengaluru, open to Hybrid, On-site, or Remote.
+Format your answers with clean markdown points and bold highlights.
 
 VERIFIED RESUME CONTEXT:
 ${context}
 `;
+
+  // If no API key provided, call high-speed ChatGPT model directly
+  if (!apiKey) {
+    try {
+      const response = await fetch("https://text.pollinations.ai/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userQuery }
+          ],
+          model: "openai",
+          seed: 42
+        })
+      });
+      if (response.ok) {
+        const text = await response.text();
+        if (text && text.trim()) {
+          return {
+            text: text.trim(),
+            citations,
+            providerUsed: "ChatGPT (OpenAI GPT-4o Engine • RAG)"
+          };
+        }
+      }
+    } catch (e) {
+      console.warn("ChatGPT call error, falling back:", e);
+    }
+
+    const localResult = synthesizeLocalRAGAnswer(userQuery, retrievedChunks);
+    return {
+      text: localResult.answer,
+      citations: localResult.citations,
+      providerUsed: "Local RAG Engine (Offline Fallback)"
+    };
+  }
 
   try {
     if (provider === "gemini") {
