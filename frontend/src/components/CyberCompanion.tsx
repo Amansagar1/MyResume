@@ -196,26 +196,33 @@ export default function CyberCompanion() {
     try {
       let responseData: any = null;
 
-      // 1. Try Python FastAPI Microservice first (Port 8001)
-      try {
-        const pyRes = await fetch("http://127.0.0.1:8001/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: query,
-            apiKey: apiKey || undefined,
-            provider: provider
-          })
-        });
+      // 1. Try Python FastAPI Microservice first if in local development or if NEXT_PUBLIC_AI_API_URL is configured
+      const isLocalhost = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
+      const configuredAiUrl = process.env.NEXT_PUBLIC_AI_API_URL;
 
-        if (pyRes.ok) {
-          responseData = await pyRes.json();
+      if (configuredAiUrl || isLocalhost) {
+        try {
+          const endpoint = configuredAiUrl ? `${configuredAiUrl}/chat` : "http://127.0.0.1:8001/chat";
+          const pyRes = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: query,
+              apiKey: apiKey || undefined,
+              provider: provider
+            }),
+            signal: AbortSignal.timeout(3500)
+          });
+
+          if (pyRes.ok) {
+            responseData = await pyRes.json();
+          }
+        } catch (pyErr) {
+          console.warn("Python backend unreachable, using Vercel Next.js API:", pyErr);
         }
-      } catch (pyErr) {
-        console.warn("Python backend unreachable, falling back to Next.js API:", pyErr);
       }
 
-      // 2. Fallback to Next.js API route (/api/chat) if Python microservice is not responding
+      // 2. Native Vercel Serverless Route (/api/chat)
       if (!responseData) {
         const nextRes = await fetch("/api/chat", {
           method: "POST",

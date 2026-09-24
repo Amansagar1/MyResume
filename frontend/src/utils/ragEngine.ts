@@ -235,18 +235,19 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
 
 /**
  * Call Live LLM API with RAG Augmented Context
+ * Fully compatible with Vercel Serverless execution
  */
 export async function generateLLMRAGResponse(
   userQuery: string,
   apiKey?: string,
-  provider: "gemini" | "openai" = "gemini"
-): Promise<{ text: string; citations: string[]; providerUsed: string }> {
+  provider: string = "gemini"
+): Promise<{ text: string; citations: string[]; providerUsed: string; suggestedAction?: { label: string; href: string } }> {
   // 1. Retrieve RAG Chunks
   const retrievedChunks = retrieveRelevantChunks(userQuery, 4);
   const context = retrievedChunks.map(c => `[DOCUMENT: ${c.title}]\n${c.content}`).join("\n\n");
   const citations = retrievedChunks.map(c => c.title);
 
-  const systemPrompt = `You are "Amnu", the intelligent, friendly, and expert AI Avatar for Kumar Aman Sagar.
+  const systemPrompt = `You are "Amnu", the intelligent, charismatic, and expert AI Avatar for Kumar Aman Sagar.
 Kumar is a Full Stack & AI Application Engineer with 3+ years experience based in Bengaluru.
 Respond naturally just like ChatGPT: conversational, smart, articulate, and helpful.
 Speak as Amnu ('I can share that Kumar...', 'Kumar and our team engineered...').
@@ -258,47 +259,55 @@ VERIFIED RESUME CONTEXT:
 ${context}
 `;
 
-  // If no API key provided, call high-speed ChatGPT model directly
-  if (!apiKey) {
-    try {
-      const response = await fetch("https://text.pollinations.ai/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [
-            { role: "system", content: systemPrompt },
-            { role: "user", content: userQuery }
-          ],
-          model: "openai",
-          seed: 42
-        })
-      });
-      if (response.ok) {
-        const text = await response.text();
-        if (text && text.trim()) {
-          return {
-            text: text.trim(),
-            citations,
-            providerUsed: "ChatGPT (OpenAI GPT-4o Engine • RAG)"
-          };
-        }
-      }
-    } catch (e) {
-      console.warn("ChatGPT call error, falling back:", e);
-    }
+  const activeKey = apiKey || process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY || process.env.HUGGINGFACE_API_KEY;
 
-    const localResult = synthesizeLocalRAGAnswer(userQuery, retrievedChunks);
-    return {
-      text: localResult.answer,
-      citations: localResult.citations,
-      providerUsed: "Local RAG Engine (Offline Fallback)"
-    };
+  // 1. Groq Open-Source Cloud (Meta Llama 3.3 70B & DeepSeek R1)
+  const groqKey = (activeKey && activeKey.startsWith("gsk_")) ? activeKey : process.env.GROQ_API_KEY;
+  if (groqKey || provider === "llama3" || provider === "deepseek" || provider === "groq") {
+    const keyToUse = groqKey || activeKey;
+    if (keyToUse) {
+      try {
+        const modelName = provider === "deepseek" ? "deepseek-r1-distill-llama-70b" : "llama-3.3-70b-versatile";
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${keyToUse}`
+          },
+          body: JSON.stringify({
+            model: modelName,
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: userQuery }
+            ],
+            temperature: 0.3,
+            max_tokens: 600
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const text = data?.choices?.[0]?.message?.content;
+          if (text) {
+            return {
+              text,
+              citations,
+              providerUsed: `Groq Open-Source (${modelName})`
+            };
+          }
+        }
+      } catch (e) {
+        console.warn("Groq open-source inference error, falling back:", e);
+      }
+    }
   }
 
-  try {
-    if (provider === "gemini") {
+  // 2. Google Gemini 1.5 Flash
+  const geminiKey = (activeKey && activeKey.startsWith("AIza")) ? activeKey : (process.env.GEMINI_API_KEY || activeKey);
+  if (geminiKey && (provider === "gemini" || geminiKey.startsWith("AIza"))) {
+    try {
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -306,9 +315,7 @@ ${context}
             contents: [
               {
                 role: "user",
-                parts: [
-                  { text: `${systemPrompt}\n\nUSER QUESTION: ${userQuery}` }
-                ]
+                parts: [{ text: `${systemPrompt}\n\nUSER QUESTION: ${userQuery}` }]
               }
             ],
             generationConfig: {
@@ -319,33 +326,31 @@ ${context}
         }
       );
 
-      if (!response.ok) {
-        const errText = await response.text();
-        console.warn("Gemini API error, falling back to local RAG:", errText);
-        const localFallback = synthesizeLocalRAGAnswer(userQuery, retrievedChunks);
-        return {
-          text: localFallback.answer,
-          citations,
-          providerUsed: "Local RAG Engine (Fallback)"
-        };
+      if (response.ok) {
+        const data = await response.json();
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text) {
+          return {
+            text,
+            citations,
+            providerUsed: "Google Gemini 1.5 Flash (Vercel Serverless)"
+          };
+        }
       }
+    } catch (e) {
+      console.warn("Gemini API error, falling back:", e);
+    }
+  }
 
-      const data = await response.json();
-      const generatedText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (generatedText) {
-        return {
-          text: generatedText,
-          citations,
-          providerUsed: "Google Gemini 1.5 Flash (RAG Augmented)"
-        };
-      }
-    } else {
-      // OpenAI Provider
+  // 3. OpenAI GPT-4o-mini
+  const openAiKey = (activeKey && activeKey.startsWith("sk-")) ? activeKey : (process.env.OPENAI_API_KEY || activeKey);
+  if (openAiKey && (provider === "openai" || openAiKey.startsWith("sk-"))) {
+    try {
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`
+          Authorization: `Bearer ${openAiKey}`
         },
         body: JSON.stringify({
           model: "gpt-4o-mini",
@@ -358,34 +363,67 @@ ${context}
         })
       });
 
-      if (!response.ok) {
-        const localFallback = synthesizeLocalRAGAnswer(userQuery, retrievedChunks);
-        return {
-          text: localFallback.answer,
-          citations,
-          providerUsed: "Local RAG Engine (Fallback)"
-        };
+      if (response.ok) {
+        const data = await response.json();
+        const text = data?.choices?.[0]?.message?.content;
+        if (text) {
+          return {
+            text,
+            citations,
+            providerUsed: "OpenAI GPT-4o-mini (Vercel Serverless)"
+          };
+        }
       }
-
-      const data = await response.json();
-      const generatedText = data?.choices?.[0]?.message?.content;
-      if (generatedText) {
-        return {
-          text: generatedText,
-          citations,
-          providerUsed: "OpenAI GPT-4o-mini (RAG Augmented)"
-        };
-      }
+    } catch (e) {
+      console.warn("OpenAI API error, falling back:", e);
     }
-  } catch (error) {
-    console.error("LLM fetch error:", error);
   }
 
-  // Graceful fallback to local RAG
-  const localFallback = synthesizeLocalRAGAnswer(userQuery, retrievedChunks);
+  // 4. HuggingFace Open-Source Inference
+  const hfKey = (activeKey && activeKey.startsWith("hf_")) ? activeKey : process.env.HUGGINGFACE_API_KEY;
+  if (hfKey || provider === "huggingface") {
+    const keyToUse = hfKey || activeKey;
+    if (keyToUse) {
+      try {
+        const response = await fetch("https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${keyToUse}`
+          },
+          body: JSON.stringify({
+            model: "meta-llama/Llama-3.2-3B-Instruct",
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: userQuery }
+            ],
+            max_tokens: 500
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const text = data?.choices?.[0]?.message?.content;
+          if (text) {
+            return {
+              text,
+              citations,
+              providerUsed: "HuggingFace Open-Source (Llama 3.2 3B)"
+            };
+          }
+        }
+      } catch (e) {
+        console.warn("HuggingFace API error, falling back:", e);
+      }
+    }
+  }
+
+  // 5. Intelligent Conversational Local RAG Engine (Zero external dependencies, 100% Vercel Uptime)
+  const localResult = synthesizeLocalRAGAnswer(userQuery, retrievedChunks);
   return {
-    text: localFallback.answer,
-    citations,
-    providerUsed: "Local RAG Engine"
+    text: localResult.answer,
+    citations: localResult.citations,
+    suggestedAction: localResult.suggestedAction,
+    providerUsed: "Amnu AI • Vercel Edge RAG Engine"
   };
 }
