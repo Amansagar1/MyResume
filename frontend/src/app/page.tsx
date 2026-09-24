@@ -4,12 +4,19 @@ import React, { useState, useEffect } from "react";
 import { ResumeData } from "../types/resume";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import StatsBar from "../components/StatsBar";
 import Experience from "../components/Experience";
 import Projects from "../components/Projects";
 import Skills from "../components/Skills";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
-import { Loader2, WifiOff, Play } from "lucide-react";
+import NeuralCanvas from "../components/NeuralCanvas";
+import CursorGlow from "../components/CursorGlow";
+import Scene3D from "../components/Scene3D";
+import AboutKitanga from "../components/AboutKitanga";
+import ClickSparkles from "../components/ClickSparkles";
+import CyberCompanion from "../components/CyberCompanion";
+import { Loader2, WifiOff, Play, Sparkles } from "lucide-react";
 import { fallbackResumeData } from "../data/fallbackData";
 
 export default function Home() {
@@ -62,55 +69,64 @@ export default function Home() {
     setError(false);
   };
 
-  // 1. Loading State
+  // 1. Loading State with 3D feel
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-zinc-50 font-sans">
-        <div className="flex flex-col items-center gap-4 p-8 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 shadow-2xl backdrop-blur-md">
-          <Loader2 className="w-10 h-10 text-teal-400 animate-spin" />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-zinc-50 font-sans relative overflow-hidden">
+        <NeuralCanvas />
+        <CursorGlow />
+        <div className="flex flex-col items-center gap-5 p-8 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-[0_0_50px_rgba(139,92,246,0.2)] backdrop-blur-2xl relative z-10">
+          <div className="relative">
+            <Loader2 className="w-10 h-10 text-violet-400 animate-spin" />
+            <div className="absolute inset-0 w-10 h-10 rounded-full bg-violet-400/20 blur-md animate-ping" />
+          </div>
           <div className="text-center space-y-1">
-            <h1 className="text-lg font-bold text-white tracking-wide">Connecting to PHP API...</h1>
-            <p className="text-xs text-zinc-500 font-light">Retrieving all resume sections and skills</p>
+            <h1 className="text-lg font-bold text-white tracking-wide flex items-center gap-2 font-heading">
+              <Sparkles className="w-4 h-4 text-violet-400" />
+              Initialising AI Engine &amp; REST API...
+            </h1>
+            <p className="text-xs text-zinc-500 font-mono">Connecting to PHP microservices &amp; portfolio state</p>
           </div>
         </div>
       </div>
     );
   }
 
-  // 2. Error / Offline State
+  // 2. Error / Offline State with clean recovery
   if (error || !resumeData) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-zinc-50 font-sans p-4">
-        <div className="max-w-md w-full flex flex-col items-center gap-6 p-8 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 shadow-2xl backdrop-blur-md text-center">
-          <div className="p-4 rounded-full bg-red-500/10 text-red-400 border border-red-500/20">
-            <WifiOff className="w-10 h-10" />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-zinc-50 font-sans p-4 relative overflow-hidden">
+        <NeuralCanvas />
+        <CursorGlow />
+        <div className="max-w-md w-full flex flex-col items-center gap-6 p-8 rounded-2xl bg-zinc-950/85 border border-zinc-800/80 shadow-2xl backdrop-blur-2xl text-center relative z-10">
+          <div className="p-4 rounded-2xl bg-red-500/10 text-red-400 border border-red-500/20 shadow-[0_0_20px_rgba(239,68,68,0.15)]">
+            <WifiOff className="w-8 h-8" />
           </div>
           <div className="space-y-2">
-            <h1 className="text-xl font-bold text-white">PHP API Offline</h1>
-            <p className="text-sm text-zinc-400 font-light leading-relaxed">
-              This portfolio is configured to retrieve all information dynamically from the PHP REST API, but the local backend is unreachable.
+            <h1 className="text-xl font-bold text-white tracking-tight font-heading">PHP REST API Unreachable</h1>
+            <p className="text-xs text-zinc-400 font-light leading-relaxed">
+              The portfolio attempted to retrieve resume data from the local PHP backend on port 8000.
             </p>
-            <div className="p-4 bg-zinc-950/80 border border-zinc-850 rounded-xl text-left text-xs font-mono text-zinc-500 space-y-2.5 mt-4">
-              <span className="text-teal-400 font-semibold">// Start local backend:</span>
-              <p>Navigate to backend directory and start server on port 8000:</p>
-              <div className="p-2 rounded bg-zinc-900 text-zinc-300 select-all border border-zinc-800">
-                php -S localhost:8000
+            <div className="p-4 bg-zinc-900/80 border border-zinc-850 rounded-xl text-left text-xs font-mono text-zinc-500 space-y-2 mt-4 shadow-inner">
+              <span className="text-violet-400 font-semibold">// Start local PHP backend:</span>
+              <div className="p-2 rounded-lg bg-black text-zinc-300 border border-zinc-800 select-all">
+                php -S 127.0.0.1:8000 -t backend/api
               </div>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 w-full pt-4">
+          <div className="flex flex-col sm:flex-row gap-3 w-full pt-2">
             <button
               onClick={fetchResumeData}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 text-zinc-950 font-bold hover:brightness-110 active:scale-95 transition-all text-sm cursor-pointer"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-500 via-indigo-500 to-fuchsia-500 text-white font-bold hover:brightness-110 active:scale-95 transition-all text-xs cursor-pointer shadow-lg shadow-violet-500/25"
             >
               Retry Connection
             </button>
             <button
               onClick={handleUseFallback}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-750 active:scale-95 transition-all text-sm cursor-pointer"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 text-zinc-200 border border-zinc-800 active:scale-95 transition-all text-xs cursor-pointer"
             >
-              <Play className="w-3.5 h-3.5 text-teal-400" />
-              Use Static Data
+              <Play className="w-3.5 h-3.5 text-violet-400" />
+              Use Verified Data
             </button>
           </div>
         </div>
@@ -118,28 +134,30 @@ export default function Home() {
     );
   }
 
-  // 3. Render Page with live API data
+  // 3. Render Page with live interactive 3D WebGL scene & Kitanga aesthetics
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-zinc-50 overflow-x-hidden selection:bg-teal-500 selection:text-black">
-      <div className="fixed top-0 left-0 right-0 h-[500px] bg-radial-gradient from-teal-500/5 via-transparent to-transparent pointer-events-none -z-20" />
-      
-      {mongodbError && (
-        <div className="bg-yellow-500/10 border-b border-yellow-500/20 text-yellow-400 px-4 py-2.5 text-center text-xs font-medium relative z-50 flex items-center justify-center gap-2">
-          <span>⚠️ <strong>MongoDB Connection Warning:</strong> {mongodbError}</span>
-          <button 
-            onClick={() => setMongodbError(null)} 
-            className="underline hover:text-white ml-2 cursor-pointer focus:outline-none"
-          >
-            Dismiss
-          </button>
-        </div>
-      )}
+    <div className="flex flex-col min-h-screen bg-zinc-950 text-zinc-50 overflow-x-hidden selection:bg-violet-500 selection:text-white relative font-sans">
+      {/* 2025.kitanga.dev 3D WebGL Canvas Scene */}
+      <Scene3D />
+
+      {/* Interactive AI Neural Constellation & Cursor Glow */}
+      <NeuralCanvas />
+      <CursorGlow />
+
+      {/* Interactive Sparkle Burst on Mouse Click */}
+      <ClickSparkles />
+
+      {/* Roaming Autonomous AI Drone Companion ("Nexus Bot") */}
+      <CyberCompanion />
 
       <Navbar githubUrl={resumeData.personal.github} personalName={resumeData.personal.name} />
-      <main className="flex-grow">
+      
+      <main className="flex-grow relative z-10">
         <Hero personal={resumeData.personal} />
-        <Experience experience={resumeData.experience} />
+        <StatsBar />
+        <AboutKitanga personal={resumeData.personal} />
         <Projects projects={resumeData.projects} />
+        <Experience experience={resumeData.experience} />
         <Skills 
           skills={resumeData.skills} 
           certifications={resumeData.certifications} 
@@ -147,6 +165,7 @@ export default function Home() {
         />
         <Contact personal={resumeData.personal} />
       </main>
+
       <Footer personal={resumeData.personal} />
     </div>
   );

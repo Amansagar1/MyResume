@@ -1,79 +1,115 @@
 "use client";
 
 import React from "react";
-import { Briefcase, Calendar, CheckCircle2 } from "lucide-react";
+import { Briefcase, Calendar, CheckCircle2, Building2, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { ExperienceItem } from "../types/resume";
+import Card3D from "./Card3D";
 
 interface ExperienceProps {
   experience: ExperienceItem[];
 }
 
 export default function Experience({ experience }: ExperienceProps) {
+  // Associated skills/tech tags inferred per role for quick visual scanning
+  const getExperienceTags = (index: number) => {
+    switch (index) {
+      case 0:
+        return ["LLM APIs", "Server-Sent Events (SSE)", "AWS ECS", "Node.js", "TypeScript", "Redis Caching", "Docker CI/CD"];
+      case 1:
+        return ["IoT Telemetry", "Python FastAPI", "Node.js", "Redis Rate-Limiting", "AWS CloudWatch", "Kubernetes", "Docker"];
+      case 2:
+        return ["React.js", "JavaScript (ES6+)", "Figma UI", "REST APIs", "Context API", "Agile Sprints"];
+      default:
+        return [];
+    }
+  };
+
   return (
-    <section id="experience" className="py-24 relative bg-zinc-950/60 overflow-hidden">
+    <section id="experience" className="py-20 relative bg-[#06060a]/80 overflow-hidden">
       {/* Decorative side blur */}
-      <div className="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-teal-500/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 -right-20 w-96 h-96 rounded-full bg-violet-600/10 blur-[150px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Title */}
-        <div className="text-center md:text-left mb-16">
-          <h2 className="text-xs uppercase tracking-widest text-teal-400 font-bold mb-2">My Journey</h2>
-          <h3 className="text-3xl sm:text-4xl font-extrabold text-white">Work Experience</h3>
-          <div className="h-1 w-20 bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full mt-4 mx-auto md:mx-0" />
+        <div className="text-center md:text-left mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-2.5">
+            <Sparkles className="w-3.5 h-3.5" />
+            CAREER TRAJECTORY
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Work Experience</h2>
+          <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
+            Hands-on engineering across AI agent integrations, high-throughput microservices, and distributed cloud systems.
+          </p>
+          <div className="h-1 w-16 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full mt-3 mx-auto md:mx-0" />
         </div>
 
-        {/* Timeline container */}
-        <div className="relative border-l border-zinc-800 ml-4 md:ml-6 space-y-12">
+        {/* Timeline container (tighter spacing) */}
+        <div className="relative border-l border-zinc-800 ml-3 md:ml-6 space-y-6">
           {experience.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="relative pl-8 md:pl-10 group"
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: index * 0.12 }}
+              className="relative pl-6 md:pl-9 group"
             >
               {/* Glowing Timeline Dot */}
-              <div className="absolute -left-3.5 top-1.5 w-7 h-7 rounded-full bg-zinc-950 border-2 border-zinc-800 group-hover:border-teal-400 flex items-center justify-center transition-colors duration-300 shadow-md">
-                <Briefcase className="w-3.5 h-3.5 text-zinc-500 group-hover:text-teal-400 transition-colors duration-300" />
+              <div className="absolute -left-[15px] top-3.5 w-7 h-7 rounded-full bg-zinc-950 border-2 border-zinc-800 group-hover:border-violet-400 flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.8)] z-20">
+                <Briefcase className="w-3 h-3 text-zinc-400 group-hover:text-violet-400 transition-colors duration-300" />
               </div>
-              
+
               {/* Highlight Pulse effect on dot */}
-              <div className="absolute -left-3.5 top-1.5 w-7 h-7 rounded-full bg-teal-400/20 scale-0 group-hover:scale-150 rounded-full transition-transform duration-500 pointer-events-none -z-10" />
+              <div className="absolute -left-[15px] top-3.5 w-7 h-7 rounded-full bg-violet-400/20 scale-100 group-hover:scale-150 transition-transform duration-500 pointer-events-none -z-10" />
 
-              {/* Experience Card */}
-              <div className="p-6 rounded-2xl bg-zinc-900/50 border border-zinc-800/80 hover:border-zinc-700/80 hover:bg-zinc-900 transition-all duration-300 shadow-xl relative overflow-hidden group-hover:-translate-y-1">
-                {/* Decorative card background glow */}
-                <div className="absolute -right-20 -top-20 w-40 h-40 rounded-full bg-teal-500/5 group-hover:bg-teal-500/10 blur-3xl transition-all duration-500" />
+              {/* 3D Tilt Experience Card (Tighter padding & spacing) */}
+              <Card3D depth={6} glowColor="rgba(139, 92, 246, 0.15)">
+                <div className="p-4 sm:p-5 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-violet-500/50 backdrop-blur-xl shadow-lg transition-all duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 mb-3.5">
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-violet-400 uppercase tracking-wider block mb-0.5">
+                        Role 0{index + 1}
+                      </span>
+                      <h3 className="text-lg sm:text-xl font-extrabold text-white group-hover:text-violet-300 transition-colors">
+                        {item.role}
+                      </h3>
+                      <div className="flex items-center gap-1.5 text-xs font-semibold text-zinc-300 mt-0.5">
+                        <Building2 className="w-3.5 h-3.5 text-violet-400" />
+                        {item.company}
+                      </div>
+                    </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                  <div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-teal-400 transition-colors duration-300">
-                      {item.role}
-                    </h4>
-                    <span className="text-sm font-semibold text-zinc-400 mt-1 block">
-                      {item.company}
+                    {/* Period badge */}
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-zinc-900 border border-zinc-800 text-zinc-300 shadow-inner self-start">
+                      <Calendar className="w-3 h-3 text-violet-400" />
+                      {item.period}
                     </span>
                   </div>
-                  
-                  {/* Period badge */}
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 self-start sm:self-center">
-                    <Calendar className="w-3 h-3 text-teal-400" />
-                    {item.period}
-                  </span>
-                </div>
 
-                {/* Job Highlights */}
-                <ul className="space-y-3">
-                  {item.highlights.map((point, pIndex) => (
-                    <li key={pIndex} className="flex items-start gap-3 text-sm text-zinc-350 leading-relaxed">
-                      <CheckCircle2 className="w-4.5 h-4.5 text-teal-500/85 mt-0.5 flex-shrink-0" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                  {/* Job Highlights */}
+                  <ul className="space-y-2 mb-4">
+                    {item.highlights.map((point, pIndex) => (
+                      <li key={pIndex} className="flex items-start gap-2.5 text-xs text-zinc-350 leading-relaxed font-light">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-violet-400 mt-0.5 flex-shrink-0" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Skills / Tech Stack Chips */}
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-850">
+                    {getExperienceTags(index).map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900/80 text-zinc-400 border border-zinc-800/80 hover:border-violet-500/30 hover:text-violet-300 transition-colors shadow-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Card3D>
             </motion.div>
           ))}
         </div>

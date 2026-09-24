@@ -1,9 +1,11 @@
 "use client";
 
 import React from "react";
-import { Mail, Phone, MapPin, Download, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight, Sparkles, Terminal, ArrowUpRight, Radio } from "lucide-react";
+import { LinkedinIcon, GithubIcon } from "./Icons";
 import { motion } from "framer-motion";
 import { PersonalInfo } from "../types/resume";
+import AgentTerminal3D from "./AgentTerminal3D";
 
 interface HeroProps {
   personal: PersonalInfo;
@@ -17,150 +19,149 @@ export default function Hero({ personal }: HeroProps) {
     }
   };
 
-  // Stagger configurations
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-  } as const;
-
-  const itemVariants = {
-    hidden: { y: 25, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: "spring" as const, stiffness: 100, damping: 15 },
-    },
+  const handleScrollDown = () => {
+    const nextSection = document.getElementById("experience") || document.getElementById("projects");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-zinc-950"
+      className="relative min-h-[96vh] flex flex-col justify-between pt-28 pb-12 overflow-hidden bg-transparent"
     >
-      {/* Dynamic Grid Background with Glows */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293710_1px,transparent_1px),linear-gradient(to_bottom,#1f293710_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      
-      {/* Decorative Blur Spheres */}
-      <div className="absolute top-1/4 left-1/10 w-72 h-72 rounded-full bg-teal-500/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/10 w-96 h-96 rounded-full bg-emerald-500/10 blur-[150px] pointer-events-none" />
+      {/* 2025.kitanga.dev Iconic Split Typography Header */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 pt-4">
+        {/* Availability Badge */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-zinc-900/80 text-violet-300 border border-violet-500/30 backdrop-blur-xl shadow-[0_0_20px_rgba(139,92,246,0.2)]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-400" />
+            </span>
+            <span className="font-mono tracking-wide">AVAILABLE FOR FULL-TIME ROLES &bull; BENGALURU</span>
+          </div>
+        </div>
 
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center sm:text-left flex flex-col md:flex-row items-center md:justify-between gap-12"
-        >
-          {/* Main Text Content */}
-          <div className="flex-1 space-y-6">
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-teal-500/10 text-teal-400 border border-teal-500/20 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-              Available for Full-time Roles
-            </motion.div>
-
-            <div className="space-y-2">
-              <motion.h1 
-                variants={itemVariants} 
-                className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight"
-              >
-                Hi, I'm{" "}
-                <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-500 bg-clip-text text-transparent">
-                  {personal.name}
-                </span>
-              </motion.h1>
-
-              <motion.h2 
-                variants={itemVariants} 
-                className="text-xl sm:text-2xl font-bold text-zinc-300 tracking-wide"
-              >
-                {personal.title} — <span className="text-teal-400">{personal.subtitle}</span>
-              </motion.h2>
-            </div>
-
-            <motion.p 
-              variants={itemVariants} 
-              className="text-base sm:text-lg text-zinc-400 max-w-2xl leading-relaxed font-light"
-            >
-              {personal.summary}
-            </motion.p>
-
-            {/* Quick Contacts */}
-            <motion.div 
-              variants={itemVariants} 
-              className="flex flex-wrap justify-center sm:justify-start gap-y-3 gap-x-6 text-sm text-zinc-400"
-            >
-              <a 
-                href={`mailto:${personal.email}`}
-                className="flex items-center gap-2 hover:text-teal-400 transition-colors"
-                id="contact-email-link"
-              >
-                <Mail className="w-4 h-4 text-teal-500" />
-                {personal.email}
-              </a>
-              <a 
-                href={`tel:${personal.phone}`}
-                className="flex items-center gap-2 hover:text-teal-400 transition-colors"
-                id="contact-phone-link"
-              >
-                <Phone className="w-4 h-4 text-teal-500" />
-                {personal.phone}
-              </a>
-              <span className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-teal-500" />
-                {personal.location}
+        {/* Massive Kitanga-style Split Branding */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center text-center md:text-left mb-8">
+          {/* Left Title: Name */}
+          <div className="space-y-1">
+            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-violet-400 font-bold block mb-2">
+              // LEAD ARCHITECT &amp; ENGINEER
+            </span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white tracking-tight uppercase leading-[0.95]">
+              Kumar <br />
+              <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(139,92,246,0.3)]">
+                Aman Sagar
               </span>
-            </motion.div>
-
-            {/* Call to Actions */}
-            <motion.div 
-              variants={itemVariants} 
-              className="flex flex-wrap justify-center sm:justify-start gap-4 pt-4"
-            >
-              <button
-                onClick={handleScrollToContact}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 text-zinc-950 font-bold hover:brightness-110 active:scale-95 transition-all shadow-lg hover:shadow-teal-500/10 cursor-pointer"
-                id="cta-hire-me"
-              >
-                Hire Me
-                <ArrowRight className="w-4 h-4" />
-              </button>
-              
-              <a
-                href="#experience"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-900 hover:bg-zinc-800 text-zinc-100 font-semibold border border-zinc-800 hover:border-zinc-700 transition-all cursor-pointer"
-                id="cta-experience"
-              >
-                View Experience
-              </a>
-            </motion.div>
+            </h1>
           </div>
 
-          {/* Graphical Animated Illustration Container */}
-          <motion.div
-            variants={itemVariants}
-            className="w-64 h-64 sm:w-80 sm:h-80 relative flex items-center justify-center pointer-events-none md:flex-shrink-0"
-          >
-            {/* Spinning gradient rings */}
-            <div className="absolute inset-0 rounded-full border border-zinc-850 animate-[spin_40s_linear_infinite]" />
-            <div className="absolute inset-4 rounded-full border border-dashed border-zinc-800 animate-[spin_20s_linear_infinite_reverse]" />
-            <div className="absolute inset-8 rounded-full bg-gradient-to-tr from-teal-500/10 to-emerald-500/10 border border-teal-500/20 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-center">
-              {/* Tech Stack Floating Tags */}
-              <div className="text-xs uppercase tracking-widest text-teal-400 font-bold">Skills Core</div>
-              <div className="text-xl font-bold text-white mt-1">{personal.title}</div>
-              <div className="text-xs text-zinc-400 mt-2 max-w-[170px]">{personal.subtitle}</div>
+          {/* Right Title: Role */}
+          <div className="md:text-right space-y-1">
+            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-zinc-500 font-bold block mb-2">
+              // PRODUCTION SPECIALIZATION
+            </span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-zinc-300 tracking-tight uppercase leading-[0.98]">
+              AI &amp; Full <br />
+              <span className="text-white">Stack</span>
+            </h2>
+          </div>
+        </div>
+
+        {/* Main Content Row: Bio & 3D Interactive Terminal */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-6">
+          {/* Left: Summary & Quick Pills */}
+          <div className="lg:col-span-6 space-y-6">
+            <p className="text-sm sm:text-base text-zinc-350 leading-relaxed font-light">
+              Full Stack &amp; AI Application Engineer with <strong className="text-white font-semibold">3+ years</strong> of hands-on experience building production AI agent frameworks, RAG vector pipelines, and high-concurrency microservices on AWS ECS, Docker, and Redis.
+            </p>
+
+            {/* Quick Contacts Pills */}
+            <div className="flex flex-wrap gap-2 text-xs text-zinc-350">
+              <a
+                href={`mailto:${personal.email}`}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-violet-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
+              >
+                <Mail className="w-3.5 h-3.5 text-violet-400" />
+                {personal.email}
+              </a>
+              <a
+                href={`tel:${personal.phone}`}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-violet-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
+              >
+                <Phone className="w-3.5 h-3.5 text-violet-400" />
+                {personal.phone}
+              </a>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-zinc-400 backdrop-blur-md shadow-sm">
+                <MapPin className="w-3.5 h-3.5 text-violet-400" />
+                {personal.location}
+              </span>
+              {personal.linkedin && (
+                <a
+                  href={personal.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-violet-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
+                >
+                  <LinkedinIcon className="w-3.5 h-3.5 text-violet-400" />
+                  LinkedIn
+                </a>
+              )}
+              {personal.github && (
+                <a
+                  href={personal.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-violet-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
+                >
+                  <GithubIcon className="w-3.5 h-3.5 text-violet-400" />
+                  GitHub
+                </a>
+              )}
             </div>
-            
-            {/* Floating Orbiting elements */}
-            <div className="absolute top-2 left-1/2 w-3 h-3 rounded-full bg-teal-400 shadow-[0_0_10px_#2dd4bf] animate-ping" />
-            <div className="absolute bottom-10 right-8 w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-          </motion.div>
-        </motion.div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4 pt-2">
+              <button
+                onClick={handleScrollToContact}
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-violet-500 via-indigo-500 to-fuchsia-500 text-white font-extrabold hover:brightness-110 active:scale-95 transition-all shadow-[0_0_25px_rgba(139,92,246,0.35)] cursor-pointer text-sm"
+              >
+                Get In Touch
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 font-bold border border-zinc-800 hover:border-violet-500/40 transition-all cursor-pointer text-sm"
+              >
+                <Terminal className="w-4 h-4 text-violet-400" />
+                Explore Systems
+              </a>
+            </div>
+          </div>
+
+          {/* Right: 3D AI Engineering Terminal */}
+          <div className="lg:col-span-6">
+            <AgentTerminal3D />
+          </div>
+        </div>
+      </div>
+
+      {/* 2025.kitanga.dev Iconic Scroll Hint at Bottom Right */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-end pt-8 z-10">
+        <button
+          onClick={handleScrollDown}
+          className="flex items-center gap-2 text-zinc-400 hover:text-white text-xs font-mono tracking-widest uppercase transition-colors cursor-pointer group"
+          id="scroll-hint"
+        >
+          {/* Animated Mouse Icon */}
+          <div className="w-4 h-6 rounded-full border border-zinc-500 group-hover:border-violet-400 flex items-start justify-center p-1 transition-colors">
+            <div className="w-1 h-1.5 rounded-full bg-violet-400 animate-bounce" />
+          </div>
+          <span>Scroll</span>
+        </button>
       </div>
     </section>
   );

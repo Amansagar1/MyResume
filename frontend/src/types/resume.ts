@@ -8,6 +8,8 @@ export interface PersonalInfo {
   location: string;
   github: string;
   githubUsername: string;
+  linkedin?: string;
+  linkedinUsername?: string;
 }
 
 export interface ExperienceItem {
@@ -23,16 +25,11 @@ export interface ProjectItem {
   highlights: string[];
   technologies: string[];
   link?: string;
+  github?: string;
+  demo?: string;
 }
 
-export interface Skills {
-  languages: string[];
-  frontend: string[];
-  backend: string[];
-  database: string[];
-  tools: string[];
-  other: string[];
-}
+export type Skills = Record<string, string[]>;
 
 export interface EducationItem {
   institution: string;
