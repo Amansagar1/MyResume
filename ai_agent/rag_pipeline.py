@@ -315,26 +315,84 @@ class PythonRAGPipeline:
             except Exception as e:
                 print(f"[RAG OpenAI error]: {e}")
 
-        # 3. Fast Online LLM Attempt if reachable within 3.5s
-        try:
-            chatgpt_url = "https://text.pollinations.ai/"
-            chatgpt_payload = {
-                "messages": [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": query}
-                ],
-                "model": "openai",
-                "seed": 42
-            }
-            res = requests.post(chatgpt_url, json=chatgpt_payload, timeout=3.5)
-            if res.status_code == 200 and res.text.strip():
-                return {
-                    "text": res.text.strip(),
-                    "citations": citations,
-                    "providerUsed": "ChatGPT (OpenAI GPT-4o Engine • Python RAG)"
+        groq_key = key if (key and key.startswith("gsk_")) else os.environ.get("GROQ_API_KEY")
+        hf_key = key if (key and key.startswith("hf_")) else os.environ.get("HUGGINGFACE_API_KEY")
+
+        # 1. Ollama (100% Local Offline Open-Source AI on localhost:11434)
+        if provider == "ollama" or (not key and provider == "local"):
+            try:
+                ollama_url = os.environ.get("OLLAMA_HOST", "http://localhost:11434") + "/api/generate"
+                ollama_model = os.environ.get("OLLAMA_MODEL", "llama3.2")
+                payload = {
+                    "model": ollama_model,
+                    "prompt": f"{system_prompt}\n\nUSER QUESTION: {query}",
+                    "stream": False
                 }
-        except Exception:
-            pass
+                res = requests.post(ollama_url, json=payload, timeout=10)
+                if res.status_code == 200:
+                    text = res.json().get("response", "")
+                    if text:
+                        return {
+                            "text": text.strip(),
+                            "citations": citations,
+                            "providerUsed": f"Ollama Local Open-Source ({ollama_model})"
+                        }
+            except Exception as e:
+                print(f"[Ollama probe error]: {e}")
+
+        # 2. Groq Open-Source Cloud (Meta Llama 3.3 70B & DeepSeek R1)
+        if groq_key or provider in ["groq", "llama3", "deepseek"]:
+            active_groq_key = groq_key or os.environ.get("GROQ_API_KEY")
+            if active_groq_key:
+                try:
+                    model_name = "deepseek-r1-distill-llama-70b" if provider == "deepseek" else "llama-3.3-70b-versatile"
+                    url = "https://api.groq.com/openai/v1/chat/completions"
+                    headers = {"Authorization": f"Bearer {active_groq_key}", "Content-Type": "application/json"}
+                    payload = {
+                        "model": model_name,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": query}
+                        ],
+                        "temperature": 0.3,
+                        "max_tokens": 600
+                    }
+                    res = requests.post(url, headers=headers, json=payload, timeout=8)
+                    if res.status_code == 200:
+                        text = res.json()["choices"][0]["message"]["content"]
+                        return {
+                            "text": text,
+                            "citations": citations,
+                            "providerUsed": f"Groq Open-Source ({model_name})"
+                        }
+                except Exception as e:
+                    print(f"[Groq open-source error]: {e}")
+
+        # 3. HuggingFace Open-Source Inference
+        if hf_key or provider == "huggingface":
+            active_hf_key = hf_key or os.environ.get("HUGGINGFACE_API_KEY")
+            if active_hf_key:
+                try:
+                    url = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct/v1/chat/completions"
+                    headers = {"Authorization": f"Bearer {active_hf_key}", "Content-Type": "application/json"}
+                    payload = {
+                        "model": "meta-llama/Llama-3.2-3B-Instruct",
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": query}
+                        ],
+                        "max_tokens": 500
+                    }
+                    res = requests.post(url, headers=headers, json=payload, timeout=9)
+                    if res.status_code == 200:
+                        text = res.json()["choices"][0]["message"]["content"]
+                        return {
+                            "text": text,
+                            "citations": citations,
+                            "providerUsed": "HuggingFace Open-Source (Llama-3.2-3B)"
+                        }
+                except Exception as e:
+                    print(f"[HuggingFace error]: {e}")
 
         # 4. Instant Conversational RAG Generation
         local_ans = self.synthesize_local(query, retrieved_chunks)

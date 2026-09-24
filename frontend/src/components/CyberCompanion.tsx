@@ -50,7 +50,7 @@ export default function CyberCompanion() {
   const [inputMessage, setInputMessage] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [apiKey, setApiKey] = useState("");
-  const [provider, setProvider] = useState<"gemini" | "openai">("gemini");
+  const [provider, setProvider] = useState<string>("gemini");
   const [showSettings, setShowSettings] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -58,7 +58,7 @@ export default function CyberCompanion() {
     {
       id: "welcome-1",
       sender: "bot",
-      text: "Greetings! 🤖 I'm **Amnu**, Kumar Aman Sagar's personal AI Avatar.\n\nI am powered by a **Python 3.11 FastAPI RAG engine** indexing Kumar's verified resume data, LLM integrations, and microservices architecture.\n\nAsk me anything about Kumar's background, AI projects, tech stack, or availability!",
+      text: "Greetings! 🤖 I'm **Amnu**, Kumar Aman Sagar's personal AI Avatar.\n\nI am powered by a **Python 3.11 FastAPI RAG engine** supporting open-source models (Llama 3.3, DeepSeek R1, Ollama) and LLMs.\n\nAsk me anything about Kumar's background, AI projects, tech stack, or availability!",
       citations: ["Python RAG Knowledge Base"],
       providerUsed: "Python FastAPI RAG Microservice"
     }
@@ -70,11 +70,11 @@ export default function CyberCompanion() {
       const savedKey = localStorage.getItem("amnu_avatar_llm_key");
       if (savedKey) setApiKey(savedKey);
       const savedProvider = localStorage.getItem("amnu_avatar_llm_provider");
-      if (savedProvider === "openai" || savedProvider === "gemini") setProvider(savedProvider);
+      if (savedProvider) setProvider(savedProvider);
     }
   }, []);
 
-  const handleSaveApiKey = (key: string, prov: "gemini" | "openai") => {
+  const handleSaveApiKey = (key: string, prov: string) => {
     setApiKey(key);
     setProvider(prov);
     if (typeof window !== "undefined") {
@@ -456,28 +456,42 @@ export default function CyberCompanion() {
                   <div className="flex gap-2">
                     <select
                       value={provider}
-                      onChange={(e) => setProvider(e.target.value as "gemini" | "openai")}
-                      className="px-2.5 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs outline-none"
+                      onChange={(e) => setProvider(e.target.value)}
+                      className="px-2 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs outline-none cursor-pointer"
                     >
-                      <option value="gemini">Google Gemini 1.5</option>
+                      <option value="gemini">Google Gemini (Free Cloud)</option>
+                      <option value="llama3">Meta Llama 3.3 (Groq Open Source)</option>
+                      <option value="deepseek">DeepSeek R1 (Open Source)</option>
+                      <option value="ollama">Ollama (Local Open Source)</option>
                       <option value="openai">OpenAI GPT-4o-mini</option>
+                      <option value="huggingface">HuggingFace Open Source</option>
                     </select>
-                    <input
-                      type="password"
-                      placeholder={provider === "gemini" ? "AIzaSy..." : "sk-..."}
-                      value={apiKey}
-                      onChange={(e) => setApiKey(e.target.value)}
-                      className="flex-1 px-3 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-200 placeholder-zinc-600 text-xs outline-none focus:border-violet-500"
-                    />
+                    {provider === "ollama" ? (
+                      <div className="flex-1 px-2.5 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-emerald-400 font-mono text-[10px] flex items-center">
+                        localhost:11434 (No key needed)
+                      </div>
+                    ) : (
+                      <input
+                        type="password"
+                        placeholder={
+                          provider === "gemini" ? "AIzaSy..." :
+                          provider === "llama3" || provider === "deepseek" ? "Groq key (gsk_...)" :
+                          provider === "huggingface" ? "HF key (hf_...)" : "sk-..."
+                        }
+                        value={apiKey}
+                        onChange={(e) => setApiKey(e.target.value)}
+                        className="flex-1 px-3 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-200 placeholder-zinc-600 text-xs outline-none focus:border-violet-500"
+                      />
+                    )}
                     <button
                       onClick={() => handleSaveApiKey(apiKey, provider)}
-                      className="px-3 py-1.5 rounded-lg bg-violet-600 text-white font-semibold text-xs hover:bg-violet-500 active:scale-95"
+                      className="px-3 py-1.5 rounded-lg bg-violet-600 text-white font-semibold text-xs hover:bg-violet-500 active:scale-95 cursor-pointer"
                     >
                       Save
                     </button>
                   </div>
                   <p className="text-[10px] text-zinc-400 leading-tight">
-                    * Without a cloud key, Amnu automatically uses the high-accuracy <strong>Python Local RAG Engine</strong> with zero latency!
+                    * Supports open-source AI (Llama 3.3, DeepSeek R1, Ollama) and cloud LLMs. Without a key, Amnu uses the built-in <strong>Python Local RAG Engine</strong>!
                   </p>
                 </motion.div>
               )}
