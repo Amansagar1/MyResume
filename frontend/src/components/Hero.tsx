@@ -6,6 +6,7 @@ import { LinkedinIcon, GithubIcon } from "./Icons";
 import { motion } from "framer-motion";
 import { PersonalInfo } from "../types/resume";
 import AgentTerminal3D from "./AgentTerminal3D";
+import AvailabilityBeacon from "./AvailabilityBeacon";
 
 interface HeroProps {
   personal: PersonalInfo;
@@ -33,16 +34,8 @@ export default function Hero({ personal }: HeroProps) {
     >
       {/* 2025.kitanga.dev Iconic Split Typography Header */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 pt-4">
-        {/* Availability Badge */}
-        <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-zinc-900/80 text-violet-300 border border-violet-500/30 backdrop-blur-xl shadow-[0_0_20px_rgba(139,92,246,0.2)]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-400" />
-            </span>
-            <span className="font-mono tracking-wide">AVAILABLE FOR FULL-TIME ROLES &bull; BENGALURU</span>
-          </div>
-        </div>
+        {/* Modern Interactive Availability Beacon & Telemetry Drawer */}
+        <AvailabilityBeacon location={personal.location} email={personal.email} />
 
         {/* Massive Kitanga-style Split Branding */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 items-center text-center md:text-left mb-8">
