@@ -31,8 +31,8 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
 
   const navItems = [
     { id: "home", label: "Overview" },
-    { id: "experience", label: "Experience" },
     { id: "projects", label: "Projects" },
+    { id: "experience", label: "Experience" },
     { id: "skills", label: "Skills & AI" },
     { id: "contact", label: "Contact" },
   ];
@@ -41,14 +41,21 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = navItems.map((item) => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 120;
+      const sections = navItems.map((item) => ({
+        id: item.id,
+        element: document.getElementById(item.id),
+      }));
 
+      // Find the last section that has scrolled past the top offset
       for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
-          break;
+        const { id, element } = sections[i];
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If the top of the section is at or above the navbar (plus some padding)
+          if (rect.top <= 150) {
+            setActiveSection(id);
+            break;
+          }
         }
       }
     };

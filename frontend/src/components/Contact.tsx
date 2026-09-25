@@ -6,6 +6,7 @@ import { LinkedinIcon } from "./Icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { PersonalInfo } from "../types/resume";
 import Card3D from "./Card3D";
+import Draggable from "./Draggable";
 
 interface ContactProps {
   personal: PersonalInfo;
@@ -104,10 +105,14 @@ export default function Contact({ personal }: ContactProps) {
             <Sparkles className="w-3.5 h-3.5" />
             INITIATE COLLABORATION
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Let's Connect</h2>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
-            Available for full-time engineering roles, AI agent integrations, and scalable full-stack web applications.
-          </p>
+          <Draggable>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Let's Connect</h2>
+          </Draggable>
+          <Draggable>
+            <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
+              Available for full-time engineering roles, AI agent integrations, and scalable full-stack web applications.
+            </p>
+          </Draggable>
           <div className="h-1 w-16 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full mt-3 mx-auto md:mx-0" />
         </div>
 

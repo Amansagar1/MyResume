@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import Draggable from "./Draggable";
 
 interface Card3DProps {
   children: React.ReactNode;
@@ -59,44 +60,46 @@ export default function Card3D({
   };
 
   return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{ perspective: 1000 }}
-      className={`relative group ${className}`}
-    >
-      <motion.div
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        className="w-full h-full relative rounded-2xl transition-shadow duration-300"
+    <Draggable className={`relative group w-full h-full ${className}`}>
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{ perspective: 1000 }}
+        className="w-full h-full"
       >
-        {children}
-
-        {/* Dynamic Interactive Glare / Glimpse Overlay */}
         <motion.div
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.2 }}
           style={{
-            background: `radial-gradient(400px circle at ${mouseX.get()}px ${mouseY.get()}px, ${glowColor}, transparent 70%)`,
+            rotateX,
+            rotateY,
+            transformStyle: "preserve-3d",
           }}
-          className="pointer-events-none absolute inset-0 rounded-2xl z-20 mix-blend-screen"
-        />
+          className="w-full h-full relative rounded-2xl transition-shadow duration-300"
+        >
+          {children}
 
-        {/* Subtle border highlight following the cursor */}
-        <motion.div
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.2 }}
-          style={{
-            background: `radial-gradient(250px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(168, 85, 247, 0.45), transparent 60%)`,
-          }}
-          className="pointer-events-none absolute -inset-px rounded-2xl z-10 -z-10 blur-[1px]"
-        />
-      </motion.div>
-    </div>
+          {/* Dynamic Interactive Glare / Glimpse Overlay */}
+          <motion.div
+            animate={{ opacity: isHovered ? 1 : 0 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              background: `radial-gradient(400px circle at ${mouseX.get()}px ${mouseY.get()}px, ${glowColor}, transparent 70%)`,
+            }}
+            className="pointer-events-none absolute inset-0 rounded-2xl z-20 mix-blend-screen"
+          />
+
+          {/* Subtle border highlight following the cursor */}
+          <motion.div
+            animate={{ opacity: isHovered ? 1 : 0 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              background: `radial-gradient(250px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(168, 85, 247, 0.45), transparent 60%)`,
+            }}
+            className="pointer-events-none absolute -inset-px rounded-2xl z-10 -z-10 blur-[1px]"
+          />
+        </motion.div>
+      </div>
+    </Draggable>
   );
 }

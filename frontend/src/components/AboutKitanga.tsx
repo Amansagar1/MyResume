@@ -3,6 +3,7 @@
 import React from "react";
 import { Sparkles, Terminal, Code2, Cpu, Cloud, Layers, CheckCircle2 } from "lucide-react";
 import { PersonalInfo } from "../types/resume";
+import Draggable from "./Draggable";
 
 interface AboutKitangaProps {
   personal: PersonalInfo;
@@ -39,9 +40,11 @@ export default function AboutKitanga({ personal }: AboutKitangaProps) {
             <Sparkles className="w-3 h-3 text-violet-400" />
             ENGINEERING PHILOSOPHY &bull; OVERVIEW
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            About Kumar
-          </h2>
+          <Draggable>
+            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              About Kumar
+            </h2>
+          </Draggable>
           <div className="h-0.5 w-12 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full" />
         </div>
 
@@ -49,12 +52,16 @@ export default function AboutKitanga({ personal }: AboutKitangaProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Narrative */}
           <div className="lg:col-span-6 space-y-4 text-sm sm:text-base text-zinc-350 leading-relaxed font-light">
-            <p>
-              I am a <strong className="text-white font-semibold">Full Stack &amp; AI Application Engineer</strong> based in Bengaluru with <strong className="text-white font-semibold">3+ years</strong> of battle-tested experience building and scaling software systems.
-            </p>
-            <p>
-              My focus centers on combining modern web user interfaces with intelligent backend agent systems. At I2 Global Virtual Learning, I engineered an AI assistant platform utilizing streaming LLM APIs that reduced API response times by 40% and improved concurrency across distributed cloud services.
-            </p>
+            <Draggable>
+              <p>
+                I am a <strong className="text-white font-semibold">Full Stack &amp; AI Application Engineer</strong> based in Bengaluru with <strong className="text-white font-semibold">3+ years</strong> of battle-tested experience building and scaling software systems.
+              </p>
+            </Draggable>
+            <Draggable>
+              <p>
+                My focus centers on combining modern web user interfaces with intelligent backend agent systems. At I2 Global Virtual Learning, I engineered an AI assistant platform utilizing streaming LLM APIs that reduced API response times by 40% and improved concurrency across distributed cloud services.
+              </p>
+            </Draggable>
             <div className="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-850 space-y-2 text-xs font-mono">
               <span className="text-violet-400 font-semibold block">// Production Stack</span>
               <p className="text-zinc-350 leading-normal">
@@ -75,17 +82,21 @@ export default function AboutKitanga({ personal }: AboutKitangaProps) {
                     <div className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-violet-400 group-hover:scale-110 transition-transform">
                       {pillar.icon}
                     </div>
-                    <h3 className="text-xs sm:text-sm font-bold text-white group-hover:text-violet-300 transition-colors">
-                      {pillar.title}
-                    </h3>
+                    <Draggable>
+                      <h3 className="text-xs sm:text-sm font-bold text-white group-hover:text-violet-300 transition-colors">
+                        {pillar.title}
+                      </h3>
+                    </Draggable>
                   </div>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400">
                     {pillar.tag}
                   </span>
                 </div>
-                <p className="text-xs text-zinc-400 font-light leading-relaxed pl-8">
-                  {pillar.desc}
-                </p>
+                <Draggable>
+                  <p className="text-xs text-zinc-400 font-light leading-relaxed pl-8">
+                    {pillar.desc}
+                  </p>
+                </Draggable>
               </div>
             ))}
           </div>

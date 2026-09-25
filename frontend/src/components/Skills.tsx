@@ -5,6 +5,7 @@ import { Cpu, Award, GraduationCap, ArrowRight, Code2, Database, Terminal, Setti
 import { motion, AnimatePresence } from "framer-motion";
 import { Skills as SkillsType, EducationItem } from "../types/resume";
 import Card3D from "./Card3D";
+import Draggable from "./Draggable";
 
 interface SkillsProps {
   skills: SkillsType;
@@ -54,10 +55,14 @@ export default function Skills({ skills, certifications, education }: SkillsProp
               <Sparkles className="w-3.5 h-3.5" />
               CAPABILITIES &bull; PROFICIENCIES
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Technical Arsenal</h2>
-            <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
-              Core technologies, architectural patterns, and verified engineering credentials.
-            </p>
+            <Draggable>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Technical Arsenal</h2>
+            </Draggable>
+            <Draggable>
+              <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
+                Core technologies, architectural patterns, and verified engineering credentials.
+              </p>
+            </Draggable>
             <div className="h-1 w-16 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full mt-3 mx-auto md:mx-0" />
           </div>
 
@@ -125,9 +130,11 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                                 >
                                   {getGroupIcon(category)}
                                 </div>
-                                <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
-                                  {getGroupTitle(category)}
-                                </h3>
+                                <Draggable>
+                                  <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                                    {getGroupTitle(category)}
+                                  </h3>
+                                </Draggable>
                               </div>
 
                               {isAiCategory && (

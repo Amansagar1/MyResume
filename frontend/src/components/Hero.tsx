@@ -4,6 +4,7 @@ import React from "react";
 import { Mail, Phone, MapPin, ArrowRight, Sparkles, Terminal, ArrowUpRight, Radio } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "./Icons";
 import { motion } from "framer-motion";
+import Draggable from "./Draggable";
 import { PersonalInfo } from "../types/resume";
 import AgentTerminal3D from "./AgentTerminal3D";
 import AvailabilityBeacon from "./AvailabilityBeacon";
@@ -30,7 +31,7 @@ export default function Hero({ personal }: HeroProps) {
   return (
     <section
       id="home"
-      className="relative min-h-[96vh] flex flex-col justify-between pt-28 pb-12 overflow-hidden bg-transparent"
+      className="relative min-h-[96vh] flex flex-col justify-between pt-28 pb-12 bg-transparent"
     >
       {/* 2025.kitanga.dev Iconic Split Typography Header */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 pt-4">
@@ -42,21 +43,32 @@ export default function Hero({ personal }: HeroProps) {
           {/* Left Column: Core Identity & Actions */}
           <div className="lg:col-span-6 text-center lg:text-left space-y-5">
             <div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-3">
-                <Sparkles className="w-3 h-3 text-violet-400" />
-                FULL STACK &amp; AI APPLICATION ENGINEER
-              </span>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-[1.05]">
-                Kumar{" "}
-                <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(139,92,246,0.3)]">
-                  Aman Sagar
+              <Draggable className="inline-block">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-3">
+                  <Sparkles className="w-3 h-3 text-violet-400" />
+                  FULL STACK &amp; AI APPLICATION ENGINEER
                 </span>
+              </Draggable>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight uppercase leading-[1.05] flex flex-wrap gap-x-3 sm:gap-x-4">
+                <Draggable className="inline-block"><span>Kumar</span></Draggable>
+                <Draggable className="inline-block">
+                  <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(139,92,246,0.3)]">
+                    Aman
+                  </span>
+                </Draggable>
+                <Draggable className="inline-block">
+                  <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(139,92,246,0.3)]">
+                    Sagar
+                  </span>
+                </Draggable>
               </h1>
             </div>
 
-            <p className="text-sm sm:text-base text-zinc-350 leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
-              Full Stack &amp; AI Engineer with <strong className="text-white font-semibold">3+ years</strong> of production experience building autonomous AI agent networks, RAG vector pipelines, and high-concurrency microservices on AWS ECS, Docker, and Redis.
-            </p>
+            <Draggable>
+              <p className="text-sm sm:text-base text-zinc-350 leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
+                Full Stack &amp; AI Engineer with <strong className="text-white font-semibold">3+ years</strong> of production experience building autonomous AI agent networks, RAG vector pipelines, and high-concurrency microservices on AWS ECS, Docker, and Redis.
+              </p>
+            </Draggable>
 
             {/* Quick Contacts Pills */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 text-xs text-zinc-350 pt-1">

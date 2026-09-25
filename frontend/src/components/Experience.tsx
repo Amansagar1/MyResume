@@ -5,6 +5,7 @@ import { Briefcase, Calendar, CheckCircle2, Building2, Sparkles } from "lucide-r
 import { motion } from "framer-motion";
 import { ExperienceItem } from "../types/resume";
 import Card3D from "./Card3D";
+import Draggable from "./Draggable";
 
 interface ExperienceProps {
   experience: ExperienceItem[];
@@ -37,10 +38,14 @@ export default function Experience({ experience }: ExperienceProps) {
             <Sparkles className="w-3.5 h-3.5" />
             CAREER TRAJECTORY
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Work Experience</h2>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
-            Hands-on engineering across AI agent integrations, high-throughput microservices, and distributed cloud systems.
-          </p>
+          <Draggable>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Work Experience</h2>
+          </Draggable>
+          <Draggable>
+            <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
+              Hands-on engineering across AI agent integrations, high-throughput microservices, and distributed cloud systems.
+            </p>
+          </Draggable>
           <div className="h-1 w-16 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full mt-3 mx-auto md:mx-0" />
         </div>
 
@@ -71,9 +76,11 @@ export default function Experience({ experience }: ExperienceProps) {
                       <span className="text-[10px] font-mono font-bold text-violet-400 uppercase tracking-wider block mb-0.5">
                         Role 0{index + 1}
                       </span>
-                      <h3 className="text-lg sm:text-xl font-extrabold text-white group-hover:text-violet-300 transition-colors">
-                        {item.role}
-                      </h3>
+                      <Draggable>
+                        <h3 className="text-lg sm:text-xl font-extrabold text-white group-hover:text-violet-300 transition-colors">
+                          {item.role}
+                        </h3>
+                      </Draggable>
                       <div className="flex items-center gap-1.5 text-xs font-semibold text-zinc-300 mt-0.5">
                         <Building2 className="w-3.5 h-3.5 text-violet-400" />
                         {item.company}
@@ -92,7 +99,7 @@ export default function Experience({ experience }: ExperienceProps) {
                     {item.highlights.map((point, pIndex) => (
                       <li key={pIndex} className="flex items-start gap-2.5 text-xs text-zinc-350 leading-relaxed font-light">
                         <CheckCircle2 className="w-3.5 h-3.5 text-violet-400 mt-0.5 flex-shrink-0" />
-                        <span>{point}</span>
+                        <Draggable><span>{point}</span></Draggable>
                       </li>
                     ))}
                   </ul>

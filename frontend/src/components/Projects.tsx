@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ProjectItem } from "../types/resume";
 import Card3D from "./Card3D";
 import WorkAccordion from "./WorkAccordion";
+import Draggable from "./Draggable";
 
 interface ProjectsProps {
   projects: ProjectItem[];
@@ -48,10 +49,14 @@ export default function Projects({ projects }: ProjectsProps) {
               <Sparkles className="w-3.5 h-3.5" />
               ENGINEERED SYSTEMS &bull; WORK SHOWCASE
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">Key Projects</h2>
-            <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
-              Production-grade systems highlighting AI automation, distributed queue pipelines, and cloud microservices.
-            </p>
+            <Draggable>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">Key Projects</h2>
+            </Draggable>
+            <Draggable>
+              <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
+                Production-grade systems highlighting AI automation, distributed queue pipelines, and cloud microservices.
+              </p>
+            </Draggable>
             <div className="h-1 w-16 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full mt-3 mx-auto md:mx-0" />
           </div>
 
@@ -144,12 +149,16 @@ export default function Projects({ projects }: ProjectsProps) {
                   {/* Body: Title & Description */}
                   <div className="flex-grow flex flex-col justify-between">
                     <div>
-                      <h3 className="text-lg sm:text-xl font-extrabold text-white mb-2 group-hover:text-violet-300 transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-xs text-zinc-400 mb-4 font-light leading-relaxed">
-                        {project.description}
-                      </p>
+                      <Draggable>
+                        <h3 className="text-lg sm:text-xl font-extrabold text-white mb-2 group-hover:text-violet-300 transition-colors">
+                          {project.title}
+                        </h3>
+                      </Draggable>
+                      <Draggable>
+                        <p className="text-xs text-zinc-400 mb-4 font-light leading-relaxed">
+                          {project.description}
+                        </p>
+                      </Draggable>
 
                       {/* Highlights */}
                       <ul className="space-y-2 mb-4">
