@@ -74,10 +74,10 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
 
   return (
     <>
-      {/* Scroll Progress Bar at the very top (Electric Violet Gradient) */}
+      {/* Scroll Progress Bar at the very top (Electric red Gradient) */}
       <motion.div
         style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-violet-500 via-indigo-500 to-fuchsia-500 origin-left z-[60] shadow-[0_0_12px_#8b5cf6]"
+        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-red-500 via-red-500 to-red-500 origin-left z-[60] shadow-[0_0_12px_#ef4444]"
       />
 
       <header
@@ -94,13 +94,13 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
               className="flex items-center gap-2.5 cursor-pointer group"
               onClick={() => scrollTo("home")}
             >
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-violet-500/20 via-indigo-500/20 to-fuchsia-500/20 border border-violet-500/30 flex items-center justify-center text-violet-400 group-hover:scale-105 group-hover:border-violet-400/60 transition-all shadow-[0_0_15px_rgba(139,92,246,0.2)]">
-                <Terminal className="w-3.5 h-3.5 text-violet-300" />
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-red-500/20 via-red-500/20 to-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 group-hover:scale-105 group-hover:border-red-400/60 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                <Terminal className="w-3.5 h-3.5 text-red-300" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs sm:text-sm font-extrabold tracking-wide text-white group-hover:text-violet-300 transition-colors flex items-center gap-1.5">
+                <span className="text-xs sm:text-sm font-extrabold tracking-wide text-white group-hover:text-red-300 transition-colors flex items-center gap-1.5">
                   {personalName}
-                  <Sparkles className="w-3 h-3 text-violet-400 opacity-80" />
+                  <Sparkles className="w-3 h-3 text-red-400 opacity-80" />
                 </span>
                 <span className="text-[10px] font-mono text-zinc-500 tracking-wider">
                   Full Stack &amp; AI Engineer
@@ -123,7 +123,7 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
                   {activeSection === item.id && (
                     <motion.span
                       layoutId="activeNavPill"
-                      className="absolute inset-0 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full shadow-[0_0_15px_rgba(139,92,246,0.4)]"
+                      className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-500 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.4)]"
                       transition={{ type: "spring", stiffness: 350, damping: 28 }}
                     />
                   )}
@@ -138,28 +138,28 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
               <button
                 type="button"
                 onClick={handleToggleSound}
-                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-mono border border-zinc-800 bg-zinc-900/60 hover:border-violet-500/40 text-zinc-400 hover:text-white transition-all cursor-pointer select-none backdrop-blur-md"
+                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-mono border border-zinc-800 bg-zinc-900/60 hover:border-red-500/40 text-zinc-400 hover:text-white transition-all cursor-pointer select-none backdrop-blur-md"
                 title="Toggle ambient background sound"
               >
                 <span className="flex items-center gap-1">
                   <span
                     className={`w-1.5 h-3 rounded-full transition-all duration-300 ${
                       soundOn
-                        ? "bg-violet-400 animate-pulse h-3"
+                        ? "bg-red-400 animate-pulse h-3"
                         : "bg-zinc-600 h-1.5"
                     }`}
                   />
                   <span
                     className={`w-1.5 h-4 rounded-full transition-all duration-300 ${
                       soundOn
-                        ? "bg-indigo-400 animate-pulse delay-75 h-4"
+                        ? "bg-red-400 animate-pulse delay-75 h-4"
                         : "bg-zinc-600 h-1.5"
                     }`}
                   />
                   <span
                     className={`w-1.5 h-2 rounded-full transition-all duration-300 ${
                       soundOn
-                        ? "bg-fuchsia-400 animate-pulse delay-150 h-2"
+                        ? "bg-red-400 animate-pulse delay-150 h-2"
                         : "bg-zinc-600 h-1.5"
                     }`}
                   />
@@ -171,10 +171,10 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-900/90 text-zinc-200 hover:text-white border border-zinc-800 hover:border-violet-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all group"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-900/90 text-zinc-200 hover:text-white border border-zinc-800 hover:border-red-500/50 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all group"
               >
                 GitHub
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-violet-400" />
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-red-400" />
               </a>
             </div>
 
@@ -213,7 +213,7 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
                     onClick={() => scrollTo(item.id)}
                     className={`block w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                       activeSection === item.id
-                        ? "bg-gradient-to-r from-violet-500/10 to-indigo-500/10 text-violet-400 border border-violet-500/30 pl-5"
+                        ? "bg-gradient-to-r from-red-500/10 to-red-500/10 text-red-400 border border-red-500/30 pl-5"
                         : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
                     }`}
                   >
@@ -225,7 +225,7 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
                     href={githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-gradient-to-r from-violet-500 to-indigo-600 text-white font-bold text-center text-sm shadow-lg shadow-violet-500/25"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white font-bold text-center text-sm shadow-lg shadow-red-500/25"
                   >
                     GitHub Profile
                     <ArrowUpRight className="w-4 h-4" />

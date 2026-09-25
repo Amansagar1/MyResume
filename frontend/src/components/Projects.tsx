@@ -38,14 +38,14 @@ export default function Projects({ projects }: ProjectsProps) {
   return (
     <section id="projects" className="py-20 relative bg-[#06060a]/80 overflow-hidden">
       {/* Decorative top blur */}
-      <div className="absolute top-0 left-1/3 w-96 h-96 rounded-full bg-violet-600/10 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-indigo-600/10 blur-[160px] pointer-events-none" />
+      <div className="absolute top-0 left-1/3 w-96 h-96 rounded-full bg-red-600/10 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-red-600/10 blur-[160px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Title & View Toggle */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">
           <div className="text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-2.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-red-500/10 text-red-400 border border-red-500/20 mb-2.5">
               <Sparkles className="w-3.5 h-3.5" />
               ENGINEERED SYSTEMS &bull; WORK SHOWCASE
             </div>
@@ -54,10 +54,10 @@ export default function Projects({ projects }: ProjectsProps) {
             </Draggable>
             <Draggable>
               <p className="text-xs sm:text-sm text-zinc-400 mt-1.5 max-w-xl font-light">
-                Production-grade systems highlighting AI automation, distributed queue pipelines, and cloud microservices.
+                Production-grade systems highlighting AI automation, distributed queue pipelines, and cloud micredrvices.
               </p>
             </Draggable>
-            <div className="h-1 w-16 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full mt-3 mx-auto md:mx-0" />
+            <div className="h-1 w-16 bg-gradient-to-r from-red-500 to-red-500 rounded-full mt-3 mx-auto md:mx-0" />
           </div>
 
           {/* Mode Switcher */}
@@ -66,7 +66,7 @@ export default function Projects({ projects }: ProjectsProps) {
               onClick={() => setViewMode("accordion")}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                 viewMode === "accordion"
-                  ? "bg-gradient-to-r from-violet-500 to-indigo-500 text-white font-bold shadow-md shadow-violet-500/25"
+                  ? "bg-gradient-to-r from-red-500 to-red-500 text-white font-bold shadow-md shadow-red-500/25"
                   : "text-zinc-400 hover:text-white"
               }`}
             >
@@ -76,7 +76,7 @@ export default function Projects({ projects }: ProjectsProps) {
               onClick={() => setViewMode("grid")}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                 viewMode === "grid"
-                  ? "bg-gradient-to-r from-violet-500 to-indigo-500 text-white font-bold shadow-md shadow-violet-500/25"
+                  ? "bg-gradient-to-r from-red-500 to-red-500 text-white font-bold shadow-md shadow-red-500/25"
                   : "text-zinc-400 hover:text-white"
               }`}
             >
@@ -97,16 +97,16 @@ export default function Projects({ projects }: ProjectsProps) {
           >
           {projects.map((project, index) => (
             <motion.div key={index} variants={cardVariants} className="h-full">
-              <Card3D depth={8} glowColor="rgba(139, 92, 246, 0.18)" className="h-full">
-                <div className="flex flex-col h-full rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-violet-500/50 backdrop-blur-xl shadow-xl overflow-hidden p-5 sm:p-6 transition-all duration-300">
+              <Card3D depth={8} glowColor="rgba(239, 68, 68, 0.18)" className="h-full">
+                <div className="flex flex-col h-full rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-red-500/50 backdrop-blur-xl shadow-xl overflow-hidden p-5 sm:p-6 transition-all duration-300">
                   {/* Top Bar: Icon + Action Links */}
                   <div className="flex items-center justify-between pb-3.5 border-b border-zinc-850 mb-4">
                     <div className="flex items-center gap-2.5">
-                      <div className="p-2.5 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.15)]">
+                      <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
                         {index === 0 ? <Cpu className="w-5 h-5" /> : <Layers className="w-5 h-5" />}
                       </div>
                       <div>
-                        <span className="text-[10px] font-mono font-bold text-violet-400 uppercase tracking-widest block">
+                        <span className="text-[10px] font-mono font-bold text-red-400 uppercase tracking-widest block">
                           Featured System 0{index + 1}
                         </span>
                         <span className="text-[11px] text-zinc-400 font-mono">
@@ -122,10 +122,10 @@ export default function Projects({ projects }: ProjectsProps) {
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-violet-500/15 text-violet-300 border border-violet-500/40 hover:bg-violet-500/25 transition-all shadow-[0_0_10px_rgba(139,92,246,0.2)] group/link"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-red-500/15 text-red-300 border border-red-500/40 hover:bg-red-500/25 transition-all shadow-[0_0_10px_rgba(239,68,68,0.2)] group/link"
                           id={`project-demo-${index}`}
                         >
-                          <Radio className="w-2.5 h-2.5 text-fuchsia-400 animate-pulse" />
+                          <Radio className="w-2.5 h-2.5 text-red-400 animate-pulse" />
                           Live Demo
                           <ArrowUpRight className="w-3 h-3 group-link:translate-x-0.5 group-link:-translate-y-0.5 transition-transform" />
                         </a>
@@ -150,7 +150,7 @@ export default function Projects({ projects }: ProjectsProps) {
                   <div className="flex-grow flex flex-col justify-between">
                     <div>
                       <Draggable>
-                        <h3 className="text-lg sm:text-xl font-extrabold text-white mb-2 group-hover:text-violet-300 transition-colors">
+                        <h3 className="text-lg sm:text-xl font-extrabold text-white mb-2 group-hover:text-red-300 transition-colors">
                           {project.title}
                         </h3>
                       </Draggable>
@@ -164,7 +164,7 @@ export default function Projects({ projects }: ProjectsProps) {
                       <ul className="space-y-2 mb-4">
                         {project.highlights.map((highlight, hIdx) => (
                           <li key={hIdx} className="flex items-start gap-2 text-xs text-zinc-350 leading-relaxed font-light">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-violet-400 flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-3.5 h-3.5 text-red-400 flex-shrink-0 mt-0.5" />
                             <span>{highlight}</span>
                           </li>
                         ))}
@@ -176,7 +176,7 @@ export default function Projects({ projects }: ProjectsProps) {
                       {project.technologies.map((tech, tIdx) => (
                         <span
                           key={tIdx}
-                          className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-900/90 text-zinc-300 border border-zinc-800 hover:border-violet-500/40 hover:text-violet-300 transition-colors shadow-sm"
+                          className="px-2 py-0.5 rounded-md text-[11px] font-mono bg-zinc-900/90 text-zinc-300 border border-zinc-800 hover:border-red-500/40 hover:text-red-300 transition-colors shadow-sm"
                         >
                           {tech}
                         </span>

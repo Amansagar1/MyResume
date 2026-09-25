@@ -75,17 +75,17 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-zinc-50 font-sans relative overflow-hidden">
         <NeuralCanvas />
         <CursorGlow />
-        <div className="flex flex-col items-center gap-5 p-8 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-[0_0_50px_rgba(139,92,246,0.2)] backdrop-blur-2xl relative z-10">
+        <div className="flex flex-col items-center gap-5 p-8 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-[0_0_50px_rgba(239,68,68,0.2)] backdrop-blur-2xl relative z-10">
           <div className="relative">
-            <Loader2 className="w-10 h-10 text-violet-400 animate-spin" />
-            <div className="absolute inset-0 w-10 h-10 rounded-full bg-violet-400/20 blur-md animate-ping" />
+            <Loader2 className="w-10 h-10 text-red-400 animate-spin" />
+            <div className="absolute inset-0 w-10 h-10 rounded-full bg-red-400/20 blur-md animate-ping" />
           </div>
           <div className="text-center space-y-1">
             <h1 className="text-lg font-bold text-white tracking-wide flex items-center gap-2 font-heading">
-              <Sparkles className="w-4 h-4 text-violet-400" />
+              <Sparkles className="w-4 h-4 text-red-400" />
               Initialising AI Engine &amp; REST API...
             </h1>
-            <p className="text-xs text-zinc-500 font-mono">Connecting to PHP microservices &amp; portfolio state</p>
+            <p className="text-xs text-zinc-500 font-mono">Connecting to PHP micredrvices &amp; portfolio state</p>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@ export default function Home() {
               The portfolio attempted to retrieve resume data from the local PHP backend on port 8000.
             </p>
             <div className="p-4 bg-zinc-900/80 border border-zinc-850 rounded-xl text-left text-xs font-mono text-zinc-500 space-y-2 mt-4 shadow-inner">
-              <span className="text-violet-400 font-semibold">// Start local PHP backend:</span>
+              <span className="text-red-400 font-semibold">// Start local PHP backend:</span>
               <div className="p-2 rounded-lg bg-black text-zinc-300 border border-zinc-800 select-all">
                 php -S 127.0.0.1:8000 -t backend/api
               </div>
@@ -117,7 +117,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 w-full pt-2">
             <button
               onClick={fetchResumeData}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-500 via-indigo-500 to-fuchsia-500 text-white font-bold hover:brightness-110 active:scale-95 transition-all text-xs cursor-pointer shadow-lg shadow-violet-500/25"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-500 via-red-500 to-red-500 text-white font-bold hover:brightness-110 active:scale-95 transition-all text-xs cursor-pointer shadow-lg shadow-red-500/25"
             >
               Retry Connection
             </button>
@@ -125,7 +125,7 @@ export default function Home() {
               onClick={handleUseFallback}
               className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 text-zinc-200 border border-zinc-800 active:scale-95 transition-all text-xs cursor-pointer"
             >
-              <Play className="w-3.5 h-3.5 text-violet-400" />
+              <Play className="w-3.5 h-3.5 text-red-400" />
               Use Verified Data
             </button>
           </div>
@@ -136,7 +136,7 @@ export default function Home() {
 
   // 3. Render Page with live interactive 3D WebGL scene & Kitanga aesthetics
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-zinc-50 overflow-x-hidden selection:bg-violet-500 selection:text-white relative font-sans">
+    <div className="flex flex-col min-h-screen bg-zinc-950 text-zinc-50 overflow-x-hidden selection:bg-red-500 selection:text-white relative font-sans">
       {/* 2025.kitanga.dev 3D WebGL Canvas Scene */}
       <Scene3D />
 

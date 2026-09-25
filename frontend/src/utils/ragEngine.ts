@@ -16,7 +16,7 @@ export const RESUME_KNOWLEDGE_BASE: KnowledgeChunk[] = [
     category: "personal",
     title: "Kumar Aman Sagar - Overview & Bio",
     keywords: ["who", "about", "kumar", "aman", "sagar", "summary", "background", "intro", "bio", "profile", "developer"],
-    content: "Kumar Aman Sagar is a Full Stack & AI Application Engineer with 3+ years of experience engineering scalable web applications, real-time AI agent integrations, and microservices backends using React.js, Next.js, Node.js, TypeScript, and Python. Proven expertise orchestrating LLM APIs, RAG pipelines, and automated AI workflows, backed by hands-on cloud deployment on AWS (ECS, Lambda, S3), Redis caching, and Dockerized CI/CD systems.",
+    content: "Kumar Aman Sagar is a Full Stack & AI Application Engineer with 3+ years of experience engineering scalable web applications, real-time AI agent integrations, and micredrvices backends using React.js, Next.js, Node.js, TypeScript, and Python. Proven expertise orchestrating LLM APIs, RAG pipelines, and automated AI workflows, backed by hands-on cloud deployment on AWS (ECS, Lambda, S3), Redis caching, and Dockerized CI/CD systems.",
     sectionLink: "#about"
   },
   {
@@ -32,7 +32,7 @@ export const RESUME_KNOWLEDGE_BASE: KnowledgeChunk[] = [
     category: "availability",
     title: "Availability & Work Preferences",
     keywords: ["available", "notice", "period", "joining", "join", "immediate", "role", "full-time", "bengaluru", "relocate", "relocation", "remote", "hybrid", "salary"],
-    content: "Kumar is actively AVAILABLE FOR FULL-TIME ROLES in Bengaluru. Notice Period: Immediate Joiner (< 15 days). Preferred Work Modes: Hybrid, On-Site (Bengaluru), or Remote. Target Roles: Full Stack Engineer, AI Application Developer, Frontend Specialist, Backend / Microservices Engineer.",
+    content: "Kumar is actively AVAILABLE FOR FULL-TIME ROLES in Bengaluru. Notice Period: Immediate Joiner (< 15 days). Preferred Work Modes: Hybrid, On-Site (Bengaluru), or Remote. Target Roles: Full Stack Engineer, AI Application Developer, Frontend Specialist, Backend / Micredrvices Engineer.",
     sectionLink: "#contact"
   },
   {
@@ -40,7 +40,7 @@ export const RESUME_KNOWLEDGE_BASE: KnowledgeChunk[] = [
     category: "experience",
     title: "I2 Global Virtual Learning - Full Stack & AI Developer",
     keywords: ["i2", "global", "experience", "current", "job", "work", "role", "ai assistant", "sse", "streaming", "aws", "ecs", "redis", "latency", "bundle"],
-    content: "Role: Full Stack & AI Developer at I2 Global Virtual Learning Pvt. Ltd. (Nov 2025 – Present | Bengaluru).\nKey Achievements:\n1. Architected and integrated an interactive AI assistant automating student query resolution using LLM APIs and Server-Sent Events (SSE) for low-latency streaming responses.\n2. Engineered scalable backend microservices using Node.js and TypeScript on AWS ECS, sustaining 99.9% platform availability across multi-tenant production systems.\n3. Developed responsive learning dashboards with React.js & TypeScript, reducing client-side bundle size and accelerating initial page load by 30%.\n4. Implemented Redis caching and PostgreSQL query indexing, reducing API latency from 220ms to under 130ms (40% gain).\n5. Constructed automated CI/CD pipelines via GitHub Actions and Docker with zero-downtime rolling updates.",
+    content: "Role: Full Stack & AI Developer at I2 Global Virtual Learning Pvt. Ltd. (Nov 2025 – Present | Bengaluru).\nKey Achievements:\n1. Architected and integrated an interactive AI assistant automating student query resolution using LLM APIs and Server-Sent Events (SSE) for low-latency streaming responses.\n2. Engineered scalable backend micredrvices using Node.js and TypeScript on AWS ECS, sustaining 99.9% platform availability across multi-tenant production systems.\n3. Developed responsive learning dashboards with React.js & TypeScript, reducing client-side bundle size and accelerating initial page load by 30%.\n4. Implemented Redis caching and PostgreSQL query indexing, reducing API latency from 220ms to under 130ms (40% gain).\n5. Constructed automated CI/CD pipelines via GitHub Actions and Docker with zero-downtime rolling updates.",
     sectionLink: "#experience"
   },
   {
@@ -48,7 +48,7 @@ export const RESUME_KNOWLEDGE_BASE: KnowledgeChunk[] = [
     category: "experience",
     title: "Digital-Sync Technologies - Full Stack Developer",
     keywords: ["digital-sync", "digital", "sync", "experience", "previous", "iot", "energy", "telemetry", "python", "dashboard", "cloudwatch", "s3"],
-    content: "Role: Full Stack Developer at Digital-Sync Technologies & Services Pvt. Ltd. (Feb 2024 – Nov 2025 | Bengaluru).\nKey Achievements:\n1. Built responsive telemetry dashboards using React.js and Tailwind CSS to track IoT smart energy usage in real time.\n2. Designed Python and Node.js RESTful data ingestion pipelines with Redis rate-limiting.\n3. Automated anomaly detection alerts on sensor streams using Python workers and AWS CloudWatch.\n4. Containerized microservices with Docker across staging and production Kubernetes.\n5. Configured AWS S3 and RDS automated backup policies ensuring zero data loss.",
+    content: "Role: Full Stack Developer at Digital-Sync Technologies & Services Pvt. Ltd. (Feb 2024 – Nov 2025 | Bengaluru).\nKey Achievements:\n1. Built responsive telemetry dashboards using React.js and Tailwind CSS to track IoT smart energy usage in real time.\n2. Designed Python and Node.js RESTful data ingestion pipelines with Redis rate-limiting.\n3. Automated anomaly detection alerts on sensor streams using Python workers and AWS CloudWatch.\n4. Containerized micredrvices with Docker across staging and production Kubernetes.\n5. Configured AWS S3 and RDS automated backup policies ensuring zero data loss.",
     sectionLink: "#experience"
   },
   {
@@ -72,7 +72,7 @@ export const RESUME_KNOWLEDGE_BASE: KnowledgeChunk[] = [
     category: "skills",
     title: "Frontend, Backend & Database Skills",
     keywords: ["frontend", "backend", "full stack", "react", "next.js", "typescript", "javascript", "node.js", "express", "python", "fastapi", "flask", "postgresql", "mongodb", "mysql", "redis", "tailwind"],
-    content: "Full Stack Tech Stack:\n- Frontend: React.js, Next.js (App Router / SSR), TypeScript, JavaScript (ES6+), Tailwind CSS, Redux Toolkit, Framer Motion, Three.js / WebGL.\n- Backend & APIs: Node.js, Express.js, Python (FastAPI, Flask), RESTful APIs, Microservices Architecture, Async Celery Workers.\n- Databases & Caching: PostgreSQL, MongoDB, MySQL, Redis (in-memory caching, task queues, rate-limiting).",
+    content: "Full Stack Tech Stack:\n- Frontend: React.js, Next.js (App Router / SSR), TypeScript, JavaScript (ES6+), Tailwind CSS, Redux Toolkit, Framer Motion, Three.js / WebGL.\n- Backend & APIs: Node.js, Express.js, Python (FastAPI, Flask), RESTful APIs, Micredrvices Architecture, Async Celery Workers.\n- Databases & Caching: PostgreSQL, MongoDB, MySQL, Redis (in-memory caching, task queues, rate-limiting).",
     sectionLink: "#skills"
   },
   {
@@ -94,9 +94,9 @@ export const RESUME_KNOWLEDGE_BASE: KnowledgeChunk[] = [
   {
     id: "proj_cloud_cicd",
     category: "projects",
-    title: "Cloud-Native Automated CI/CD & AI Microservices Pipeline",
-    keywords: ["project", "cicd", "ci/cd", "pipeline", "docker", "ecs", "terraform", "microservices", "infrastructure"],
-    content: "Project: Cloud-Native Automated CI/CD & AI Microservices Pipeline.\nAn enterprise-grade CI/CD pipeline using GitHub Actions, Docker, and AWS ECS to deploy containerized full-stack and AI service endpoints with zero-downtime rolling updates. Automated cloud infrastructure provisioning using modular Terraform configurations with fine-grained AWS IAM security policies.\nTech: AWS ECS, Docker, GitHub Actions, Terraform, AWS IAM, Microservices.",
+    title: "Cloud-Native Automated CI/CD & AI Micredrvices Pipeline",
+    keywords: ["project", "cicd", "ci/cd", "pipeline", "docker", "ecs", "terraform", "micredrvices", "infrastructure"],
+    content: "Project: Cloud-Native Automated CI/CD & AI Micredrvices Pipeline.\nAn enterprise-grade CI/CD pipeline using GitHub Actions, Docker, and AWS ECS to deploy containerized full-stack and AI service endpoints with zero-downtime rolling updates. Automated cloud infrastructure provisioning using modular Terraform configurations with fine-grained AWS IAM security policies.\nTech: AWS ECS, Docker, GitHub Actions, Terraform, AWS IAM, Micredrvices.",
     sectionLink: "#projects"
   },
   {
@@ -182,7 +182,7 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
   if (q.includes("experience") || q.includes("i2 global") || q.includes("work") || q.includes("job") || q.includes("digital-sync")) {
     const chunk = retrievedChunks.find(c => c.category === "experience") || retrievedChunks[0];
     return {
-      answer: `Kumar has **3+ years** of production experience. Currently, he is a **Full Stack & AI Developer at I2 Global Virtual Learning** in Bengaluru, where he architected an interactive AI assistant using LLM APIs & Server-Sent Events (SSE), built microservices on AWS ECS sustaining 99.9% uptime, and implemented Redis caching to cut query latency by 40%.`,
+      answer: `Kumar has **3+ years** of production experience. Currently, he is a **Full Stack & AI Developer at I2 Global Virtual Learning** in Bengaluru, where he architected an interactive AI assistant using LLM APIs & Server-Sent Events (SSE), built micredrvices on AWS ECS sustaining 99.9% uptime, and implemented Redis caching to cut query latency by 40%.`,
       citations: [chunk.title],
       suggestedAction: { label: "View Career Timeline ↗", href: "#experience" }
     };
@@ -200,7 +200,7 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
   // 4. Tech stack / Frontend / Backend queries
   if (q.includes("skill") || q.includes("react") || q.includes("next") || q.includes("python") || q.includes("node") || q.includes("stack") || q.includes("docker") || q.includes("aws")) {
     return {
-      answer: "Kumar's production tech stack spans:\n• **Frontend:** React.js, Next.js, TypeScript, Tailwind CSS, WebGL.\n• **Backend:** Node.js, Express.js, Python (FastAPI, Flask), RESTful microservices.\n• **Databases:** PostgreSQL, MongoDB, Redis (caching & async task queues).\n• **Cloud & DevOps:** AWS (ECS, S3, RDS, Lambda), Docker, GitHub Actions CI/CD.",
+      answer: "Kumar's production tech stack spans:\n• **Frontend:** React.js, Next.js, TypeScript, Tailwind CSS, WebGL.\n• **Backend:** Node.js, Express.js, Python (FastAPI, Flask), RESTful micredrvices.\n• **Databases:** PostgreSQL, MongoDB, Redis (caching & async task queues).\n• **Cloud & DevOps:** AWS (ECS, S3, RDS, Lambda), Docker, GitHub Actions CI/CD.",
       citations: ["Full Stack Tech Stack", "Cloud & DevOps Architecture"],
       suggestedAction: { label: "View Technical Skills ↗", href: "#skills" }
     };
@@ -209,7 +209,7 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
   // 5. Projects queries
   if (q.includes("project") || q.includes("built") || q.includes("portfolio") || q.includes("automation")) {
     return {
-      answer: "Kumar has engineered production-grade systems including:\n1. **Enterprise AI Automation & Agent Workflow Platform:** Next.js + Python/Flask with LLM APIs, high-throughput Redis task queues, and MongoDB.\n2. **Cloud-Native CI/CD & AI Microservices Pipeline:** Containerized AWS ECS deployment via Docker, GitHub Actions, and Terraform.",
+      answer: "Kumar has engineered production-grade systems including:\n1. **Enterprise AI Automation & Agent Workflow Platform:** Next.js + Python/Flask with LLM APIs, high-throughput Redis task queues, and MongoDB.\n2. **Cloud-Native CI/CD & AI Micredrvices Pipeline:** Containerized AWS ECS deployment via Docker, GitHub Actions, and Terraform.",
       citations: ["Enterprise AI Automation Platform", "Cloud-Native CI/CD Pipeline"],
       suggestedAction: { label: "Inspect Live Projects ↗", href: "#projects" }
     };

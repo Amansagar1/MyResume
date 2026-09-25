@@ -27,8 +27,8 @@ export default function Footer({ personal }: FooterProps) {
           </p>
           <p className="text-xs text-zinc-650 font-light">
             Designed & Engineered using{" "}
-            <span className="text-violet-400 font-semibold">Next.js</span> &{" "}
-            <span className="text-violet-400 font-semibold">PHP REST API</span>
+            <span className="text-red-400 font-semibold">Next.js</span> &{" "}
+            <span className="text-red-400 font-semibold">PHP REST API</span>
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function Footer({ personal }: FooterProps) {
             href={personal.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-violet-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
+            className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-red-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
             id="footer-github-link"
             aria-label="GitHub"
           >
@@ -52,7 +52,7 @@ export default function Footer({ personal }: FooterProps) {
               href={personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-violet-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
+              className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-red-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
               id="footer-linkedin-link"
               aria-label="LinkedIn"
             >
@@ -61,7 +61,7 @@ export default function Footer({ personal }: FooterProps) {
           )}
           <a
             href={`mailto:${personal.email}`}
-            className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-violet-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
+            className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-red-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
             id="footer-email-link"
             aria-label="Email"
           >
@@ -72,7 +72,7 @@ export default function Footer({ personal }: FooterProps) {
         {/* Right: Scroll to top */}
         <button
           onClick={scrollToTop}
-          className="p-2.5 rounded-full bg-zinc-900 border border-zinc-850 hover:border-violet-500/40 hover:bg-zinc-850 text-zinc-400 hover:text-violet-400 transition-all shadow-md group cursor-pointer"
+          className="p-2.5 rounded-full bg-zinc-900 border border-zinc-850 hover:border-red-500/40 hover:bg-zinc-850 text-zinc-400 hover:text-red-400 transition-all shadow-md group cursor-pointer"
           aria-label="Scroll to top"
         >
           <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />

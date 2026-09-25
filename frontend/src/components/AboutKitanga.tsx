@@ -14,19 +14,19 @@ export default function AboutKitanga({ personal }: AboutKitangaProps) {
     {
       title: "Autonomous AI Agents & RAG",
       desc: "Architecting low-latency LLM agent workflows, vector retrieval with pgvector/Pinecone, and real-time Server-Sent Events (SSE) streaming.",
-      icon: <Cpu className="w-4 h-4 text-violet-400" />,
+      icon: <Cpu className="w-4 h-4 text-red-400" />,
       tag: "LLM Orchestration",
     },
     {
       title: "High-Concurrency Cloud Systems",
-      desc: "Deploying resilient containerized microservices on AWS ECS, Docker, and Redis caching layers that sustain 99.9% uptime under high traffic.",
-      icon: <Cloud className="w-4 h-4 text-indigo-400" />,
+      desc: "Deploying resilient containerized micredrvices on AWS ECS, Docker, and Redis caching layers that sustain 99.9% uptime under high traffic.",
+      icon: <Cloud className="w-4 h-4 text-red-400" />,
       tag: "Cloud & DevOps",
     },
     {
       title: "Modern Full Stack Engineering",
       desc: "Building typed, high-performance web applications using React, Next.js, TypeScript, and FastAPI with clean domain-driven architecture.",
-      icon: <Layers className="w-4 h-4 text-fuchsia-400" />,
+      icon: <Layers className="w-4 h-4 text-red-400" />,
       tag: "Next.js & FastAPI",
     },
   ];
@@ -36,8 +36,8 @@ export default function AboutKitanga({ personal }: AboutKitangaProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="space-y-2 mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20">
-            <Sparkles className="w-3 h-3 text-violet-400" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-mono font-semibold bg-red-500/10 text-red-400 border border-red-500/20">
+            <Sparkles className="w-3 h-3 text-red-400" />
             ENGINEERING PHILOSOPHY &bull; OVERVIEW
           </div>
           <Draggable>
@@ -45,7 +45,7 @@ export default function AboutKitanga({ personal }: AboutKitangaProps) {
               About Kumar
             </h2>
           </Draggable>
-          <div className="h-0.5 w-12 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full" />
+          <div className="h-0.5 w-12 bg-gradient-to-r from-red-500 to-red-500 rounded-full" />
         </div>
 
         {/* Narrative & Pillars Grid */}
@@ -63,7 +63,7 @@ export default function AboutKitanga({ personal }: AboutKitangaProps) {
               </p>
             </Draggable>
             <div className="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-850 space-y-2 text-xs font-mono">
-              <span className="text-violet-400 font-semibold block">// Production Stack</span>
+              <span className="text-red-400 font-semibold block">// Production Stack</span>
               <p className="text-zinc-350 leading-normal">
                 TypeScript &bull; Next.js &bull; React &bull; Node.js &bull; Python &bull; FastAPI &bull; Docker &bull; AWS ECS &bull; Redis &bull; PostgreSQL &bull; MongoDB
               </p>
@@ -75,15 +75,15 @@ export default function AboutKitanga({ personal }: AboutKitangaProps) {
             {pillars.map((pillar, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-violet-500/40 transition-all hover:bg-zinc-900/50 group"
+                className="p-4 rounded-2xl bg-zinc-950/70 border border-zinc-850 hover:border-red-500/40 transition-all hover:bg-zinc-900/50 group"
               >
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <div className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-violet-400 group-hover:scale-110 transition-transform">
+                    <div className="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-red-400 group-hover:scale-110 transition-transform">
                       {pillar.icon}
                     </div>
                     <Draggable>
-                      <h3 className="text-xs sm:text-sm font-bold text-white group-hover:text-violet-300 transition-colors">
+                      <h3 className="text-xs sm:text-sm font-bold text-white group-hover:text-red-300 transition-colors">
                         {pillar.title}
                       </h3>
                     </Draggable>

@@ -95,13 +95,13 @@ export default function Contact({ personal }: ContactProps) {
   return (
     <section id="contact" className="py-20 relative bg-[#06060a]/90 overflow-hidden">
       {/* Decorative Blur */}
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-violet-600/10 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-96 h-96 rounded-full bg-indigo-600/10 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full bg-red-600/10 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-10 left-1/4 w-96 h-96 rounded-full bg-red-600/10 blur-[160px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Title */}
         <div className="text-center md:text-left mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-2.5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-red-500/10 text-red-400 border border-red-500/20 mb-2.5">
             <Sparkles className="w-3.5 h-3.5" />
             INITIATE COLLABORATION
           </div>
@@ -113,98 +113,100 @@ export default function Contact({ personal }: ContactProps) {
               Available for full-time engineering roles, AI agent integrations, and scalable full-stack web applications.
             </p>
           </Draggable>
-          <div className="h-1 w-16 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full mt-3 mx-auto md:mx-0" />
+          <div className="h-1 w-16 bg-gradient-to-r from-red-500 to-red-500 rounded-full mt-3 mx-auto md:mx-0" />
         </div>
 
         {/* Contact Layout (Tighter gap) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7">
-          {/* Left panel: Info cards */}
-          <div className="lg:col-span-5 space-y-3">
-            <Card3D depth={6} glowColor="rgba(139, 92, 246, 0.15)">
-              <div className="p-4 sm:p-4.5 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-violet-500/50 backdrop-blur-xl shadow-lg flex items-center gap-3.5 group">
-                <div className="p-2.5 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-400 group-hover:scale-110 transition-transform">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-mono text-zinc-500 uppercase font-bold tracking-wider block">
-                    Direct Email
-                  </span>
-                  <a
-                    href={`mailto:${personal.email}`}
-                    className="text-xs sm:text-sm font-semibold text-zinc-200 hover:text-violet-300 transition-colors truncate block"
-                  >
-                    {personal.email}
-                  </a>
-                </div>
-              </div>
-            </Card3D>
-
-            <Card3D depth={6} glowColor="rgba(139, 92, 246, 0.15)">
-              <div className="p-4 sm:p-4.5 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-violet-500/50 backdrop-blur-xl shadow-lg flex items-center gap-3.5 group">
-                <div className="p-2.5 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-400 group-hover:scale-110 transition-transform">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-mono text-zinc-500 uppercase font-bold tracking-wider block">
-                    Phone &amp; WhatsApp
-                  </span>
-                  <a
-                    href={`tel:${personal.phone}`}
-                    className="text-xs sm:text-sm font-semibold text-zinc-200 hover:text-violet-300 transition-colors truncate block"
-                  >
-                    {personal.phone}
-                  </a>
-                </div>
-              </div>
-            </Card3D>
-
-            <Card3D depth={6} glowColor="rgba(139, 92, 246, 0.15)">
-              <div className="p-4 sm:p-4.5 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-violet-500/50 backdrop-blur-xl shadow-lg flex items-center gap-3.5 group">
-                <div className="p-2.5 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-400 group-hover:scale-110 transition-transform">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-mono text-zinc-500 uppercase font-bold tracking-wider block">
-                    Location
-                  </span>
-                  <span className="text-xs sm:text-sm font-semibold text-zinc-200 block">
-                    {personal.location}
-                  </span>
-                </div>
-              </div>
-            </Card3D>
-
-            {personal.linkedin && (
-              <Card3D depth={6} glowColor="rgba(139, 92, 246, 0.15)">
-                <div className="p-4 sm:p-4.5 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-violet-500/50 backdrop-blur-xl shadow-lg flex items-center gap-3.5 group">
-                  <div className="p-2.5 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-400 group-hover:scale-110 transition-transform">
-                    <LinkedinIcon className="w-4 h-4" />
+          {/* Left panel: Info cards combined into one */}
+          <div className="lg:col-span-5 h-full">
+            <Card3D depth={8} glowColor="rgba(239, 68, 68, 0.18)" className="h-full">
+              <div className="p-6 sm:p-7 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-red-500/40 backdrop-blur-xl shadow-xl h-full flex flex-col justify-center space-y-8">
+                
+                {/* Email */}
+                <div className="flex items-center gap-4 group">
+                  <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                    <Mail className="w-5 h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-[10px] font-mono text-zinc-500 uppercase font-bold tracking-wider block">
-                      LinkedIn Network
+                    <span className="text-[11px] font-mono text-zinc-500 uppercase font-bold tracking-wider block mb-0.5">
+                      Direct Email
                     </span>
                     <a
-                      href={personal.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs sm:text-sm font-semibold text-zinc-200 hover:text-violet-300 transition-colors truncate flex items-center gap-1"
+                      href={`mailto:${personal.email}`}
+                      className="text-sm sm:text-base font-semibold text-zinc-200 hover:text-red-400 transition-colors truncate block"
                     >
-                      <span>linkedin.com/in/{personal.linkedinUsername || "kumaramansagar"}</span>
-                      <ArrowUpRight className="w-3 h-3 text-violet-400" />
+                      {personal.email}
                     </a>
                   </div>
                 </div>
-              </Card3D>
-            )}
+
+                {/* Phone */}
+                <div className="flex items-center gap-4 group">
+                  <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[11px] font-mono text-zinc-500 uppercase font-bold tracking-wider block mb-0.5">
+                      Phone &amp; WhatsApp
+                    </span>
+                    <a
+                      href={`tel:${personal.phone}`}
+                      className="text-sm sm:text-base font-semibold text-zinc-200 hover:text-red-400 transition-colors truncate block"
+                    >
+                      {personal.phone}
+                    </a>
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="flex items-center gap-4 group">
+                  <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[11px] font-mono text-zinc-500 uppercase font-bold tracking-wider block mb-0.5">
+                      Location
+                    </span>
+                    <span className="text-sm sm:text-base font-semibold text-zinc-200 block">
+                      {personal.location}
+                    </span>
+                  </div>
+                </div>
+
+                {/* LinkedIn */}
+                {personal.linkedin && (
+                  <div className="flex items-center gap-4 group">
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                      <LinkedinIcon className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-[11px] font-mono text-zinc-500 uppercase font-bold tracking-wider block mb-0.5">
+                        LinkedIn Network
+                      </span>
+                      <a
+                        href={personal.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm sm:text-base font-semibold text-zinc-200 hover:text-red-400 transition-colors truncate flex items-center gap-1.5"
+                      >
+                        <span>linkedin.com/in/{personal.linkedinUsername || "kumaramansagar"}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-red-400" />
+                      </a>
+                    </div>
+                  </div>
+                )}
+                
+              </div>
+            </Card3D>
           </div>
 
           {/* Right panel: 3D Form (Tighter padding) */}
           <div className="lg:col-span-7">
-            <Card3D depth={8} glowColor="rgba(139, 92, 246, 0.18)">
-              <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-violet-500/40 backdrop-blur-xl shadow-xl relative overflow-hidden">
+            <Card3D depth={8} glowColor="rgba(239, 68, 68, 0.18)">
+              <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-red-500/40 backdrop-blur-xl shadow-xl relative overflow-hidden">
                 <div className="flex items-center gap-2 mb-5 text-xs font-mono text-zinc-400">
-                  <MessageSquare className="w-4 h-4 text-violet-400" />
+                  <MessageSquare className="w-4 h-4 text-red-400" />
                   <span>Send Direct Message</span>
                 </div>
 
@@ -217,7 +219,7 @@ export default function Contact({ personal }: ContactProps) {
                       exit={{ opacity: 0 }}
                       className="flex flex-col items-center justify-center text-center py-10 space-y-3"
                     >
-                      <div className="w-14 h-14 rounded-full bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 shadow-[0_0_20px_rgba(139,92,246,0.25)]">
+                      <div className="w-14 h-14 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 shadow-[0_0_20px_rgba(239,68,68,0.25)]">
                         <CheckCircle2 className="w-7 h-7" />
                       </div>
                       <h4 className="text-xl font-extrabold text-white">Message Dispatched!</h4>
@@ -247,7 +249,7 @@ export default function Contact({ personal }: ContactProps) {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div className="space-y-2">
                           <label htmlFor="name" className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider block">
-                            Your Name <span className="text-violet-400">*</span>
+                            Your Name <span className="text-red-400">*</span>
                           </label>
                           <input
                             type="text"
@@ -257,13 +259,13 @@ export default function Contact({ personal }: ContactProps) {
                             value={formData.name}
                             onChange={handleChange}
                             placeholder="Kumar Aman Sagar"
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-violet-400 focus:ring-1 focus:ring-violet-400/30 text-zinc-100 placeholder-zinc-600 outline-none text-xs sm:text-sm transition-all shadow-inner"
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-red-400 focus:ring-1 focus:ring-red-400/30 text-zinc-100 placeholder-zinc-600 outline-none text-xs sm:text-sm transition-all shadow-inner"
                           />
                         </div>
 
                         <div className="space-y-1.5">
                           <label htmlFor="email" className="text-[11px] font-mono font-semibold text-zinc-400 uppercase tracking-wider block">
-                            Your Email <span className="text-violet-400">*</span>
+                            Your Email <span className="text-red-400">*</span>
                           </label>
                           <input
                             type="email"
@@ -273,7 +275,7 @@ export default function Contact({ personal }: ContactProps) {
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="kumaramansagar01@gmail.com"
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-violet-400 focus:ring-1 focus:ring-violet-400/30 text-zinc-100 placeholder-zinc-600 outline-none text-xs sm:text-sm transition-all shadow-inner"
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-red-400 focus:ring-1 focus:ring-red-400/30 text-zinc-100 placeholder-zinc-600 outline-none text-xs sm:text-sm transition-all shadow-inner"
                           />
                         </div>
                       </div>
@@ -289,13 +291,13 @@ export default function Contact({ personal }: ContactProps) {
                           value={formData.subject}
                           onChange={handleChange}
                           placeholder="Full Stack / AI Engineer Opportunity"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-violet-400 focus:ring-1 focus:ring-violet-400/30 text-zinc-100 placeholder-zinc-600 outline-none text-xs sm:text-sm transition-all shadow-inner"
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-red-400 focus:ring-1 focus:ring-red-400/30 text-zinc-100 placeholder-zinc-600 outline-none text-xs sm:text-sm transition-all shadow-inner"
                         />
                       </div>
 
                       <div className="space-y-1.5">
                         <label htmlFor="message" className="text-[11px] font-mono font-semibold text-zinc-400 uppercase tracking-wider block">
-                          Message <span className="text-violet-400">*</span>
+                          Message <span className="text-red-400">*</span>
                         </label>
                         <textarea
                           id="message"
@@ -305,7 +307,7 @@ export default function Contact({ personal }: ContactProps) {
                           value={formData.message}
                           onChange={handleChange}
                           placeholder="Let's build something remarkable together..."
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-violet-400 focus:ring-1 focus:ring-violet-400/30 text-zinc-100 placeholder-zinc-600 outline-none text-xs sm:text-sm transition-all resize-none shadow-inner"
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 focus:border-red-400 focus:ring-1 focus:ring-red-400/30 text-zinc-100 placeholder-zinc-600 outline-none text-xs sm:text-sm transition-all resize-none shadow-inner"
                         />
                       </div>
 
@@ -323,7 +325,7 @@ export default function Contact({ personal }: ContactProps) {
                       <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-violet-500 via-indigo-500 to-fuchsia-500 text-white font-extrabold hover:brightness-110 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(139,92,246,0.3)] cursor-pointer text-xs sm:text-sm"
+                        className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-red-500 via-red-500 to-red-500 text-white font-extrabold hover:brightness-110 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(239,68,68,0.3)] cursor-pointer text-xs sm:text-sm"
                         id="contact-submit-btn"
                       >
                         {status === "loading" ? (

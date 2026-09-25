@@ -20,21 +20,21 @@ export default function Skills({ skills, certifications, education }: SkillsProp
   const getGroupIcon = (category: string) => {
     const cat = category.toLowerCase();
     if (cat.includes("ai") || cat.includes("integration")) {
-      return <Sparkles className="w-4 h-4 text-violet-400" />;
+      return <Sparkles className="w-4 h-4 text-red-400" />;
     }
     if (cat.includes("front") || cat.includes("ui")) {
-      return <Code2 className="w-4 h-4 text-violet-400" />;
+      return <Code2 className="w-4 h-4 text-red-400" />;
     }
     if (cat.includes("back") || cat.includes("api")) {
-      return <Terminal className="w-4 h-4 text-violet-400" />;
+      return <Terminal className="w-4 h-4 text-red-400" />;
     }
     if (cat.includes("data") || cat.includes("cache") || cat.includes("caching")) {
-      return <Database className="w-4 h-4 text-violet-400" />;
+      return <Database className="w-4 h-4 text-red-400" />;
     }
     if (cat.includes("cloud") || cat.includes("devops")) {
-      return <Cloud className="w-4 h-4 text-violet-400" />;
+      return <Cloud className="w-4 h-4 text-red-400" />;
     }
-    return <Cpu className="w-4 h-4 text-violet-400" />;
+    return <Cpu className="w-4 h-4 text-red-400" />;
   };
 
   const getGroupTitle = (category: string) => {
@@ -44,14 +44,14 @@ export default function Skills({ skills, certifications, education }: SkillsProp
   return (
     <section id="skills" className="py-20 relative bg-[#06060a]/80 overflow-hidden">
       {/* Decorative background glow */}
-      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-violet-600/10 blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/3 right-0 w-96 h-96 rounded-full bg-indigo-600/10 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-red-600/10 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-96 h-96 rounded-full bg-red-600/10 blur-[150px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header and Tab Toggles */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">
           <div className="text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-2.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-red-500/10 text-red-400 border border-red-500/20 mb-2.5">
               <Sparkles className="w-3.5 h-3.5" />
               CAPABILITIES &bull; PROFICIENCIES
             </div>
@@ -63,7 +63,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                 Core technologies, architectural patterns, and verified engineering credentials.
               </p>
             </Draggable>
-            <div className="h-1 w-16 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full mt-3 mx-auto md:mx-0" />
+            <div className="h-1 w-16 bg-gradient-to-r from-red-500 to-red-500 rounded-full mt-3 mx-auto md:mx-0" />
           </div>
 
           {/* Dynamic Navigation Tabs */}
@@ -72,7 +72,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
               onClick={() => setActiveTab("skills")}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === "skills"
-                  ? "bg-gradient-to-r from-violet-500 to-indigo-500 text-white font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                  ? "bg-gradient-to-r from-red-500 to-red-500 text-white font-bold shadow-[0_0_15px_rgba(239,68,68,0.3)]"
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
@@ -83,7 +83,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
               onClick={() => setActiveTab("certifications")}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                 activeTab === "certifications"
-                  ? "bg-gradient-to-r from-violet-500 to-indigo-500 text-white font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                  ? "bg-gradient-to-r from-red-500 to-red-500 text-white font-bold shadow-[0_0_15px_rgba(239,68,68,0.3)]"
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
@@ -110,12 +110,12 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                   const isAiCategory = category.toLowerCase().includes("ai");
                   return (
                     <div key={index} className={isAiCategory ? "md:col-span-2 lg:col-span-2" : ""}>
-                      <Card3D depth={8} glowColor={isAiCategory ? "rgba(139, 92, 246, 0.22)" : "rgba(139, 92, 246, 0.12)"} className="h-full">
+                      <Card3D depth={8} glowColor={isAiCategory ? "rgba(239, 68, 68, 0.22)" : "rgba(239, 68, 68, 0.12)"} className="h-full">
                         <div
                           className={`p-4 sm:p-5 rounded-2xl h-full flex flex-col justify-between bg-zinc-950/90 border backdrop-blur-xl shadow-lg transition-all duration-300 ${
                             isAiCategory
-                              ? "border-violet-500/40 bg-gradient-to-br from-violet-950/20 via-zinc-950/90 to-zinc-950/90 shadow-[0_0_25px_rgba(139,92,246,0.12)]"
-                              : "border-zinc-800/80 hover:border-violet-500/40"
+                              ? "border-red-500/40 bg-gradient-to-br from-red-950/20 via-zinc-950/90 to-zinc-950/90 shadow-[0_0_25px_rgba(239,68,68,0.12)]"
+                              : "border-zinc-800/80 hover:border-red-500/40"
                           }`}
                         >
                           <div>
@@ -124,8 +124,8 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                                 <div
                                   className={`p-2 rounded-xl border ${
                                     isAiCategory
-                                      ? "bg-violet-500/20 border-violet-500/40 text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.2)]"
-                                      : "bg-zinc-900/80 border-zinc-800 text-violet-400"
+                                      ? "bg-red-500/20 border-red-500/40 text-red-300 shadow-[0_0_15px_rgba(239,68,68,0.2)]"
+                                      : "bg-zinc-900/80 border-zinc-800 text-red-400"
                                   }`}
                                 >
                                   {getGroupIcon(category)}
@@ -138,7 +138,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                               </div>
 
                               {isAiCategory && (
-                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-violet-500/15 text-violet-300 border border-violet-500/30">
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/15 text-red-300 border border-red-500/30">
                                   CORE FOCUS
                                 </span>
                               )}
@@ -150,8 +150,8 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                                   key={itemIdx}
                                   className={`px-2.5 py-1 rounded-lg text-[11px] font-medium border transition-all duration-150 shadow-sm cursor-default hover:scale-105 ${
                                     isAiCategory
-                                      ? "bg-violet-950/30 text-violet-200 border-violet-500/30 hover:border-violet-400 hover:bg-violet-500/20"
-                                      : "bg-zinc-900/80 text-zinc-300 border-zinc-800 hover:border-violet-500/40 hover:text-violet-300 hover:bg-zinc-850"
+                                      ? "bg-red-950/30 text-red-200 border-red-500/30 hover:border-red-400 hover:bg-red-500/20"
+                                      : "bg-zinc-900/80 text-zinc-300 border-zinc-800 hover:border-red-500/40 hover:text-red-300 hover:bg-zinc-850"
                                   }`}
                                 >
                                   {skill}
@@ -162,7 +162,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
 
                           <div className="pt-3 mt-3 border-t border-zinc-900 flex items-center justify-between text-[10px] font-mono text-zinc-500">
                             <span>{items.length} proficiencies</span>
-                            <span className="text-violet-400">Production Verified</span>
+                            <span className="text-red-400">Production Verified</span>
                           </div>
                         </div>
                       </Card3D>
@@ -180,11 +180,11 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                 className="grid grid-cols-1 md:grid-cols-2 gap-5"
               >
                 {/* Certifications Block with 3D Tilt */}
-                <Card3D depth={8} glowColor="rgba(139, 92, 246, 0.15)">
-                  <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-violet-500/40 backdrop-blur-xl shadow-lg h-full flex flex-col justify-between">
+                <Card3D depth={8} glowColor="rgba(239, 68, 68, 0.15)">
+                  <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-red-500/40 backdrop-blur-xl shadow-lg h-full flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2.5 mb-4 border-b border-zinc-850 pb-3">
-                        <div className="p-2 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-400">
+                        <div className="p-2 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400">
                           <Award className="w-4 h-4" />
                         </div>
                         <div>
@@ -197,14 +197,14 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                         {certifications.map((cert, index) => (
                           <li
                             key={index}
-                            className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800/80 hover:border-violet-500/40 transition-colors flex items-start gap-2.5 group"
+                            className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800/80 hover:border-red-500/40 transition-colors flex items-start gap-2.5 group"
                           >
-                            <ShieldCheck className="w-3.5 h-3.5 text-violet-400 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                            <ShieldCheck className="w-3.5 h-3.5 text-red-400 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
                             <div>
                               <span className="text-xs text-zinc-200 font-medium leading-relaxed block">
                                 {cert}
                               </span>
-                              <span className="text-[10px] font-mono text-violet-400/80 uppercase font-semibold">
+                              <span className="text-[10px] font-mono text-red-400/80 uppercase font-semibold">
                                 Verified Credential
                               </span>
                             </div>
@@ -214,18 +214,18 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                     </div>
 
                     <div className="pt-4 mt-4 border-t border-zinc-850 text-xs text-zinc-400 flex items-center gap-1.5">
-                      <CheckCircle className="w-3 h-3 text-violet-400" />
+                      <CheckCircle className="w-3 h-3 text-red-400" />
                       Continuous pursuit of advanced cloud &amp; AI specializations.
                     </div>
                   </div>
                 </Card3D>
 
                 {/* Education Block with 3D Tilt */}
-                <Card3D depth={8} glowColor="rgba(99, 102, 241, 0.15)">
-                  <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-indigo-500/40 backdrop-blur-xl shadow-lg h-full flex flex-col justify-between">
+                <Card3D depth={8} glowColor="rgba(239, 68, 68, 0.15)">
+                  <div className="p-5 sm:p-6 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 hover:border-red-500/40 backdrop-blur-xl shadow-lg h-full flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2.5 mb-4 border-b border-zinc-850 pb-3">
-                        <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/25 text-indigo-400">
+                        <div className="p-2 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400">
                           <GraduationCap className="w-4 h-4" />
                         </div>
                         <div>
@@ -238,12 +238,12 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                         {education.map((edu, index) => (
                           <div
                             key={index}
-                            className="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 relative pl-3.5 border-l-2 border-l-violet-400"
+                            className="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 relative pl-3.5 border-l-2 border-l-red-400"
                           >
                             <h4 className="text-xs sm:text-sm font-bold text-zinc-100">{edu.institution}</h4>
                             <p className="text-xs text-zinc-300 mt-0.5 font-medium">{edu.degree}</p>
                             {edu.details && (
-                              <span className="inline-block mt-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-violet-500/10 text-violet-300 border border-violet-500/20">
+                              <span className="inline-block mt-1.5 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-red-500/10 text-red-300 border border-red-500/20">
                                 {edu.details}
                               </span>
                             )}
@@ -253,7 +253,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                     </div>
 
                     <div className="pt-4 mt-4 border-t border-zinc-850 text-xs text-zinc-400 flex items-center gap-1.5">
-                      <ArrowRight className="w-3 h-3 text-violet-400" />
+                      <ArrowRight className="w-3 h-3 text-red-400" />
                       Committed to engineering excellence and scalable architecture.
                     </div>
                   </div>

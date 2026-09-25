@@ -14,7 +14,7 @@ interface Card3DProps {
 export default function Card3D({
   children,
   className = "",
-  glowColor = "rgba(139, 92, 246, 0.22)",
+  glowColor = "rgba(239, 68, 68, 0.22)",
   depth = 10,
 }: Card3DProps) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -94,7 +94,7 @@ export default function Card3D({
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.2 }}
             style={{
-              background: `radial-gradient(250px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(168, 85, 247, 0.45), transparent 60%)`,
+              background: `radial-gradient(250px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(239, 68, 68, 0.45), transparent 60%)`,
             }}
             className="pointer-events-none absolute -inset-px rounded-2xl z-10 -z-10 blur-[1px]"
           />

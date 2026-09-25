@@ -29,7 +29,7 @@ export default function CursorGlow() {
         translateX: "-50%",
         translateY: "-50%",
       }}
-      className="fixed pointer-events-none w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,rgba(236,72,153,0.05)_35%,transparent_70%)] blur-[25px] z-10 -z-10 mix-blend-screen"
+      className="fixed pointer-events-none w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(239,68,68,0.12)_0%,rgba(236,72,153,0.05)_35%,transparent_70%)] blur-[25px] z-10 -z-10 mix-blend-screen"
       aria-hidden="true"
     />
   );

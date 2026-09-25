@@ -6,7 +6,7 @@ export const fallbackResumeData: ResumeData = {
     title: "Full Stack & AI Application Engineer",
     subtitle: "Specializing in LLMs, RAG Pipelines & Cloud Architecture",
     summary:
-      "Full Stack & AI Engineer with 3+ years of experience engineering scalable web applications, real-time AI agent integrations, and microservices backends using React.js, Next.js, Node.js, TypeScript, and Python. Proven expertise orchestrating LLM APIs, RAG pipelines, and automated AI workflows, backed by hands-on cloud deployment on AWS (ECS, Lambda, S3), Redis caching, and Dockerized CI/CD systems. Certified in Oracle Cloud AI Foundations and Fusion AI Agent Studio.",
+      "Full Stack & AI Engineer with 3+ years of experience engineering scalable web applications, real-time AI agent integrations, and micredrvices backends using React.js, Next.js, Node.js, TypeScript, and Python. Proven expertise orchestrating LLM APIs, RAG pipelines, and automated AI workflows, backed by hands-on cloud deployment on AWS (ECS, Lambda, S3), Redis caching, and Dockerized CI/CD systems. Certified in Oracle Cloud AI Foundations and Fusion AI Agent Studio.",
     email: "kumaramansagar01@gmail.com",
     phone: "+91 8434120273",
     location: "Bengaluru, Karnataka",
@@ -22,7 +22,7 @@ export const fallbackResumeData: ResumeData = {
       period: "Nov 2025 – Present | Bengaluru",
       highlights: [
         "Architected and integrated an interactive AI assistant into the core learning platform, automating student query resolution using LLM APIs and Server-Sent Events (SSE) for low-latency streaming responses.",
-        "Engineered scalable backend microservices using Node.js and TypeScript on AWS ECS, sustaining 99.9% platform availability across multi-tenant production systems.",
+        "Engineered scalable backend micredrvices using Node.js and TypeScript on AWS ECS, sustaining 99.9% platform availability across multi-tenant production systems.",
         "Developed responsive, accessible learning dashboards with React.js and TypeScript, reducing client-side bundle size and accelerating initial page load by 30%.",
         "Implemented Redis caching and PostgreSQL query indexing for frequently retrieved contextual documents, reducing API latency from 220ms to under 130ms (40% gain).",
         "Constructed automated CI/CD pipelines via GitHub Actions and Docker, accelerating feature delivery cycles by 35% with zero-downtime rolling updates.",
@@ -36,7 +36,7 @@ export const fallbackResumeData: ResumeData = {
         "Built responsive, data-intensive telemetry dashboards using React.js and Tailwind CSS to track and visualize IoT smart energy usage in real time.",
         "Designed Python and Node.js RESTful data ingestion pipelines to process, parse, and store high-frequency sensor readings with Redis rate-limiting.",
         "Automated anomaly detection alerts on incoming sensor data streams using background Python workers and AWS CloudWatch notifications.",
-        "Containerized application microservices with Docker to maintain strict environment parity across staging and production Kubernetes environments.",
+        "Containerized application micredrvices with Docker to maintain strict environment parity across staging and production Kubernetes environments.",
         "Configured AWS S3 and RDS automated backup policies to guarantee zero data loss disaster recovery readiness.",
       ],
     },
@@ -66,14 +66,14 @@ export const fallbackResumeData: ResumeData = {
       link: "https://github.com/Amansagar1",
     },
     {
-      title: "Cloud-Native Automated CI/CD & AI Microservices Pipeline",
+      title: "Cloud-Native Automated CI/CD & AI Micredrvices Pipeline",
       description:
         "An enterprise-grade CI/CD pipeline using GitHub Actions, Docker, and AWS ECS to deploy containerized full-stack and AI service endpoints.",
       highlights: [
         "Built an enterprise-grade CI/CD pipeline using GitHub Actions, Docker, and AWS ECS to deploy containerized full-stack and AI service endpoints.",
         "Automated cloud infrastructure provisioning using modular Terraform configurations with fine-grained AWS IAM security policies.",
       ],
-      technologies: ["AWS ECS", "Docker", "GitHub Actions", "Terraform", "AWS IAM", "Microservices"],
+      technologies: ["AWS ECS", "Docker", "GitHub Actions", "Terraform", "AWS IAM", "Micredrvices"],
       github: "https://github.com/Amansagar1",
       link: "https://github.com/Amansagar1",
     },
@@ -102,7 +102,7 @@ export const fallbackResumeData: ResumeData = {
       "Express.js",
       "Python (FastAPI, Flask)",
       "RESTful APIs",
-      "Microservices Architecture",
+      "Micredrvices Architecture",
       "Async Task Workers",
     ],
     "Databases & Caching": [

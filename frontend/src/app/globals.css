@@ -3,9 +3,9 @@
 :root {
   --background: #06060a;
   --foreground: #f4f4f8;
-  --accent-violet: #8b5cf6;
-  --accent-indigo: #6366f1;
-  --accent-magenta: #ec4899;
+  --accent-red: #ef4444;
+  --accent-red: #ef4444;
+  --accent-magenta: #ef4444;
 }
 
 @theme inline {
@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
 }
 
-/* Custom Electric Violet Scrollbar */
+/* Custom Electric red Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -42,11 +42,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #6366f150;
+  background: #ef444450;
   border-radius: 9999px;
   border: 1px solid #06060a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8b5cf6;
+  background: #ef4444;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

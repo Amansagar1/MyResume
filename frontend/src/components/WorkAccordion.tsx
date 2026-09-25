@@ -12,12 +12,12 @@ interface WorkAccordionProps {
 export default function WorkAccordion({ projects }: WorkAccordionProps) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  // Gradient visuals for projects (Electric Violet / Indigo / Fuchsia / Purple)
+  // Gradient visuals for projects (Electric red / red / red / red)
   const projectGradients = [
-    "from-violet-950/70 via-zinc-950 to-zinc-950",
-    "from-indigo-950/70 via-zinc-950 to-zinc-950",
-    "from-fuchsia-950/70 via-zinc-950 to-zinc-950",
-    "from-purple-950/70 via-zinc-950 to-zinc-950",
+    "from-red-950/70 via-zinc-950 to-zinc-950",
+    "from-red-950/70 via-zinc-950 to-zinc-950",
+    "from-red-950/70 via-zinc-950 to-zinc-950",
+    "from-red-950/70 via-zinc-950 to-zinc-950",
   ];
 
   const projectYears = ["2024 - PRESENT", "2023 - 2024", "2023", "2022"];
@@ -35,8 +35,8 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               onMouseEnter={() => setActiveIndex(index)}
               className={`relative rounded-2xl overflow-hidden border cursor-pointer transition-all duration-500 flex flex-col justify-between p-5 ${
                 isActive
-                  ? "col-span-6 bg-zinc-900/90 border-violet-500/50 shadow-[0_0_30px_rgba(139,92,246,0.2)]"
-                  : "col-span-2 bg-zinc-950/60 border-zinc-800/80 hover:border-violet-500/30 hover:bg-zinc-900/50"
+                  ? "col-span-6 bg-zinc-900/90 border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.2)]"
+                  : "col-span-2 bg-zinc-950/60 border-zinc-800/80 hover:border-red-500/30 hover:bg-zinc-900/50"
               }`}
             >
               {/* Background ambient gradient */}
@@ -55,7 +55,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               <div className="relative z-10 flex items-center justify-between">
                 <span
                   className={`text-[11px] font-mono font-bold tracking-widest transition-opacity duration-300 ${
-                    isActive ? "text-violet-400 opacity-100" : "text-zinc-500 opacity-50"
+                    isActive ? "text-red-400 opacity-100" : "text-zinc-500 opacity-50"
                   }`}
                 >
                   {projectYears[index] || "2024"}
@@ -63,14 +63,14 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
 
                 <div className="flex items-center gap-2">
                   {project.demo && isActive && (
-                    <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/40 animate-pulse">
+                    <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-red-500/20 text-red-300 border border-red-500/40 animate-pulse">
                       <Radio className="w-2.5 h-2.5" />
                       LIVE
                     </span>
                   )}
                   <span
                     className={`text-xs font-mono transition-colors duration-300 ${
-                      isActive ? "text-violet-400" : "text-zinc-600"
+                      isActive ? "text-red-400" : "text-zinc-600"
                     }`}
                   >
                     0{index + 1}
@@ -82,7 +82,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               <div className="relative z-10 my-auto">
                 {isActive ? (
                   <div className="space-y-3 animate-in fade-in duration-300">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-violet-500/10 text-violet-300 border border-violet-500/30">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/10 text-red-300 border border-red-500/30">
                       <Cpu className="w-3 h-3" />
                       PRODUCTION ARCHITECTURE
                     </div>
@@ -99,7 +99,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                     <div className="space-y-1.5 pt-1">
                       {project.highlights.slice(0, 2).map((highlight, hIdx) => (
                         <div key={hIdx} className="flex items-start gap-2 text-xs text-zinc-350">
-                          <span className="text-violet-400 font-bold">&bull;</span>
+                          <span className="text-red-400 font-bold">&bull;</span>
                           <span>{highlight}</span>
                         </div>
                       ))}
@@ -113,7 +113,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-violet-500 via-indigo-500 to-fuchsia-500 text-white hover:brightness-110 transition-all shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-red-500 via-red-500 to-red-500 text-white hover:brightness-110 transition-all shadow-[0_0_15px_rgba(239,68,68,0.3)]"
                         >
                           Launch Demo
                           <ArrowUpRight className="w-3 h-3" />
@@ -125,7 +125,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-200 border border-zinc-700 hover:text-white hover:border-violet-500/40 transition-all"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-200 border border-zinc-700 hover:text-white hover:border-red-500/40 transition-all"
                         >
                           <GithubIcon className="w-3 h-3 text-zinc-400" />
                           View Code
@@ -135,7 +135,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center text-center space-y-2 py-4">
-                    <div className="w-10 h-10 rounded-xl bg-zinc-900/90 border border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-violet-400 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-zinc-900/90 border border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-red-400 transition-colors">
                       {index % 2 === 0 ? <Cpu className="w-4 h-4" /> : <Layers className="w-4 h-4" />}
                     </div>
                     <div className="text-sm font-bold text-zinc-300 writing-mode-vertical tracking-wide">
@@ -152,7 +152,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                     {project.technologies.map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900/90 text-violet-300 border border-zinc-800"
+                        className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900/90 text-red-300 border border-zinc-800"
                       >
                         {tech}
                       </span>
@@ -176,7 +176,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
             key={index}
             className="p-5 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 space-y-3 shadow-xl"
           >
-            <div className="flex items-center justify-between text-xs font-mono text-violet-400">
+            <div className="flex items-center justify-between text-xs font-mono text-red-400">
               <span>{projectYears[index] || "2024"}</span>
               <span>0{index + 1}</span>
             </div>
@@ -188,7 +188,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               {project.technologies.map((tech, tIdx) => (
                 <span
                   key={tIdx}
-                  className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900 text-violet-300 border border-zinc-800"
+                  className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900 text-red-300 border border-zinc-800"
                 >
                   {tech}
                 </span>
@@ -200,7 +200,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-violet-500 to-indigo-500 text-white"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-red-500 to-red-500 text-white"
                 >
                   Live Demo
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -236,9 +236,9 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
 
         <a
           href="#contact"
-          className="px-7 py-3 rounded-2xl bg-transparent text-white border-2 border-zinc-700 hover:border-violet-400 font-extrabold text-sm sm:text-base inline-flex items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer"
+          className="px-7 py-3 rounded-2xl bg-transparent text-white border-2 border-zinc-700 hover:border-red-400 font-extrabold text-sm sm:text-base inline-flex items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer"
         >
-          <Mail className="w-4 h-4 text-violet-400" />
+          <Mail className="w-4 h-4 text-red-400" />
           Get In Touch
         </a>
       </div>

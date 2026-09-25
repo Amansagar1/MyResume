@@ -63,10 +63,10 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const coreMesh = new THREE.Mesh(coreGeo, coreMat);
     coreGroup.add(coreMesh);
 
-    // B. Glowing Wireframe Cage (Electric Violet)
+    // B. Glowing Wireframe Cage (Electric red)
     const wireGeo = new THREE.IcosahedronGeometry(2.42, 2);
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0xa855f7,
+      color: 0xef4444,
       wireframe: true,
       transparent: true,
       opacity: 0.45,
@@ -74,11 +74,11 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const wireMesh = new THREE.Mesh(wireGeo, wireMat);
     coreGroup.add(wireMesh);
 
-    // C. Inner Luminous Energy Sphere (Neon Violet & Indigo)
+    // C. Inner Luminous Energy Sphere (Neon red & red)
     const innerGeo = new THREE.SphereGeometry(1.5, 32, 32);
     const innerMat = new THREE.MeshStandardMaterial({
-      color: 0x6366f1,
-      emissive: 0x8b5cf6,
+      color: 0xdc2626,
+      emissive: 0xef4444,
       emissiveIntensity: 0.8,
       roughness: 0.25,
       metalness: 0.8,
@@ -86,40 +86,40 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const innerMesh = new THREE.Mesh(innerGeo, innerMat);
     coreGroup.add(innerMesh);
 
-    // --- 4. Gyroscopic Orbital Tech Rings (Electric Violet Aesthetic) ---
+    // --- 4. Gyroscopic Orbital Tech Rings (Electric red Aesthetic) ---
     const ringGroup = new THREE.Group();
     rootGroup.add(ringGroup);
 
-    // Ring 1: Primary Equatorial Torus (Cyber Indigo)
+    // Ring 1: Primary Equatorial Torus (Cyber red)
     const ring1Geo = new THREE.TorusGeometry(3.6, 0.04, 16, 120);
     const ring1Mat = new THREE.MeshStandardMaterial({
-      color: 0x818cf8,
+      color: 0xf87171,
       metalness: 0.9,
       roughness: 0.1,
-      emissive: 0x4f46e5,
+      emissive: 0xb91c1c,
       emissiveIntensity: 0.5,
     });
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
     ring1.rotation.x = Math.PI * 0.45;
     ringGroup.add(ring1);
 
-    // Ring 2: Polar Tech Orbit (Electric Violet)
+    // Ring 2: Polar Tech Orbit (Electric red)
     const ring2Geo = new THREE.TorusGeometry(4.2, 0.03, 16, 120);
     const ring2Mat = new THREE.MeshStandardMaterial({
-      color: 0xc084fc,
+      color: 0xf87171,
       metalness: 0.9,
       roughness: 0.2,
-      emissive: 0x7e22ce,
+      emissive: 0x991b1b,
       emissiveIntensity: 0.4,
     });
     const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
     ring2.rotation.y = Math.PI * 0.35;
     ringGroup.add(ring2);
 
-    // Ring 3: Tilted Outer Halo Ring (Neon Fuchsia)
+    // Ring 3: Tilted Outer Halo Ring (Neon red)
     const ring3Geo = new THREE.TorusGeometry(4.8, 0.02, 16, 120);
     const ring3Mat = new THREE.MeshBasicMaterial({
-      color: 0xec4899,
+      color: 0xef4444,
       transparent: true,
       opacity: 0.45,
     });
@@ -151,8 +151,8 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const particlePositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
 
-    const violetColor = new THREE.Color(0xa855f7);
-    const fuchsiaColor = new THREE.Color(0xec4899);
+    const redColor = new THREE.Color(0xef4444);
+    const redColor2 = new THREE.Color(0xef4444);
     const amberColor = new THREE.Color(0xf59e0b);
 
     for (let i = 0; i < particleCount; i++) {
@@ -169,11 +169,11 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       particlePositions[i * 3 + 1] = y;
       particlePositions[i * 3 + 2] = z;
 
-      // Color gradient between violet, fuchsia, and amber
-      const mixedColor = violetColor.clone();
+      // Color gradient between red, red2, and amber
+      const mixedColor = redColor.clone();
       const rand = Math.random();
       if (rand < 0.45) {
-        mixedColor.lerp(fuchsiaColor, Math.random());
+        mixedColor.lerp(redColor2, Math.random());
       } else if (rand < 0.75) {
         mixedColor.lerp(amberColor, Math.random() * 0.7);
       }
@@ -205,8 +205,8 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const ambientLight = new THREE.AmbientLight(0x0e0920, 1.8);
     scene.add(ambientLight);
 
-    // Cursor Following Point Light (Electric Violet)
-    const cursorPointLight = new THREE.PointLight(0xa855f7, 5, 25);
+    // Cursor Following Point Light (Electric red)
+    const cursorPointLight = new THREE.PointLight(0xef4444, 5, 25);
     cursorPointLight.position.set(2, 2, 6);
     scene.add(cursorPointLight);
 

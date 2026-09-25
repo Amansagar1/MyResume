@@ -59,7 +59,7 @@ export default function CyberCompanion() {
       sender: "bot",
       text: "Greetings! 🤖 I'm **Amnu**, Kumar Aman Sagar's personal AI Avatar.\n\nI'm powered by a **Python 3.11 FastAPI RAG engine** supporting open-source models (Ollama, Groq Llama 3.3, DeepSeek R1) and cloud LLMs.\n\nAsk me anything about Kumar's background, AI projects, tech stack, or full-time availability!",
       citations: ["Python RAG Knowledge Base"],
-      providerUsed: "Python FastAPI RAG Microservice"
+      providerUsed: "Python FastAPI RAG Micredrvice"
     }
   ]);
 
@@ -196,7 +196,7 @@ export default function CyberCompanion() {
     try {
       let responseData: any = null;
 
-      // 1. Try Python FastAPI Microservice first if in local development or if NEXT_PUBLIC_AI_API_URL is configured
+      // 1. Try Python FastAPI Micredrvice first if in local development or if NEXT_PUBLIC_AI_API_URL is configured
       const isLocalhost = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
       const configuredAiUrl = process.env.NEXT_PUBLIC_AI_API_URL;
 
@@ -306,10 +306,10 @@ export default function CyberCompanion() {
                 initial={{ opacity: 0, y: 8, scale: 0.92 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 6, scale: 0.92 }}
-                className="absolute bottom-full right-1/2 translate-x-1/2 sm:right-0 sm:translate-x-0 mb-3 w-56 p-3 rounded-2xl bg-zinc-950/95 border border-violet-500/40 shadow-[0_10px_35px_rgba(0,0,0,0.85),0_0_20px_rgba(139,92,246,0.3)] backdrop-blur-xl text-left"
+                className="absolute bottom-full right-1/2 translate-x-1/2 sm:right-0 sm:translate-x-0 mb-3 w-56 p-3 rounded-2xl bg-zinc-950/95 border border-red-500/40 shadow-[0_10px_35px_rgba(0,0,0,0.85),0_0_20px_rgba(239,68,68,0.3)] backdrop-blur-xl text-left"
               >
                 <div className="flex items-start justify-between gap-1.5 mb-1">
-                  <span className="text-[10px] font-mono font-bold text-violet-400 flex items-center gap-1 uppercase tracking-wider">
+                  <span className="text-[10px] font-mono font-bold text-red-400 flex items-center gap-1 uppercase tracking-wider">
                     <Cpu className="w-3 h-3" />
                     AMNU • FLOATING AI
                   </span>
@@ -329,7 +329,7 @@ export default function CyberCompanion() {
                 <p className="text-xs text-zinc-200 font-sans leading-relaxed">
                   {speech || "Floating companion ready! Click me to chat with Python RAG & Open-Source LLMs."}
                 </p>
-                <div className="mt-2 pt-1 border-t border-zinc-850 flex items-center justify-between text-[10px] text-violet-400 font-mono font-semibold">
+                <div className="mt-2 pt-1 border-t border-zinc-850 flex items-center justify-between text-[10px] text-red-400 font-mono font-semibold">
                   <span>CLICK OR DRAG</span>
                   <span>⚡</span>
                 </div>
@@ -357,49 +357,49 @@ export default function CyberCompanion() {
               setIsHovered(false);
               setFaceExpression("normal");
             }}
-            className="relative w-15 h-15 sm:w-16 sm:h-16 flex items-center justify-center filter drop-shadow-[0_0_22px_rgba(139,92,246,0.55)] cursor-grab active:cursor-grabbing"
+            className="relative w-15 h-15 sm:w-16 sm:h-16 flex items-center justify-center filter drop-shadow-[0_0_22px_rgba(239,68,68,0.55)] cursor-grab active:cursor-grabbing"
             title="Amnu Floating AI Companion (Click to chat, Drag to move)"
           >
             {/* Outer Halo Pulsing Ring */}
-            <div className="absolute inset-0 rounded-full border border-violet-500/30 animate-ping opacity-25" />
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-violet-600/30 via-fuchsia-600/20 to-indigo-600/30 blur-md pointer-events-none" />
+            <div className="absolute inset-0 rounded-full border border-red-500/30 animate-ping opacity-25" />
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-red-600/30 via-red-600/20 to-red-600/30 blur-md pointer-events-none" />
 
             {/* Bot Body (Aerodynamic Cyber Sphere) */}
-            <div className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-b from-zinc-850 via-zinc-900 to-black border-2 border-violet-400/60 shadow-2xl flex flex-col items-center justify-center overflow-hidden">
+            <div className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-b from-zinc-850 via-zinc-900 to-black border-2 border-red-400/60 shadow-2xl flex flex-col items-center justify-center overflow-hidden">
               {/* Top Antenna Beacon */}
-              <div className="absolute -top-1 w-2.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+              <div className="absolute -top-1 w-2.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
 
               {/* Glowing Visor */}
-              <div className="w-9 sm:w-11 h-5 sm:h-6 rounded-xl bg-black/90 border border-violet-500/50 flex items-center justify-center shadow-inner relative overflow-hidden">
+              <div className="w-9 sm:w-11 h-5 sm:h-6 rounded-xl bg-black/90 border border-red-500/50 flex items-center justify-center shadow-inner relative overflow-hidden">
                 <div className="absolute -top-2 -left-2 w-8 h-4 bg-white/20 rounded-full rotate-12 blur-[1px]" />
                 <div className="flex items-center gap-1.5 font-mono font-black text-xs select-none">
                   {faceExpression === "normal" && (
-                    <span className="text-violet-400 animate-pulse tracking-widest">&bull; &bull;</span>
+                    <span className="text-red-400 animate-pulse tracking-widest">&bull; &bull;</span>
                   )}
                   {faceExpression === "happy" && (
-                    <span className="text-fuchsia-400 tracking-wider">^ _ ^</span>
+                    <span className="text-red-400 tracking-wider">^ _ ^</span>
                   )}
                   {faceExpression === "speed" && (
                     <span className="text-amber-400 tracking-widest">&gt; &lt;</span>
                   )}
                   {faceExpression === "sparkle" && (
-                    <span className="text-cyan-300 tracking-wider">★ ★</span>
+                    <span className="text-red-300 tracking-wider">★ ★</span>
                   )}
                 </div>
               </div>
 
               {/* Micro Chest Core Light */}
               <div className="mt-0.5 flex items-center gap-1">
-                <span className="w-1 h-1 rounded-full bg-violet-400 animate-ping" />
-                <span className="w-3.5 h-0.5 rounded-full bg-violet-500/60" />
+                <span className="w-1 h-1 rounded-full bg-red-400 animate-ping" />
+                <span className="w-3.5 h-0.5 rounded-full bg-red-500/60" />
               </div>
             </div>
 
             {/* Levitating Micro Thruster Flame with Jet Glow */}
             <div className="absolute -bottom-1.5 flex gap-1.5">
-              <span className="w-1.5 h-3 rounded-full bg-gradient-to-b from-violet-400 to-transparent animate-pulse" />
-              <span className="w-1.5 h-4 rounded-full bg-gradient-to-b from-fuchsia-400 to-transparent animate-bounce" />
-              <span className="w-1.5 h-3 rounded-full bg-gradient-to-b from-violet-400 to-transparent animate-pulse" />
+              <span className="w-1.5 h-3 rounded-full bg-gradient-to-b from-red-400 to-transparent animate-pulse" />
+              <span className="w-1.5 h-4 rounded-full bg-gradient-to-b from-red-400 to-transparent animate-bounce" />
+              <span className="w-1.5 h-3 rounded-full bg-gradient-to-b from-red-400 to-transparent animate-pulse" />
             </div>
 
             {/* Floating Tag */}
@@ -407,7 +407,7 @@ export default function CyberCompanion() {
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="absolute -top-6 px-2 py-0.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold text-[9px] font-mono tracking-wider shadow-lg flex items-center gap-1 whitespace-nowrap"
+                className="absolute -top-6 px-2 py-0.5 rounded-full bg-gradient-to-r from-red-600 to-red-600 text-white font-bold text-[9px] font-mono tracking-wider shadow-lg flex items-center gap-1 whitespace-nowrap"
               >
                 <Zap className="w-2 h-2 text-amber-300 fill-amber-300" />
                 CHAT
@@ -425,19 +425,19 @@ export default function CyberCompanion() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ type: "spring", stiffness: 350, damping: 28 }}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[80] w-[calc(100vw-32px)] sm:w-[460px] h-[580px] max-h-[85vh] rounded-3xl bg-zinc-950/95 border border-violet-500/40 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_40px_rgba(139,92,246,0.25)] flex flex-col overflow-hidden font-sans"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[80] w-[calc(100vw-32px)] sm:w-[460px] h-[580px] max-h-[85vh] rounded-3xl bg-zinc-950/95 border border-red-500/40 backdrop-blur-2xl shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_40px_rgba(239,68,68,0.25)] flex flex-col overflow-hidden font-sans"
           >
             {/* Terminal Header */}
             <div className="px-4 py-3 bg-zinc-900/90 border-b border-zinc-800 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="relative w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/40 flex items-center justify-center shadow-inner">
-                  <Bot className="w-4 h-4 text-violet-400" />
-                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="relative w-8 h-8 rounded-xl bg-red-950/60 border border-red-500/40 flex items-center justify-center shadow-inner">
+                  <Bot className="w-4 h-4 text-red-400" />
+                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-red-400 animate-pulse" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
                     <h3 className="text-xs font-bold text-white font-heading">Amnu AI Avatar</h3>
-                    <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                    <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-red-500/20 text-red-300 border border-red-500/30">
                       Python 3.11 RAG
                     </span>
                   </div>
@@ -475,7 +475,7 @@ export default function CyberCompanion() {
                   className="px-4 py-3 bg-zinc-900/95 border-b border-zinc-800 text-xs space-y-2.5 overflow-hidden"
                 >
                   <div className="flex items-center justify-between text-zinc-300 font-mono text-[11px]">
-                    <span className="flex items-center gap-1.5 text-violet-400 font-bold">
+                    <span className="flex items-center gap-1.5 text-red-400 font-bold">
                       <Key className="w-3.5 h-3.5" />
                       LLM API Key (Optional)
                     </span>
@@ -495,7 +495,7 @@ export default function CyberCompanion() {
                       <option value="huggingface">HuggingFace Open Source</option>
                     </select>
                     {provider === "ollama" ? (
-                      <div className="flex-1 px-2.5 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-emerald-400 font-mono text-[10px] flex items-center">
+                      <div className="flex-1 px-2.5 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-red-400 font-mono text-[10px] flex items-center">
                         localhost:11434 (No key needed)
                       </div>
                     ) : (
@@ -508,12 +508,12 @@ export default function CyberCompanion() {
                         }
                         value={apiKey}
                         onChange={(e) => setApiKey(e.target.value)}
-                        className="flex-1 px-3 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-200 placeholder-zinc-600 text-xs outline-none focus:border-violet-500"
+                        className="flex-1 px-3 py-1.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-200 placeholder-zinc-600 text-xs outline-none focus:border-red-500"
                       />
                     )}
                     <button
                       onClick={() => handleSaveApiKey(apiKey, provider)}
-                      className="px-3 py-1.5 rounded-lg bg-violet-600 text-white font-semibold text-xs hover:bg-violet-500 active:scale-95 cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg bg-red-600 text-white font-semibold text-xs hover:bg-red-500 active:scale-95 cursor-pointer"
                     >
                       Save
                     </button>
@@ -537,7 +537,7 @@ export default function CyberCompanion() {
                   <div
                     className={`max-w-[88%] p-3.5 rounded-2xl leading-relaxed ${
                       msg.sender === "user"
-                        ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-tr-sm shadow-md"
+                        ? "bg-gradient-to-r from-red-600 to-red-600 text-white rounded-tr-sm shadow-md"
                         : "bg-zinc-900/90 text-zinc-200 border border-zinc-800 rounded-tl-sm shadow-sm"
                     }`}
                   >
@@ -546,7 +546,7 @@ export default function CyberCompanion() {
                     {/* Citations Pill Bar */}
                     {msg.citations && msg.citations.length > 0 && (
                       <div className="mt-2.5 pt-2 border-t border-zinc-800/80 flex flex-wrap items-center gap-1.5 text-[10px] text-zinc-400 font-mono">
-                        <span className="text-violet-400 font-bold">RAG Sources:</span>
+                        <span className="text-red-400 font-bold">RAG Sources:</span>
                         {msg.citations.slice(0, 2).map((cit, idx) => (
                           <span
                             key={idx}
@@ -564,7 +564,7 @@ export default function CyberCompanion() {
                         <a
                           href={msg.suggestedAction.href}
                           onClick={() => setIsChatOpen(false)}
-                          className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-violet-500/20 hover:bg-violet-500/30 text-violet-300 font-mono text-[10px] font-semibold border border-violet-500/30 transition-all active:scale-95"
+                          className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 font-mono text-[10px] font-semibold border border-red-500/30 transition-all active:scale-95"
                         >
                           <span>{msg.suggestedAction.label}</span>
                           <ArrowUpRight className="w-3 h-3" />
@@ -587,7 +587,7 @@ export default function CyberCompanion() {
 
               {/* Generating Thinking Animation */}
               {isGenerating && (
-                <div className="flex items-center gap-2 p-3 rounded-2xl bg-zinc-900/80 border border-violet-500/30 text-violet-400 text-xs font-mono max-w-[75%]">
+                <div className="flex items-center gap-2 p-3 rounded-2xl bg-zinc-900/80 border border-red-500/30 text-red-400 text-xs font-mono max-w-[75%]">
                   <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                   <span>Python RAG searching vector chunks...</span>
                 </div>
@@ -603,7 +603,7 @@ export default function CyberCompanion() {
                   key={idx}
                   onClick={() => handleSendMessage(prompt)}
                   disabled={isGenerating}
-                  className="whitespace-nowrap px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-violet-500/40 hover:text-white text-zinc-400 text-[10px] font-medium transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
+                  className="whitespace-nowrap px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-500/40 hover:text-white text-zinc-400 text-[10px] font-medium transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
                 >
                   {prompt}
                 </button>
@@ -624,12 +624,12 @@ export default function CyberCompanion() {
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 disabled={isGenerating}
-                className="flex-1 px-3.5 py-2 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-violet-500 text-zinc-100 placeholder-zinc-500 text-xs outline-none transition-colors"
+                className="flex-1 px-3.5 py-2 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-red-500 text-zinc-100 placeholder-zinc-500 text-xs outline-none transition-colors"
               />
               <button
                 type="submit"
                 disabled={!inputMessage.trim() || isGenerating}
-                className="p-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white hover:brightness-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md shadow-violet-500/25 cursor-pointer"
+                className="p-2 rounded-xl bg-gradient-to-r from-red-600 to-red-600 text-white hover:brightness-110 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md shadow-red-500/25 cursor-pointer"
               >
                 <Send className="w-4 h-4" />
               </button>

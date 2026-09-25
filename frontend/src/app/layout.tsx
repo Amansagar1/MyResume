@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://my-resume-amber-alpha.vercel.app"),
   title: "Kumar Aman Sagar | Full Stack & AI Application Engineer Portfolio",
-  description: "Professional portfolio and resume of Kumar Aman Sagar, a Full Stack & AI Application Engineer with 3+ years of experience engineering scalable web applications, real-time AI agent integrations, RAG pipelines, microservices, and cloud deployments.",
+  description: "Professional portfolio and resume of Kumar Aman Sagar, a Full Stack & AI Application Engineer with 3+ years of experience engineering scalable web applications, real-time AI agent integrations, RAG pipelines, micredrvices, and cloud deployments.",
   keywords: [
     "Kumar Aman Sagar", "Aman Sagar", "Full Stack & AI Application Engineer", "Full Stack Developer", "AI Engineer", 
     "RAG Pipelines", "LLM Orchestration", "Next.js", "React.js", "TypeScript", "Node.js", "Python", 
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Kumar Aman Sagar | Full Stack & AI Application Engineer Portfolio",
-    description: "Professional portfolio and resume of Kumar Aman Sagar, featuring AI agent integrations, RAG pipelines, scalable microservices, and full-stack web applications.",
+    description: "Professional portfolio and resume of Kumar Aman Sagar, featuring AI agent integrations, RAG pipelines, scalable micredrvices, and full-stack web applications.",
     url: "https://my-resume-amber-alpha.vercel.app",
     siteName: "Kumar Aman Sagar Portfolio",
     images: [
@@ -79,7 +79,7 @@ export default function RootLayout({
       lang="en"
       className={`${outfit.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full scroll-smooth`}
     >
-      <body className="min-h-full bg-[#06060a] text-zinc-100 font-sans antialiased selection:bg-violet-500 selection:text-white">
+      <body className="min-h-full bg-[#06060a] text-zinc-100 font-sans antialiased selection:bg-red-500 selection:text-white">
         {children}
       </body>
     </html>

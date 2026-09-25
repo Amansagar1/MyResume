@@ -49,9 +49,9 @@ export default function ClickSparkles() {
     window.addEventListener("resize", handleResize);
 
     const sparkleColors = [
-      "#a855f7", // Violet
-      "#c084fc", // Soft Lavender
-      "#818cf8", // Indigo
+      "#ef4444", // red
+      "#f87171", // Soft Lavender
+      "#ef4444", // red
       "#ffffff", // Pure White
     ];
 

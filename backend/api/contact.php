@@ -59,6 +59,19 @@ try {
     $bulk->insert($newMessage);
     $manager->executeBulkWrite($namespace, $bulk);
 
+    // Send email notification
+    $to = "kumaramansagar01@gmail.com";
+    $email_subject = "Portfolio Contact: " . $subject;
+    $email_body = "You have a new message from your portfolio!\n\n" .
+                  "Name: $name\n" .
+                  "Email: $email\n\n" .
+                  "Message:\n$message";
+    $headers = "From: noreply@portfolio.com\r\n" .
+               "Reply-To: $email\r\n" .
+               "X-Mailer: PHP/" . phpversion();
+               
+    @mail($to, $email_subject, $email_body, $headers);
+
     echo json_encode([
         "success" => true,
         "message" => "Thank you, your message has been received and saved directly to MongoDB Atlas!",
@@ -93,6 +106,19 @@ try {
         $messages[] = $newMessage;
         file_put_contents($messagesFile, json_encode($messages, JSON_PRETTY_PRINT));
         
+        // Send email notification
+        $to = "kumaramansagar01@gmail.com";
+        $email_subject = "Portfolio Contact (Local Fallback): " . $subject;
+        $email_body = "You have a new message from your portfolio!\n\n" .
+                      "Name: $name\n" .
+                      "Email: $email\n\n" .
+                      "Message:\n$message";
+        $headers = "From: noreply@portfolio.com\r\n" .
+                   "Reply-To: $email\r\n" .
+                   "X-Mailer: PHP/" . phpversion();
+                   
+        @mail($to, $email_subject, $email_body, $headers);
+
         echo json_encode([
             "success" => true,
             "message" => "Thank you, your message has been received! (Stored in local JSON database fallback).",

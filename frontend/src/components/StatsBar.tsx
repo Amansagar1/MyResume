@@ -11,21 +11,21 @@ export default function StatsBar() {
       label: "Production Experience",
       value: "3+ Years",
       detail: "Full Stack & Real-Time AI Agents",
-      icon: <Rocket className="w-4 h-4 text-violet-400" />,
-      glowColor: "rgba(139, 92, 246, 0.2)",
+      icon: <Rocket className="w-4 h-4 text-red-400" />,
+      glowColor: "rgba(239, 68, 68, 0.2)",
     },
     {
       label: "Platform Availability",
       value: "99.9%",
-      detail: "AWS ECS Multi-Tenant Microservices",
-      icon: <ShieldCheck className="w-4 h-4 text-indigo-400" />,
-      glowColor: "rgba(99, 102, 241, 0.2)",
+      detail: "AWS ECS Multi-Tenant Micredrvices",
+      icon: <ShieldCheck className="w-4 h-4 text-red-400" />,
+      glowColor: "rgba(239, 68, 68, 0.2)",
     },
     {
       label: "Latency Reduction",
       value: "40% Gain",
       detail: "220ms to <130ms via Redis Caching",
-      icon: <Gauge className="w-4 h-4 text-fuchsia-400" />,
+      icon: <Gauge className="w-4 h-4 text-red-400" />,
       glowColor: "rgba(236, 72, 153, 0.2)",
     },
     {
@@ -49,7 +49,7 @@ export default function StatsBar() {
             transition={{ duration: 0.5, delay: idx * 0.1 }}
           >
             <Card3D depth={8} glowColor={stat.glowColor}>
-              <div className="p-4 rounded-2xl bg-zinc-950/85 border border-zinc-800/80 hover:border-violet-500/40 backdrop-blur-xl shadow-lg flex flex-col justify-between h-full group">
+              <div className="p-4 rounded-2xl bg-zinc-950/85 border border-zinc-800/80 hover:border-red-500/40 backdrop-blur-xl shadow-lg flex flex-col justify-between h-full group">
                 <div className="flex items-center justify-between mb-2.5">
                   <div className="p-2 rounded-xl bg-zinc-900/80 border border-zinc-800 group-hover:scale-110 transition-transform">
                     {stat.icon}
@@ -60,7 +60,7 @@ export default function StatsBar() {
                 </div>
 
                 <div>
-                  <div className="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-white via-zinc-100 to-zinc-350 bg-clip-text text-transparent group-hover:text-violet-400 transition-colors">
+                  <div className="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-white via-zinc-100 to-zinc-350 bg-clip-text text-transparent group-hover:text-red-400 transition-colors">
                     {stat.value}
                   </div>
                   <div className="text-xs font-bold text-zinc-200 mt-0.5">
