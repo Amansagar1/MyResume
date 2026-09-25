@@ -1,0 +1,40 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    # Frontend Build
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: './frontend/package-lock.json'
+        
+    - name: Install Frontend Dependencies
+      run: npm ci
+      working-directory: ./frontend
+      
+    - name: Build Frontend
+      run: npm run build
+      working-directory: ./frontend
+
+    # Docker Build & Push (Simulated)
+    - name: Build Docker Images
+      run: |
+        docker-compose -f docker-compose.yml build
+      
+    # Deploy to Kubernetes (AWS EKS via Terraform infrastructure)
+    # - name: Deploy to K8s
+    #   run: |
+    #     kubectl apply -f infrastructure/k8s/
