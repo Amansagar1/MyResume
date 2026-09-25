@@ -32,7 +32,7 @@ jobs:
     # Docker Build & Push (Simulated)
     - name: Build Docker Images
       run: |
-        docker-compose -f docker-compose.yml build
+        docker compose -f docker-compose.yml build
       
     # Deploy to Kubernetes (AWS EKS via Terraform infrastructure)
     # - name: Deploy to K8s
