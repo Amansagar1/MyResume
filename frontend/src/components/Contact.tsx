@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PersonalInfo } from "../types/resume";
 import Card3D from "./Card3D";
 import Draggable from "./Draggable";
-import CyberCube3D from "./CyberCube3D";
 
 interface ContactProps {
   personal: PersonalInfo;
