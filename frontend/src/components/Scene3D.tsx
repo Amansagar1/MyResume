@@ -59,9 +59,7 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     // B. Glowing Wireframe Cage (Electric red)
     const wireGeo = new THREE.TetrahedronGeometry(3.3, 0);
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff, wireframe: true, transparent: true, opacity: 0.8,
-      transparent: true,
-      opacity: 0.45,
+      color: 0xffffff, wireframe: true, transparent: true, opacity: 0.45,
     });
     const wireMesh = new THREE.Mesh(wireGeo, wireMat);
     coreGroup.add(wireMesh);
