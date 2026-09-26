@@ -293,7 +293,7 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
 
     // --- 8. Animation & Render Loop ---
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const startTime = performance.now();
 
     // Section 3D Transform Coordinates (Responsive for Kitanga-style staging)
     const getTargetTransform = (progress: number) => {
@@ -349,7 +349,7 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = (performance.now() - startTime) / 1000;
 
       // Smooth Lerp for Mouse coordinates
       mouse.x += (mouse.targetX - mouse.x) * 0.06;

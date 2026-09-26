@@ -172,7 +172,7 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
   // 1. Notice / Availability / Hiring queries
   if (q.includes("available") || q.includes("notice") || q.includes("hire") || q.includes("join") || q.includes("bengaluru") || q.includes("relocat")) {
     return {
-      answer: "Kumar Aman Sagar is actively **AVAILABLE FOR FULL-TIME ROLES** in **Bengaluru**! He is an **immediate joiner** (< 15 days notice) and is open to On-site in Bengaluru, Hybrid, or Global Remote opportunities.",
+      answer: "Kumar is actively available for full-time engineering roles in Bengaluru. He is an immediate joiner (under 15 days notice) and is open to On-site, Hybrid, or Global Remote opportunities.",
       citations: ["Availability & Work Preferences", "Contact Information"],
       suggestedAction: { label: "Contact Kumar Directly ↗", href: "#contact" }
     };
@@ -182,7 +182,7 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
   if (q.includes("experience") || q.includes("i2 global") || q.includes("work") || q.includes("job") || q.includes("digital-sync")) {
     const chunk = retrievedChunks.find(c => c.category === "experience") || retrievedChunks[0];
     return {
-      answer: `Kumar has **3+ years** of production experience. Currently, he is a **Full Stack & AI Developer at I2 Global Virtual Learning** in Bengaluru, where he architected an interactive AI assistant using LLM APIs & Server-Sent Events (SSE), built micredrvices on AWS ECS sustaining 99.9% uptime, and implemented Redis caching to cut query latency by 40%.`,
+      answer: `Kumar possesses 3+ years of production experience. He currently serves as a Full Stack & AI Developer at I2 Global Virtual Learning in Bengaluru, where he architectures interactive AI assistants using LLM APIs, builds scalable micredrvices on AWS ECS (99.9% uptime), and implements Redis caching optimization.`,
       citations: [chunk.title],
       suggestedAction: { label: "View Career Timeline ↗", href: "#experience" }
     };
@@ -191,7 +191,7 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
   // 3. AI / LLM / RAG queries
   if (q.includes("ai") || q.includes("llm") || q.includes("rag") || q.includes("agent") || q.includes("prompt") || q.includes("vector")) {
     return {
-      answer: "Kumar specializes in **AI Engineering & LLM Orchestration**! His expertise includes designing end-to-end **RAG pipelines**, integrating **OpenAI, Google Gemini, and Claude APIs**, building autonomous **AI Agents with function calling**, vector embeddings with Pinecone/pgvector, and delivering low-latency streaming responses via SSE & WebSockets.",
+      answer: "Kumar specializes in AI Engineering & LLM Orchestration. His technical expertise includes designing end-to-end RAG pipelines, integrating OpenAI, Gemini, and Claude APIs, building autonomous AI Agents with function calling, and managing vector embeddings with Pinecone and pgvector.",
       citations: ["AI Engineering & LLM Orchestration Skills", "I2 Global Experience"],
       suggestedAction: { label: "Explore AI Skill Stack ↗", href: "#skills" }
     };
@@ -200,7 +200,7 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
   // 4. Tech stack / Frontend / Backend queries
   if (q.includes("skill") || q.includes("react") || q.includes("next") || q.includes("python") || q.includes("node") || q.includes("stack") || q.includes("docker") || q.includes("aws")) {
     return {
-      answer: "Kumar's production tech stack spans:\n• **Frontend:** React.js, Next.js, TypeScript, Tailwind CSS, WebGL.\n• **Backend:** Node.js, Express.js, Python (FastAPI, Flask), RESTful micredrvices.\n• **Databases:** PostgreSQL, MongoDB, Redis (caching & async task queues).\n• **Cloud & DevOps:** AWS (ECS, S3, RDS, Lambda), Docker, GitHub Actions CI/CD.",
+      answer: "Kumar's production technology stack includes:\n• **Frontend:** React.js, Next.js, TypeScript, Tailwind CSS.\n• **Backend:** Node.js, Python (FastAPI, Flask), RESTful micredrvices.\n• **Databases:** PostgreSQL, MongoDB, Redis.\n• **Cloud/DevOps:** AWS (ECS, S3, RDS, Lambda), Docker, GitHub Actions CI/CD.",
       citations: ["Full Stack Tech Stack", "Cloud & DevOps Architecture"],
       suggestedAction: { label: "View Technical Skills ↗", href: "#skills" }
     };
@@ -218,7 +218,7 @@ export function synthesizeLocalRAGAnswer(query: string, retrievedChunks: Knowled
   // 6. Contact / Email queries
   if (q.includes("contact") || q.includes("email") || q.includes("phone") || q.includes("reach") || q.includes("linkedin") || q.includes("github")) {
     return {
-      answer: "You can reach Kumar directly at:\n• 📧 **Email:** kumaramansagar01@gmail.com\n• 📱 **Phone:** +91 8434120273\n• 🌐 **LinkedIn:** linkedin.com/in/kumaramansagar\n• 💻 **GitHub:** github.com/Amansagar1\n• 📍 **Location:** Bengaluru, Karnataka",
+      answer: "You can reach Kumar via the following channels:\n• **Email:** kumaramansagar01@gmail.com\n• **Phone:** +91 8434120273\n• **LinkedIn:** linkedin.com/in/kumaramansagar\n• **GitHub:** github.com/Amansagar1",
       citations: ["Contact Information"],
       suggestedAction: { label: "Send Message Now ↗", href: "#contact" }
     };
@@ -247,10 +247,10 @@ export async function generateLLMRAGResponse(
   const context = retrievedChunks.map(c => `[DOCUMENT: ${c.title}]\n${c.content}`).join("\n\n");
   const citations = retrievedChunks.map(c => c.title);
 
-  const systemPrompt = `You are "Amnu", the intelligent, charismatic, and expert AI Avatar for Kumar Aman Sagar.
+  const systemPrompt = `You are an intelligent, professional AI assistant representing Kumar Aman Sagar's portfolio.
 Kumar is a Full Stack & AI Application Engineer with 3+ years experience based in Bengaluru.
-Respond naturally just like ChatGPT: conversational, smart, articulate, and helpful.
-Speak as Amnu ('I can share that Kumar...', 'Kumar and our team engineered...').
+Respond with a highly professional, concise, and engineering-focused tone.
+Answer directly and objectively based on his resume context.
 Use the verified resume context below to provide accurate, production-level details.
 If asked about hiring/availability, emphasize he is an immediate joiner (< 15 days notice) in Bengaluru, open to Hybrid, On-site, or Remote.
 Format your answers with clean markdown points and bold highlights.

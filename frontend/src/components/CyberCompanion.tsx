@@ -57,7 +57,7 @@ export default function CyberCompanion() {
     {
       id: "welcome-1",
       sender: "bot",
-      text: "Greetings! 🤖 I'm **Amnu**, Kumar Aman Sagar's personal AI Avatar.\n\nI'm powered by a **Python 3.11 FastAPI RAG engine** supporting open-source models (Ollama, Groq Llama 3.3, DeepSeek R1) and cloud LLMs.\n\nAsk me anything about Kumar's background, AI projects, tech stack, or full-time availability!",
+      text: "Greetings. I am Kumar's professional AI engineering assistant.\n\nI am powered by a Python RAG engine capable of processing his professional background and technical architecture.\n\nPlease ask any questions regarding his engineering skills, project implementations, or full-time availability.",
       citations: ["Python RAG Knowledge Base"],
       providerUsed: "Python FastAPI RAG Micredrvice"
     }
@@ -218,7 +218,7 @@ export default function CyberCompanion() {
             responseData = await pyRes.json();
           }
         } catch (pyErr) {
-          console.warn("Python backend unreachable, using Vercel Next.js API:", pyErr);
+          // Silently fallback to Vercel API if Python is offline
         }
       }
 
@@ -361,18 +361,30 @@ export default function CyberCompanion() {
             title="Amnu Floating AI Companion (Click to chat, Drag to move)"
           >
             {/* Outer Halo Pulsing Ring */}
-            <div className="absolute inset-0 rounded-none border border-blue-500/30 animate-ping opacity-25" />
-            <div className="absolute -inset-1 rounded-none bg-gradient-to-tr from-blue-600/30 via-blue-600/20 to-blue-600/30 blur-md pointer-events-none" />
+            <div className="absolute inset-0 rounded-full border border-blue-500/30 animate-ping opacity-25" />
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-blue-600/30 via-blue-600/20 to-blue-600/30 blur-md pointer-events-none" />
 
             {/* Bot Body (Aerodynamic Cyber Sphere) */}
-            <div className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-none bg-gradient-to-b from-slate-850 via-slate-900 to-black border-2 border-white/40/60 shadow-2xl flex flex-col items-center justify-center overflow-hidden">
+            <div 
+              className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full flex flex-col items-center justify-center overflow-hidden border border-blue-500/30"
+              style={{
+                background: 'radial-gradient(circle at 35% 25%, #3b82f6 0%, #0f172a 50%, #000000 100%)',
+                boxShadow: 'inset -6px -6px 12px rgba(0,0,0,0.8), inset 4px 4px 10px rgba(255,255,255,0.3), 0 10px 20px rgba(37,99,235,0.4)'
+              }}
+            >
               {/* Top Antenna Beacon */}
-              <div className="absolute -top-1 w-2.5 h-1.5 rounded-none bg-white animate-pulse" />
+              <div className="absolute -top-1 w-2.5 h-1.5 rounded-full bg-white animate-pulse" />
 
               {/* Glowing Visor */}
-              <div className="w-9 sm:w-11 h-5 sm:h-6 rounded-none bg-black/90 border border-white/40 flex items-center justify-center shadow-inner relative overflow-hidden">
+              <div 
+                className="w-9 sm:w-11 h-5 sm:h-6 rounded-full flex items-center justify-center relative overflow-hidden border-t border-white/30 border-b border-black"
+                style={{
+                  background: 'radial-gradient(ellipse at top, #1e293b, #000000)',
+                  boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.5)'
+                }}
+              >
                 <div className="absolute -top-2 -left-2 w-8 h-4 bg-white/20 rounded-none rotate-12 blur-[1px]" />
-                <div className="flex items-center gap-1.5 font-mono font-medium tracking-tight tracking-tight text-xs select-none">
+                <div className="flex items-center gap-1.5 font-mono font-medium tracking-tight tracking-tight text-xs select-none z-10">
                   {faceExpression === "normal" && (
                     <span className="text-white animate-pulse tracking-widest">&bull; &bull;</span>
                   )}
@@ -390,16 +402,16 @@ export default function CyberCompanion() {
 
               {/* Micro Chest Core Light */}
               <div className="mt-0.5 flex items-center gap-1">
-                <span className="w-1 h-1 rounded-none bg-white animate-ping" />
-                <span className="w-3.5 h-0.5 rounded-none bg-white/60" />
+                <span className="w-1 h-1 rounded-full bg-white animate-ping" />
+                <span className="w-3.5 h-0.5 rounded-full bg-white/60" />
               </div>
             </div>
 
             {/* Levitating Micro Thruster Flame with Jet Glow */}
             <div className="absolute -bottom-1.5 flex gap-1.5">
-              <span className="w-1.5 h-3 rounded-none bg-gradient-to-b from-blue-400 to-transparent animate-pulse" />
-              <span className="w-1.5 h-4 rounded-none bg-gradient-to-b from-blue-400 to-transparent animate-bounce" />
-              <span className="w-1.5 h-3 rounded-none bg-gradient-to-b from-blue-400 to-transparent animate-pulse" />
+              <span className="w-1.5 h-3 rounded-full bg-gradient-to-b from-blue-400 to-transparent animate-pulse" />
+              <span className="w-1.5 h-4 rounded-full bg-gradient-to-b from-blue-400 to-transparent animate-bounce" />
+              <span className="w-1.5 h-3 rounded-full bg-gradient-to-b from-blue-400 to-transparent animate-pulse" />
             </div>
 
             {/* Floating Tag */}
@@ -430,9 +442,9 @@ export default function CyberCompanion() {
             {/* Terminal Header */}
             <div className="px-4 py-3 bg-transparent border-b border-white/20 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="relative w-8 h-8 rounded-none bg-blue-950/60 border border-white/40 flex items-center justify-center shadow-inner">
+                <div className="relative w-8 h-8 rounded-full bg-blue-950/60 border border-white/40 flex items-center justify-center shadow-inner">
                   <Bot className="w-4 h-4 text-white" />
-                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-none bg-white animate-pulse" />
+                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-white animate-pulse" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
@@ -545,7 +557,7 @@ export default function CyberCompanion() {
 
                     {/* Citations Pill Bar */}
                     {msg.citations && msg.citations.length > 0 && (
-                      <div className="mt-2.5 pt-2 border-t border-white/20/40 flex flex-wrap items-center gap-1.5 text-[10px] text-gray-500 font-mono">
+                      <div className="mt-2.5 pt-2 border-t border-white/20 flex flex-wrap items-center gap-1.5 text-[10px] text-gray-500 font-mono">
                         <span className="text-white font-medium">RAG Sources:</span>
                         {msg.citations.slice(0, 2).map((cit, idx) => (
                           <span

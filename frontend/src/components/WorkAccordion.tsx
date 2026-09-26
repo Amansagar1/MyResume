@@ -174,7 +174,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="p-5 rounded-none bg-slate-900/60 /40 space-y-3 shadow-xl"
+            className="p-5 rounded-none bg-slate-900/60 space-y-3 shadow-xl"
           >
             <div className="flex items-center justify-between text-xs font-mono text-white">
               <span>{projectYears[index] || "2024"}</span>

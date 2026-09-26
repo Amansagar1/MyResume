@@ -63,10 +63,12 @@ export default function Navbar({ personalName, githubUrl }: NavbarProps) {
 
   const scrollTo = (id: string) => {
     setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 150);
   };
 
   return (
@@ -78,7 +80,7 @@ export default function Navbar({ personalName, githubUrl }: NavbarProps) {
       />
 
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
           scrolled ? "bg-black/90 backdrop-blur-md border-b border-white/10 py-3" : "bg-transparent py-5"
         }`}
       >

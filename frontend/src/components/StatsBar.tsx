@@ -49,7 +49,7 @@ export default function StatsBar() {
             transition={{ duration: 0.5, delay: idx * 0.1 }}
           >
             <Card3D depth={8} glowColor={stat.glowColor}>
-              <div className="p-4 rounded-none bg-black/85 /40 hover:border-white/40 backdrop-blur-xl  flex flex-col justify-between h-full group">
+              <div className="p-4 rounded-none bg-black/85 hover:border-white/40 backdrop-blur-xl  flex flex-col justify-between h-full group">
                 <div className="flex items-center justify-between mb-2.5">
                   <div className="p-2 rounded-none bg-transparent  group-hover:scale-110 transition-transform">
                     {stat.icon}

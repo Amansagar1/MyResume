@@ -70,7 +70,7 @@ export default function Experience({ experience }: ExperienceProps) {
 
               {/* 3D Tilt Experience Card (Tighter padding & spacing) */}
               <Card3D depth={25} glowColor="rgba(0, 170, 255, 0.4)">
-                <div className="p-4 sm:p-5 rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl  transition-all duration-300">
+                <div className="p-4 sm:p-5 rounded-none bg-slate-900/60 hover:border-white/40 backdrop-blur-xl  transition-all duration-300">
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 mb-3.5">
                     <div>
                       <span className="text-[10px] font-mono font-medium text-white uppercase tracking-wider block mb-0.5">
@@ -109,7 +109,7 @@ export default function Experience({ experience }: ExperienceProps) {
                     {getExperienceTags(index).map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2 py-0.5 rounded-none text-[10px] font-mono bg-transparent text-gray-500 /40 hover:border-blue-500/30 hover:text-blue-300 transition-colors "
+                        className="px-2 py-0.5 rounded-none text-[10px] font-mono bg-transparent text-gray-500 hover:border-blue-500/30 hover:text-blue-300 transition-colors "
                       >
                         {tag}
                       </span>

@@ -122,7 +122,7 @@ export default function Contact({ personal }: ContactProps) {
           {/* Left panel: Info cards combined into one */}
           <div className="lg:col-span-5 h-full">
             <Card3D depth={8} glowColor="rgba(59, 130, 246, 0.18)" className="h-full">
-              <div className="p-6 sm:p-7 rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl shadow-xl h-full flex flex-col justify-center space-y-8">
+              <div className="p-6 sm:p-7 rounded-none bg-slate-900/60 hover:border-white/40 backdrop-blur-xl shadow-xl h-full flex flex-col justify-center space-y-8">
                 
                 {/* Email */}
                 <div className="flex items-center gap-4 group">
@@ -208,7 +208,7 @@ export default function Contact({ personal }: ContactProps) {
           {/* Right panel: 3D Form (Tighter padding) */}
           <div className="lg:col-span-7">
             <Card3D depth={8} glowColor="rgba(59, 130, 246, 0.18)">
-              <div className="p-5 sm:p-6 rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl shadow-xl relative overflow-hidden">
+              <div className="p-5 sm:p-6 rounded-none bg-slate-900/60 hover:border-white/40 backdrop-blur-xl shadow-xl relative overflow-hidden">
                 <div className="flex items-center gap-2 mb-5 text-xs font-mono text-gray-500">
                   <MessageSquare className="w-4 h-4 text-white" />
                   <span>Send Direct Message</span>

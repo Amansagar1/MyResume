@@ -81,7 +81,7 @@ export default function AgentTerminal3D() {
             rotateY,
             transformStyle: "preserve-3d",
           }}
-          className="relative rounded-none bg-[#0d0d12]/90 /40  backdrop-blur-xl overflow-hidden transition-all duration-300 group-hover:border-white/40 group-hover:"
+          className="relative rounded-none bg-[#0d0d12]/95  backdrop-blur-xl overflow-hidden transition-all duration-300 group-hover:border-white/40 group-hover:"
         >
           {/* Terminal Header Bar */}
           <div className="flex items-center justify-between px-4 py-3 bg-black border-b border-white/20">
@@ -218,7 +218,7 @@ export default function AgentTerminal3D() {
                 <div className="space-y-0 leading-[1.6rem]">
                   <div className="italic text-slate-500 mb-2">/* Production Performance Benchmark */</div>
                   <div className="grid grid-cols-2 gap-3 mt-1">
-                    <div className="p-3 rounded-none bg-[#0f0f15] /40 shadow-inner">
+                    <div className="p-3 rounded-none bg-[#0f0f15] shadow-inner">
                       <span className="text-[10px] text-slate-500 uppercase block font-medium tracking-wider">Pre-Cache Latency</span>
                       <span className="text-lg font-medium tracking-tight tracking-tight text-white/90">220 ms</span>
                     </div>
@@ -226,11 +226,11 @@ export default function AgentTerminal3D() {
                       <span className="text-[10px] text-white uppercase block font-medium tracking-wider">Post-Redis Latency</span>
                       <span className="text-lg font-medium tracking-tight tracking-tight text-white">128 ms <span className="text-[10px] text-white ml-1 bg-white/10 px-1 py-0.5 rounded">-42%</span></span>
                     </div>
-                    <div className="p-3 rounded-none bg-[#0f0f15] /40 shadow-inner">
+                    <div className="p-3 rounded-none bg-[#0f0f15] shadow-inner">
                       <span className="text-[10px] text-slate-500 uppercase block font-medium tracking-wider">Availability SLA</span>
                       <span className="text-lg font-medium tracking-tight tracking-tight text-white/90">99.98%</span>
                     </div>
-                    <div className="p-3 rounded-none bg-[#0f0f15] /40 shadow-inner">
+                    <div className="p-3 rounded-none bg-[#0f0f15] shadow-inner">
                       <span className="text-[10px] text-slate-500 uppercase block font-medium tracking-wider">Bundle Reduction</span>
                       <span className="text-lg font-medium tracking-tight tracking-tight text-white/90">-30% Size</span>
                     </div>

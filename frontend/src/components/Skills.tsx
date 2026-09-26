@@ -115,7 +115,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                           className={`p-4 sm:p-5 rounded-none h-full flex flex-col justify-between bg-slate-900/60 border backdrop-blur-xl  transition-all duration-300 ${
                             isAiCategory
                               ? "border-white/40 bg-gradient-to-br from-blue-950/20 via-slate-950/90 to-slate-950/90 "
-                              : "border-white/20/40 hover:border-white/40"
+                              : "border-white/20 hover:border-white/40"
                           }`}
                         >
                           <div>
@@ -181,7 +181,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
               >
                 {/* Certifications Block with 3D Tilt */}
                 <Card3D depth={25} glowColor="rgba(0, 170, 255, 0.4)">
-                  <div className="p-5 sm:p-6 rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl  h-full flex flex-col justify-between">
+                  <div className="p-5 sm:p-6 rounded-none bg-slate-900/60 hover:border-white/40 backdrop-blur-xl  h-full flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2.5 mb-4 border-b border-slate-850 pb-3">
                         <div className="p-2 rounded-none bg-white/10 border border-blue-500/25 text-white">
@@ -197,7 +197,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                         {certifications.map((cert, index) => (
                           <li
                             key={index}
-                            className="p-3 rounded-none bg-slate-900/60 /40 hover:border-white/40 transition-colors flex items-start gap-2.5 group"
+                            className="p-3 rounded-none bg-slate-900/60 hover:border-white/40 transition-colors flex items-start gap-2.5 group"
                           >
                             <ShieldCheck className="w-3.5 h-3.5 text-white mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
                             <div>
@@ -222,7 +222,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
 
                 {/* Education Block with 3D Tilt */}
                 <Card3D depth={25} glowColor="rgba(0, 170, 255, 0.4)">
-                  <div className="p-5 sm:p-6 rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl  h-full flex flex-col justify-between">
+                  <div className="p-5 sm:p-6 rounded-none bg-slate-900/60 hover:border-white/40 backdrop-blur-xl  h-full flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2.5 mb-4 border-b border-slate-850 pb-3">
                         <div className="p-2 rounded-none bg-white/10 border border-blue-500/25 text-white">
@@ -238,7 +238,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                         {education.map((edu, index) => (
                           <div
                             key={index}
-                            className="p-3.5 rounded-none bg-slate-900/60 /40 relative pl-3.5 border-l-2 border-l-blue-400"
+                            className="p-3.5 rounded-none bg-slate-900/60 relative pl-3.5 border-l-2 border-l-blue-400"
                           >
                             <h4 className="text-xs sm:text-sm font-medium text-white">{edu.institution}</h4>
                             <p className="text-xs text-slate-300 mt-0.5 font-medium">{edu.degree}</p>

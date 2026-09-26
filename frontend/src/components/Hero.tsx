@@ -166,7 +166,7 @@ export default function Hero({ personal }: HeroProps) {
           </div>
 
           {/* Right Column: 3D AI Engineering Terminal */}
-          <div className="w-full flex justify-center mt-12 pointer-events-auto opacity-70 hover:opacity-100 transition-opacity">
+          <div className="w-full flex justify-center mt-12 pointer-events-auto ">
             <AgentTerminal3D />
           </div>
         </div>
