@@ -1,59 +1,56 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, ArrowUpRight, Sparkles, Terminal } from "lucide-react";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { ambientSound } from "../utils/audioSynth";
+import { Terminal, ArrowUpRight, Menu, X, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface NavbarProps {
-  githubUrl: string;
   personalName: string;
+  githubUrl: string;
 }
 
-export default function Navbar({ githubUrl, personalName }: NavbarProps) {
-  const [isOpen, setIsOpen] = useState(false);
+const navItems = [
+  { label: "Home", id: "home" },
+  { label: "Experience", id: "experience" },
+  { label: "Projects", id: "projects" },
+  { label: "Skills", id: "skills" },
+];
+
+export default function Navbar({ personalName, githubUrl }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isOpen, setIsOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
+  const [scaleX, setScaleX] = useState(0);
 
   const handleToggleSound = () => {
-    const isNowPlaying = ambientSound.toggle();
-    setSoundOn(isNowPlaying);
+    setSoundOn((prev) => !prev);
+    // Sound logic would be placed here
   };
-
-  // Scroll Progress
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  const navItems = [
-    { id: "home", label: "Overview" },
-    { id: "projects", label: "Projects" },
-    { id: "experience", label: "Experience" },
-    { id: "skills", label: "Skills & AI" },
-    { id: "contact", label: "Contact" },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const scrollY = window.scrollY;
+      if (scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
 
-      const sections = navItems.map((item) => ({
-        id: item.id,
-        element: document.getElementById(item.id),
-      }));
+      // Progress bar logic
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        setScaleX(scrollY / docHeight);
+      }
 
-      // Find the last section that has scrolled past the top offset
+      // Active section logic
+      const sections = navItems.map((item) => document.getElementById(item.id));
       for (let i = sections.length - 1; i >= 0; i--) {
-        const { id, element } = sections[i];
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          // If the top of the section is at or above the navbar (plus some padding)
-          if (rect.top <= 150) {
-            setActiveSection(id);
+        const section = sections[i];
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 100) {
+            setActiveSection(navItems[i].id);
             break;
           }
         }
@@ -74,122 +71,72 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
 
   return (
     <>
-      {/* Scroll Progress Bar at the very top (Electric red Gradient) */}
+      {/* Scroll Progress Bar at the very top */}
       <motion.div
         style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-red-500 via-red-500 to-red-500 origin-left z-[60] shadow-[0_0_12px_#ef4444]"
+        className="fixed top-0 left-0 right-0 h-[1px] bg-white origin-left z-[60]"
       />
 
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#06060a]/85 backdrop-blur-xl border-b border-zinc-800/60 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
-            : "bg-transparent py-4"
+          scrolled ? "bg-black/90 backdrop-blur-md border-b border-white/10 py-3" : "bg-transparent py-5"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-13">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-10">
+            
             {/* Logo / Brand Name */}
             <div
-              className="flex items-center gap-2.5 cursor-pointer group"
+              className="flex items-center gap-2 cursor-pointer group"
               onClick={() => scrollTo("home")}
             >
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-red-500/20 via-red-500/20 to-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 group-hover:scale-105 group-hover:border-red-400/60 transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)]">
-                <Terminal className="w-3.5 h-3.5 text-red-300" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs sm:text-sm font-extrabold tracking-wide text-white group-hover:text-red-300 transition-colors flex items-center gap-1.5">
-                  {personalName}
-                  <Sparkles className="w-3 h-3 text-red-400 opacity-80" />
-                </span>
-                <span className="text-[10px] font-mono text-zinc-500 tracking-wider">
-                  Full Stack &amp; AI Engineer
-                </span>
-              </div>
+              <span className="text-xl sm:text-2xl font-bold tracking-widest text-white uppercase">
+                {personalName.split(' ')[0]}
+              </span>
             </div>
 
-            {/* Desktop Nav Items (Tighter & Sleeker) */}
-            <nav className="hidden md:flex items-center gap-1 p-1 bg-zinc-900/70 border border-zinc-800 rounded-full backdrop-blur-md shadow-inner">
+            {/* Desktop Nav Items (Center Aligned, Mono) */}
+            <nav className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
-                  className={`relative px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer ${
+                  className={`relative text-xs sm:text-sm font-mono tracking-widest transition-colors duration-200 cursor-pointer ${
                     activeSection === item.id
-                      ? "text-white font-bold"
-                      : "text-zinc-400 hover:text-zinc-200"
+                      ? "text-white"
+                      : "text-gray-400 hover:text-white"
                   }`}
                 >
+                  {item.label}
                   {activeSection === item.id && (
-                    <motion.span
-                      layoutId="activeNavPill"
-                      className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-500 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.4)]"
+                    <motion.div
+                      layoutId="navUnderline"
+                      className="absolute -bottom-1 left-0 right-0 h-[1px] bg-white"
                       transition={{ type: "spring", stiffness: 350, damping: 28 }}
                     />
                   )}
-                  <span className="relative z-10">{item.label}</span>
                 </button>
               ))}
             </nav>
 
             {/* Right side Sound Toggle + CTA */}
-            <div className="hidden md:flex items-center gap-3">
-              {/* Sound Toggle */}
-              <button
-                type="button"
-                onClick={handleToggleSound}
-                className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-mono border border-zinc-800 bg-zinc-900/60 hover:border-red-500/40 text-zinc-400 hover:text-white transition-all cursor-pointer select-none backdrop-blur-md"
-                title="Toggle ambient background sound"
-              >
-                <span className="flex items-center gap-1">
-                  <span
-                    className={`w-1.5 h-3 rounded-full transition-all duration-300 ${
-                      soundOn
-                        ? "bg-red-400 animate-pulse h-3"
-                        : "bg-zinc-600 h-1.5"
-                    }`}
-                  />
-                  <span
-                    className={`w-1.5 h-4 rounded-full transition-all duration-300 ${
-                      soundOn
-                        ? "bg-red-400 animate-pulse delay-75 h-4"
-                        : "bg-zinc-600 h-1.5"
-                    }`}
-                  />
-                  <span
-                    className={`w-1.5 h-2 rounded-full transition-all duration-300 ${
-                      soundOn
-                        ? "bg-red-400 animate-pulse delay-150 h-2"
-                        : "bg-zinc-600 h-1.5"
-                    }`}
-                  />
-                </span>
-                <span>Sound | {soundOn ? "ON" : "OFF"}</span>
-              </button>
-
+            <div className="hidden md:flex items-center gap-5">
               <a
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-900/90 text-zinc-200 hover:text-white border border-zinc-800 hover:border-red-500/50 hover:shadow-[0_0_15px_rgba(239,68,68,0.2)] transition-all group"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-full border border-white/30 text-xs font-mono text-white hover:bg-white hover:text-black transition-all group"
               >
                 GitHub
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-red-400" />
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
 
-            {/* Mobile Menu Button + Sound Toggle */}
-            <div className="md:hidden flex items-center gap-2">
-              <button
-                type="button"
-                onClick={handleToggleSound}
-                className="p-2 rounded-xl text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800 text-xs font-mono"
-              >
-                🔊 {soundOn ? "ON" : "OFF"}
-              </button>
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-900 focus:outline-none border border-zinc-800"
+                className="p-2 text-white"
               >
                 {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -204,33 +151,28 @@ export default function Navbar({ githubUrl, personalName }: NavbarProps) {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-zinc-950/95 backdrop-blur-2xl border-b border-zinc-800"
+              className="md:hidden bg-black border-b border-white/20"
             >
-              <div className="px-3 pt-3 pb-5 space-y-1">
+              <div className="px-4 py-6 space-y-4 flex flex-col items-center">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollTo(item.id)}
-                    className={`block w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                      activeSection === item.id
-                        ? "bg-gradient-to-r from-red-500/10 to-red-500/10 text-red-400 border border-red-500/30 pl-5"
-                        : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
+                    className={`block w-full text-center py-3 font-mono tracking-widest uppercase text-sm ${
+                      activeSection === item.id ? "text-white border-b border-white/20" : "text-gray-500 hover:text-white"
                     }`}
                   >
                     {item.label}
                   </button>
                 ))}
-                <div className="pt-3 border-t border-zinc-850 px-1">
-                  <a
-                    href={githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white font-bold text-center text-sm shadow-lg shadow-red-500/25"
-                  >
-                    GitHub Profile
-                    <ArrowUpRight className="w-4 h-4" />
-                  </a>
-                </div>
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 mt-4 text-center rounded-full border border-white/30 text-white font-mono text-sm hover:bg-white hover:text-black transition-colors"
+                >
+                  GitHub Profile
+                </a>
               </div>
             </motion.div>
           )}

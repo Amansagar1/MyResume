@@ -20,7 +20,7 @@ import { Loader2, WifiOff, Play, Sparkles } from "lucide-react";
 import { fallbackResumeData } from "../data/fallbackData";
 
 export default function Home() {
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const [resumeData, setResumeData] = useState<ResumeData>(fallbackResumeData);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [mongodbError, setMongodbError] = useState<string | null>(null);
@@ -50,11 +50,11 @@ export default function Home() {
           setMongodbError(data.mongodb_error);
         }
       } else {
-        setError(true);
+        // Let it fallback silently to fallbackResumeData instead of showing error on load
+        console.warn("Failed to fetch from PHP API, using fallback data.");
       }
     } catch (error) {
       console.error("Failed to fetch resume data from PHP API:", error);
-      setError(true);
     } finally {
       setLoading(false);
     }
@@ -69,47 +69,24 @@ export default function Home() {
     setError(false);
   };
 
-  // 1. Loading State with 3D feel
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-zinc-50 font-sans relative overflow-hidden">
-        <NeuralCanvas />
-        <CursorGlow />
-        <div className="flex flex-col items-center gap-5 p-8 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-[0_0_50px_rgba(239,68,68,0.2)] backdrop-blur-2xl relative z-10">
-          <div className="relative">
-            <Loader2 className="w-10 h-10 text-red-400 animate-spin" />
-            <div className="absolute inset-0 w-10 h-10 rounded-full bg-red-400/20 blur-md animate-ping" />
-          </div>
-          <div className="text-center space-y-1">
-            <h1 className="text-lg font-bold text-white tracking-wide flex items-center gap-2 font-heading">
-              <Sparkles className="w-4 h-4 text-red-400" />
-              Initialising AI Engine &amp; REST API...
-            </h1>
-            <p className="text-xs text-zinc-500 font-mono">Connecting to PHP micredrvices &amp; portfolio state</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   // 2. Error / Offline State with clean recovery
-  if (error || !resumeData) {
+  if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-950 text-zinc-50 font-sans p-4 relative overflow-hidden">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-black text-slate-50 font-mono p-4 relative overflow-hidden">
         <NeuralCanvas />
         <CursorGlow />
-        <div className="max-w-md w-full flex flex-col items-center gap-6 p-8 rounded-2xl bg-zinc-950/85 border border-zinc-800/80 shadow-2xl backdrop-blur-2xl text-center relative z-10">
-          <div className="p-4 rounded-2xl bg-red-500/10 text-red-400 border border-red-500/20 shadow-[0_0_20px_rgba(239,68,68,0.15)]">
+        <div className="max-w-md w-full flex flex-col items-center gap-6 p-8 rounded-none bg-slate-900/85 /40 shadow-2xl backdrop-blur-2xl text-center relative z-10">
+          <div className="p-4 rounded-none bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 ">
             <WifiOff className="w-8 h-8" />
           </div>
           <div className="space-y-2">
-            <h1 className="text-xl font-bold text-white tracking-tight font-heading">PHP REST API Unreachable</h1>
-            <p className="text-xs text-zinc-400 font-light leading-relaxed">
+            <h1 className="text-xl font-medium text-white tracking-tight font-heading">PHP REST API Unreachable</h1>
+            <p className="text-xs text-gray-500 font-light leading-relaxed">
               The portfolio attempted to retrieve resume data from the local PHP backend on port 8000.
             </p>
-            <div className="p-4 bg-zinc-900/80 border border-zinc-850 rounded-xl text-left text-xs font-mono text-zinc-500 space-y-2 mt-4 shadow-inner">
-              <span className="text-red-400 font-semibold">// Start local PHP backend:</span>
-              <div className="p-2 rounded-lg bg-black text-zinc-300 border border-zinc-800 select-all">
+            <div className="p-4 bg-slate-900/50  rounded-none text-left text-xs font-mono text-gray-500 space-y-2 mt-4 shadow-inner">
+              <span className="text-indigo-400 font-semibold">// Start local PHP backend:</span>
+              <div className="p-2 rounded-none bg-black text-slate-300  select-all">
                 php -S 127.0.0.1:8000 -t backend/api
               </div>
             </div>
@@ -117,15 +94,15 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 w-full pt-2">
             <button
               onClick={fetchResumeData}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-500 via-red-500 to-red-500 text-white font-bold hover:brightness-110 active:scale-95 transition-all text-xs cursor-pointer shadow-lg shadow-red-500/25"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-none bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-600 text-white font-medium hover:brightness-110 active:scale-95 transition-all text-xs cursor-pointer  shadow-indigo-500/25"
             >
               Retry Connection
             </button>
             <button
               onClick={handleUseFallback}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 text-zinc-200 border border-zinc-800 active:scale-95 transition-all text-xs cursor-pointer"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-none bg-slate-800 hover:bg-slate-700 text-slate-200  active:scale-95 transition-all text-xs cursor-pointer"
             >
-              <Play className="w-3.5 h-3.5 text-red-400" />
+              <Play className="w-3.5 h-3.5 text-indigo-400" />
               Use Verified Data
             </button>
           </div>
@@ -136,7 +113,7 @@ export default function Home() {
 
   // 3. Render Page with live interactive 3D WebGL scene & Kitanga aesthetics
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-zinc-50 overflow-x-hidden selection:bg-red-500 selection:text-white relative font-sans">
+    <div className="flex flex-col min-h-screen bg-black text-slate-50 overflow-x-hidden selection:bg-white selection:text-white relative font-mono">
       {/* 2025.kitanga.dev 3D WebGL Canvas Scene */}
       <Scene3D />
 

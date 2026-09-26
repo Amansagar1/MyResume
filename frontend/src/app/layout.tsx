@@ -79,7 +79,7 @@ export default function RootLayout({
       lang="en"
       className={`${outfit.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full scroll-smooth`}
     >
-      <body className="min-h-full bg-[#06060a] text-zinc-100 font-sans antialiased selection:bg-red-500 selection:text-white">
+      <body className="min-h-full bg-black text-white font-mono antialiased selection:bg-white selection:text-black">
         {children}
       </body>
     </html>

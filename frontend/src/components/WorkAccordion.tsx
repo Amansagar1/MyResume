@@ -14,10 +14,10 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
 
   // Gradient visuals for projects (Electric red / red / red / red)
   const projectGradients = [
-    "from-red-950/70 via-zinc-950 to-zinc-950",
-    "from-red-950/70 via-zinc-950 to-zinc-950",
-    "from-red-950/70 via-zinc-950 to-zinc-950",
-    "from-red-950/70 via-zinc-950 to-zinc-950",
+    "from-blue-950/70 via-slate-950 to-slate-950",
+    "from-blue-950/70 via-slate-950 to-slate-950",
+    "from-blue-950/70 via-slate-950 to-slate-950",
+    "from-blue-950/70 via-slate-950 to-slate-950",
   ];
 
   const projectYears = ["2024 - PRESENT", "2023 - 2024", "2023", "2022"];
@@ -33,10 +33,10 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               key={index}
               onClick={() => setActiveIndex(index)}
               onMouseEnter={() => setActiveIndex(index)}
-              className={`relative rounded-2xl overflow-hidden border cursor-pointer transition-all duration-500 flex flex-col justify-between p-5 ${
+              className={`relative rounded-none overflow-hidden border cursor-pointer transition-all duration-500 flex flex-col justify-between p-5 ${
                 isActive
-                  ? "col-span-6 bg-zinc-900/90 border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.2)]"
-                  : "col-span-2 bg-zinc-950/60 border-zinc-800/80 hover:border-red-500/30 hover:bg-zinc-900/50"
+                  ? "col-span-6 bg-transparent border-white/40 "
+                  : "col-span-2 bg-black/60 border-white/20/40 hover:border-blue-500/30 hover:bg-slate-900/50"
               }`}
             >
               {/* Background ambient gradient */}
@@ -54,8 +54,8 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               {/* Top Row: Year/Period & Indicator */}
               <div className="relative z-10 flex items-center justify-between">
                 <span
-                  className={`text-[11px] font-mono font-bold tracking-widest transition-opacity duration-300 ${
-                    isActive ? "text-red-400 opacity-100" : "text-zinc-500 opacity-50"
+                  className={`text-[11px] font-mono font-medium tracking-widest transition-opacity duration-300 ${
+                    isActive ? "text-white opacity-100" : "text-slate-500 opacity-50"
                   }`}
                 >
                   {projectYears[index] || "2024"}
@@ -63,14 +63,14 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
 
                 <div className="flex items-center gap-2">
                   {project.demo && isActive && (
-                    <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-red-500/20 text-red-300 border border-red-500/40 animate-pulse">
+                    <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-none text-[10px] font-mono bg-white/20 text-blue-300 border border-white/40 animate-pulse">
                       <Radio className="w-2.5 h-2.5" />
                       LIVE
                     </span>
                   )}
                   <span
                     className={`text-xs font-mono transition-colors duration-300 ${
-                      isActive ? "text-red-400" : "text-zinc-600"
+                      isActive ? "text-white" : "text-slate-600"
                     }`}
                   >
                     0{index + 1}
@@ -82,24 +82,24 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               <div className="relative z-10 my-auto">
                 {isActive ? (
                   <div className="space-y-3 animate-in fade-in duration-300">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/10 text-red-300 border border-red-500/30">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-none text-[10px] font-mono font-medium bg-white/10 text-blue-300 border border-blue-500/30">
                       <Cpu className="w-3 h-3" />
                       PRODUCTION ARCHITECTURE
                     </div>
 
-                    <h3 className="text-2xl font-black text-white tracking-tight leading-tight">
+                    <h3 className="text-2xl font-medium tracking-tight tracking-tight text-white tracking-tight leading-tight">
                       {project.title}
                     </h3>
 
-                    <p className="text-xs text-zinc-300 font-light leading-relaxed max-w-lg">
+                    <p className="text-xs text-slate-300 font-light leading-relaxed max-w-lg">
                       {project.description}
                     </p>
 
                     {/* Key Architecture Highlights */}
                     <div className="space-y-1.5 pt-1">
                       {project.highlights.slice(0, 2).map((highlight, hIdx) => (
-                        <div key={hIdx} className="flex items-start gap-2 text-xs text-zinc-350">
-                          <span className="text-red-400 font-bold">&bull;</span>
+                        <div key={hIdx} className="flex items-start gap-2 text-xs text-gray-400">
+                          <span className="text-white font-medium">&bull;</span>
                           <span>{highlight}</span>
                         </div>
                       ))}
@@ -113,7 +113,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-red-500 via-red-500 to-red-500 text-white hover:brightness-110 transition-all shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-none text-xs font-medium bg-gradient-to-r bg-white text-black text-white hover:brightness-110 transition-all "
                         >
                           Launch Demo
                           <ArrowUpRight className="w-3 h-3" />
@@ -125,9 +125,9 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-200 border border-zinc-700 hover:text-white hover:border-red-500/40 transition-all"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-none text-xs font-semibold bg-slate-900 text-slate-200  hover:text-white hover:border-white/40 transition-all"
                         >
-                          <GithubIcon className="w-3 h-3 text-zinc-400" />
+                          <GithubIcon className="w-3 h-3 text-gray-500" />
                           View Code
                         </a>
                       )}
@@ -135,10 +135,10 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center text-center space-y-2 py-4">
-                    <div className="w-10 h-10 rounded-xl bg-zinc-900/90 border border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-red-400 transition-colors">
+                    <div className="w-10 h-10 rounded-none bg-transparent  flex items-center justify-center text-gray-500 group-hover:text-white transition-colors">
                       {index % 2 === 0 ? <Cpu className="w-4 h-4" /> : <Layers className="w-4 h-4" />}
                     </div>
-                    <div className="text-sm font-bold text-zinc-300 writing-mode-vertical tracking-wide">
+                    <div className="text-sm font-medium text-slate-300 writing-mode-vertical tracking-wide">
                       {project.title.split(" - ")[0]}
                     </div>
                   </div>
@@ -146,20 +146,20 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               </div>
 
               {/* Bottom Row: Tech Stack Tags */}
-              <div className="relative z-10 pt-3 border-t border-zinc-850">
+              <div className="relative z-10 pt-3 border-t border-slate-850">
                 {isActive ? (
                   <div className="flex flex-wrap gap-1">
                     {project.technologies.map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900/90 text-red-300 border border-zinc-800"
+                        className="px-2 py-0.5 rounded-none text-[10px] font-mono bg-transparent text-blue-300 "
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-[10px] font-mono text-zinc-500 text-center truncate">
+                  <div className="text-[10px] font-mono text-slate-500 text-center truncate">
                     {project.technologies[0]}
                   </div>
                 )}
@@ -174,21 +174,21 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="p-5 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 space-y-3 shadow-xl"
+            className="p-5 rounded-none bg-slate-900/60 /40 space-y-3 shadow-xl"
           >
-            <div className="flex items-center justify-between text-xs font-mono text-red-400">
+            <div className="flex items-center justify-between text-xs font-mono text-white">
               <span>{projectYears[index] || "2024"}</span>
               <span>0{index + 1}</span>
             </div>
-            <h3 className="text-lg font-bold text-white">{project.title}</h3>
-            <p className="text-xs text-zinc-400 font-light leading-relaxed">
+            <h3 className="text-lg font-medium text-white">{project.title}</h3>
+            <p className="text-xs text-gray-500 font-light leading-relaxed">
               {project.description}
             </p>
             <div className="flex flex-wrap gap-1 pt-1">
               {project.technologies.map((tech, tIdx) => (
                 <span
                   key={tIdx}
-                  className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900 text-red-300 border border-zinc-800"
+                  className="px-2 py-0.5 rounded-none text-[10px] font-mono bg-slate-900 text-blue-300 "
                 >
                   {tech}
                 </span>
@@ -200,7 +200,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-red-500 to-red-500 text-white"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-none text-xs font-medium bg-gradient-to-r from-blue-500 to-blue-500 text-white"
                 >
                   Live Demo
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -211,9 +211,9 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-zinc-900 text-zinc-200 border border-zinc-800"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-none text-xs font-semibold bg-slate-900 text-slate-200 "
                 >
-                  <GithubIcon className="w-3.5 h-3.5 text-zinc-400" />
+                  <GithubIcon className="w-3.5 h-3.5 text-gray-500" />
                   GitHub
                 </a>
               )}
@@ -228,17 +228,17 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
           href="/resume.pdf"
           target="_blank"
           download="Kumar_Aman_Sagar_Resume.pdf"
-          className="px-7 py-3 rounded-2xl bg-white text-zinc-950 font-extrabold text-sm sm:text-base inline-flex items-center justify-center gap-2.5 hover:bg-zinc-200 active:scale-95 transition-all shadow-[0_0_25px_rgba(255,255,255,0.25)] cursor-pointer"
+          className="px-7 py-3 rounded-none bg-white text-slate-950 font-medium tracking-tight text-sm sm:text-base inline-flex items-center justify-center gap-2.5 hover:bg-slate-200 active:scale-95 transition-all  cursor-pointer"
         >
-          <Download className="w-4 h-4 text-zinc-950" />
+          <Download className="w-4 h-4 text-slate-950" />
           Download Resume (PDF)
         </a>
 
         <a
           href="#contact"
-          className="px-7 py-3 rounded-2xl bg-transparent text-white border-2 border-zinc-700 hover:border-red-400 font-extrabold text-sm sm:text-base inline-flex items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer"
+          className="px-7 py-3 rounded-none bg-transparent text-white border-2 border-white/20 hover:border-white/40 font-medium tracking-tight text-sm sm:text-base inline-flex items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer"
         >
-          <Mail className="w-4 h-4 text-red-400" />
+          <Mail className="w-4 h-4 text-white" />
           Get In Touch
         </a>
       </div>

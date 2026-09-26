@@ -50,24 +50,16 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     rootGroup.add(coreGroup);
 
     // A. Faceted Metallic Core Mesh
-    const coreGeo = new THREE.IcosahedronGeometry(2.4, 2);
+    const coreGeo = new THREE.TetrahedronGeometry(3.2, 0);
     const coreMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0c0818,
-      metalness: 0.95,
-      roughness: 0.16,
-      reflectivity: 0.95,
-      clearcoat: 0.85,
-      clearcoatRoughness: 0.1,
-      flatShading: true,
-    });
+      color: 0x002266, emissive: 0x000511, metalness: 0.9, roughness: 0.3, iridescence: 0.5, iridescenceIOR: 1.5, clearcoat: 0.5, flatShading: true, opacity: 0.85, transparent: true });
     const coreMesh = new THREE.Mesh(coreGeo, coreMat);
     coreGroup.add(coreMesh);
 
     // B. Glowing Wireframe Cage (Electric red)
-    const wireGeo = new THREE.IcosahedronGeometry(2.42, 2);
+    const wireGeo = new THREE.TetrahedronGeometry(3.3, 0);
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0xef4444,
-      wireframe: true,
+      color: 0xffffff, wireframe: true, transparent: true, opacity: 0.8,
       transparent: true,
       opacity: 0.45,
     });
@@ -77,8 +69,7 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     // C. Inner Luminous Energy Sphere (Neon red & red)
     const innerGeo = new THREE.SphereGeometry(1.5, 32, 32);
     const innerMat = new THREE.MeshStandardMaterial({
-      color: 0xdc2626,
-      emissive: 0xef4444,
+      color: 0x0044ff, emissive: 0x0022cc,
       emissiveIntensity: 0.8,
       roughness: 0.25,
       metalness: 0.8,
@@ -91,12 +82,9 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     rootGroup.add(ringGroup);
 
     // Ring 1: Primary Equatorial Torus (Cyber red)
-    const ring1Geo = new THREE.TorusGeometry(3.6, 0.04, 16, 120);
+    const ring1Geo = new THREE.TorusGeometry(3.6, 0.02, 4, 4);
     const ring1Mat = new THREE.MeshStandardMaterial({
-      color: 0xf87171,
-      metalness: 0.9,
-      roughness: 0.1,
-      emissive: 0xb91c1c,
+      color: 0xffffff, metalness: 1.0, roughness: 0.2, emissive: 0x001133,
       emissiveIntensity: 0.5,
     });
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
@@ -104,12 +92,9 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     ringGroup.add(ring1);
 
     // Ring 2: Polar Tech Orbit (Electric red)
-    const ring2Geo = new THREE.TorusGeometry(4.2, 0.03, 16, 120);
+    const ring2Geo = new THREE.TorusGeometry(4.2, 0.02, 4, 4);
     const ring2Mat = new THREE.MeshStandardMaterial({
-      color: 0xf87171,
-      metalness: 0.9,
-      roughness: 0.2,
-      emissive: 0x991b1b,
+      color: 0xcccccc, metalness: 1.0, roughness: 0.3, emissive: 0x001133,
       emissiveIntensity: 0.4,
     });
     const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
@@ -117,9 +102,9 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     ringGroup.add(ring2);
 
     // Ring 3: Tilted Outer Halo Ring (Neon red)
-    const ring3Geo = new THREE.TorusGeometry(4.8, 0.02, 16, 120);
+    const ring3Geo = new THREE.TorusGeometry(4.8, 0.01, 4, 4);
     const ring3Mat = new THREE.MeshBasicMaterial({
-      color: 0xef4444,
+      color: 0xffffff,
       transparent: true,
       opacity: 0.45,
     });
@@ -133,7 +118,7 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const beadGeo = new THREE.BoxGeometry(0.12, 0.24, 0.12);
     const beadMat = new THREE.MeshStandardMaterial({
       color: 0xffffff,
-      emissive: 0xf59e0b,
+      emissive: 0xffffff,
       emissiveIntensity: 1.5,
     });
     const numBeads = 8;
@@ -151,9 +136,9 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const particlePositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
 
-    const redColor = new THREE.Color(0xef4444);
-    const redColor2 = new THREE.Color(0xef4444);
-    const amberColor = new THREE.Color(0xf59e0b);
+    const redColor = new THREE.Color(0xffffff);
+    const redColor2 = new THREE.Color(0xcccccc);
+    const amberColor = new THREE.Color(0x888888);
 
     for (let i = 0; i < particleCount; i++) {
       // Spherical distribution with dispersion
@@ -201,17 +186,59 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     const particlePoints = new THREE.Points(particleGeo, particleMat);
     rootGroup.add(particlePoints);
 
+    
+    // --- Floating Shards Array ---
+    const shardGroup = new THREE.Group();
+    const shards = [];
+    const shardGeo = new THREE.TetrahedronGeometry(0.15, 0);
+    const shardMat = new THREE.MeshPhysicalMaterial({
+      color: 0x0033aa,
+      emissive: 0x001144,
+      metalness: 0.9,
+      roughness: 0.2,
+      iridescence: 0.8,
+      iridescenceIOR: 1.5,
+      transmission: 0.2,
+      opacity: 0.8,
+      transparent: true
+    });
+
+    for (let i = 0; i < 25; i++) {
+      const shard = new THREE.Mesh(shardGeo, shardMat);
+      // Random position in a sphere radius 6 to 12
+      const radius = 5 + Math.random() * 5;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos((Math.random() * 2) - 1);
+      
+      shard.position.x = radius * Math.sin(phi) * Math.cos(theta);
+      shard.position.y = radius * Math.sin(phi) * Math.sin(theta);
+      shard.position.z = radius * Math.cos(phi);
+      
+      shard.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+      
+      // Store random spin speeds
+      shard.userData = {
+        spinX: (Math.random() - 0.5) * 2.0,
+        spinY: (Math.random() - 0.5) * 2.0,
+        spinZ: (Math.random() - 0.5) * 2.0,
+      };
+      
+      shardGroup.add(shard);
+      shards.push(shard);
+    }
+    rootGroup.add(shardGroup);
+
     // --- 6. Lighting (Cinematic Multi-Angle Studio Setup) ---
-    const ambientLight = new THREE.AmbientLight(0x0e0920, 1.8);
+    const ambientLight = new THREE.AmbientLight(0x002266, 2.0);
     scene.add(ambientLight);
 
     // Cursor Following Point Light (Electric red)
-    const cursorPointLight = new THREE.PointLight(0xef4444, 5, 25);
+    const cursorPointLight = new THREE.PointLight(0x00aaff, 3.0, 25);
     cursorPointLight.position.set(2, 2, 6);
     scene.add(cursorPointLight);
 
     // Counter Accent Rim Light (Cyber Amber)
-    const rimLight = new THREE.PointLight(0xf59e0b, 4, 30);
+    const rimLight = new THREE.PointLight(0x0044ff, 3.5, 30);
     rimLight.position.set(-6, -4, 4);
     scene.add(rimLight);
 
@@ -262,12 +289,12 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       if (progress < 0.2) {
         // Hero: Prominent center-right (Kitanga split text staging)
         return {
-          posX: isMobile ? 0 : 2.6,
-          posY: isMobile ? 0.8 : 0,
-          posZ: isMobile ? -2 : 0,
+          posX: 0,
+          posY: 0,
+          posZ: isMobile ? -3 : 2,
           rotX: 0.1,
           rotY: 0.2,
-          scale: isMobile ? 0.75 : 1.0,
+          scale: isMobile ? 0.8 : 1.3,
         };
       } else if (progress < 0.45) {
         // Work / Projects: Glides to the left side so project cards take center stage
@@ -327,12 +354,21 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       currentPos.z += (target.posZ - currentPos.z) * 0.05;
       currentScale += (target.scale - currentScale) * 0.05;
 
+      // --- GLITCH EFFECT ---
+      if (Math.random() > 0.98) {
+        currentScale *= (1 + (Math.random() - 0.5) * 0.1);
+        wireMesh.visible = Math.random() > 0.5;
+        currentPos.x += (Math.random() - 0.5) * 0.2;
+      } else {
+        wireMesh.visible = true;
+      }
+      
       // Apply transforms to master group
       rootGroup.position.copy(currentPos);
       rootGroup.scale.set(currentScale, currentScale, currentScale);
 
       // Mouse-reactive Rotation + Continuous ambient spin
-      const targetRotY = elapsedTime * 0.25 + mouse.x * 0.85 + target.rotY;
+      const targetRotY = elapsedTime * 0.5 + mouse.x * 0.85 + target.rotY;
       const targetRotX = mouse.y * 0.65 + target.rotX;
 
       currentRot.x += (targetRotX - currentRot.x) * 0.08;
@@ -354,6 +390,25 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       ring1.rotation.z = elapsedTime * 0.4;
       ring2.rotation.x = elapsedTime * 0.35;
       ring3.rotation.y = -elapsedTime * 0.25;
+
+      
+      // Animate Shards
+      shardGroup.rotation.y = elapsedTime * 0.1;
+      shardGroup.rotation.x = Math.sin(elapsedTime * 0.1) * 0.2;
+      
+      shards.forEach((shard, i) => {
+        shard.rotation.x += shard.userData.spinX * 0.02;
+        shard.rotation.y += shard.userData.spinY * 0.02;
+        shard.rotation.z += shard.userData.spinZ * 0.02;
+        
+        // Glitch some shards
+        if (Math.random() > 0.995) {
+            shard.scale.setScalar(Math.random() * 2 + 0.1);
+            shard.material.wireframe = Math.random() > 0.5;
+        } else {
+            shard.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
+        }
+      });
 
       // Swirl Particle Field
       particlePoints.rotation.y = elapsedTime * 0.08;

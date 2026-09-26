@@ -98,7 +98,7 @@ export default function NeuralCanvas() {
         // Draw node
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(239, 68, 68, ${node.alpha})`;
+        ctx.fillStyle = `rgba(59, 130, 246, ${node.alpha})`;
         ctx.fill();
 
         // Draw subtle connecting lines between nodes
@@ -113,7 +113,7 @@ export default function NeuralCanvas() {
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `rgba(239, 68, 68, ${alpha})`;
+            ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }

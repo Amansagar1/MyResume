@@ -46,7 +46,7 @@ export default function Hero({ personal }: HeroProps) {
             scale: [1, 1.1, 1],
           }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-10 left-10 w-32 h-32 bg-red-500/20 rounded-full blur-[60px] pointer-events-none"
+          className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-none blur-[60px] pointer-events-none"
         />
         <motion.div
           animate={{
@@ -55,61 +55,71 @@ export default function Hero({ personal }: HeroProps) {
             scale: [1, 1.2, 1],
           }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-20 right-1/4 w-48 h-48 bg-red-500/10 rounded-full blur-[80px] pointer-events-none"
+          className="absolute bottom-20 right-1/4 w-48 h-48 bg-white/5 rounded-none blur-[80px] pointer-events-none"
         />
 
         {/* Cohesive Clean Hero Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mt-4 relative z-10">
+        <div className="flex flex-col items-center justify-center mt-4 relative z-10 text-center pointer-events-none w-full">
           {/* Left Column: Core Identity & Actions */}
-          <div className="lg:col-span-6 text-center lg:text-left space-y-5">
+          <div className="w-full flex flex-col items-center space-y-5 pointer-events-auto">
             <div className="relative">
               <Draggable className="inline-block">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-red-500/10 text-red-400 border border-red-500/20 mb-3 shadow-[0_0_15px_rgba(239,68,68,0.15)]">
-                  <Sparkles className="w-3 h-3 text-red-400 animate-pulse" />
-                  FULL STACK &amp; AI APPLICATION ENGINEER
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none text-[10px] sm:text-xs font-mono tracking-[0.2em] text-white border-l-2 border-r-2 border-white/40 mb-6 bg-white/5">
+                  <Terminal className="w-3 h-3 text-white" />
+                  SYS.ROLE :: FULL_STACK_AI_ENGINEER
                 </span>
               </Draggable>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-black text-white tracking-tight uppercase leading-[1.05] flex flex-wrap gap-x-3 sm:gap-x-4">
+              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-medium tracking-tighter text-white leading-[0.95] flex flex-wrap gap-x-4 sm:gap-x-6">
                 <Draggable className="inline-block">
-                  <span className="drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">Kumar</span>
+                  <span className="text-gray-500 font-mono text-4xl sm:text-6xl lg:text-7xl">
+                    [
+                  </span>
                 </Draggable>
                 <Draggable className="inline-block">
-                  <span className="bg-[length:200%_auto] animate-[gradient_4s_linear_infinite] bg-gradient-to-r from-red-400 via-red-400 to-red-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(239,68,68,0.4)]">
+                  <span className="">Kumar</span>
+                </Draggable>
+                <Draggable className="inline-block">
+                  <span className="text-white">
                     Aman
                   </span>
                 </Draggable>
                 <Draggable className="inline-block">
-                  <span className="bg-[length:200%_auto] animate-[gradient_4s_linear_infinite] bg-gradient-to-r from-red-300 via-red-300 to-red-300 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(99,102,241,0.4)]">
+                  <span className="text-white">
                     Sagar
+                  </span>
+                </Draggable>
+                <Draggable className="inline-block">
+                  <span className="text-gray-500 font-mono text-4xl sm:text-6xl lg:text-7xl">
+                    ]
                   </span>
                 </Draggable>
               </h1>
             </div>
 
             <Draggable>
-              <p className="text-sm sm:text-base text-zinc-350 leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
+              <p className="text-sm sm:text-base text-gray-400 leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
                 Full Stack &amp; AI Engineer with <strong className="text-white font-semibold">3+ years</strong> of production experience building autonomous AI agent networks, RAG vector pipelines, and high-concurrency micredrvices on AWS ECS, Docker, and Redis.
               </p>
             </Draggable>
 
             {/* Quick Contacts Pills */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-2 text-xs text-zinc-350 pt-1">
+            <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-400 pt-1">
               <a
                 href={`mailto:${personal.email}`}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-red-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-transparent  hover:border-white/50 hover:text-white transition-all  "
               >
-                <Mail className="w-3.5 h-3.5 text-red-400" />
+                <Mail className="w-3.5 h-3.5 text-white" />
                 {personal.email}
               </a>
               <a
                 href={`tel:${personal.phone}`}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-red-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-transparent  hover:border-white/50 hover:text-white transition-all  "
               >
-                <Phone className="w-3.5 h-3.5 text-red-400" />
+                <Phone className="w-3.5 h-3.5 text-white" />
                 {personal.phone}
               </a>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-zinc-400 backdrop-blur-md shadow-sm">
-                <MapPin className="w-3.5 h-3.5 text-red-400" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-transparent  text-gray-500  ">
+                <MapPin className="w-3.5 h-3.5 text-white" />
                 {personal.location}
               </span>
               {personal.linkedin && (
@@ -117,9 +127,9 @@ export default function Hero({ personal }: HeroProps) {
                   href={personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-red-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-transparent  hover:border-white/50 hover:text-white transition-all  "
                 >
-                  <LinkedinIcon className="w-3.5 h-3.5 text-red-400" />
+                  <LinkedinIcon className="w-3.5 h-3.5 text-white" />
                   LinkedIn
                 </a>
               )}
@@ -128,52 +138,56 @@ export default function Hero({ personal }: HeroProps) {
                   href={personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-red-500/50 hover:text-white transition-all backdrop-blur-md shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none bg-transparent  hover:border-white/50 hover:text-white transition-all  "
                 >
-                  <GithubIcon className="w-3.5 h-3.5 text-red-400" />
+                  <GithubIcon className="w-3.5 h-3.5 text-white" />
                   GitHub
                 </a>
               )}
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-3.5 pt-2">
+            <div className="flex flex-wrap justify-center gap-3.5 pt-2">
               <button
                 onClick={handleScrollToContact}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-red-500 via-red-500 to-red-500 text-white font-bold hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(239,68,68,0.35)] cursor-pointer text-xs sm:text-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-none bg-white text-black font-medium hover:brightness-110 active:scale-95 transition-all  cursor-pointer text-xs sm:text-sm"
               >
                 Get In Touch
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 font-semibold border border-zinc-800 hover:border-red-500/40 transition-all cursor-pointer text-xs sm:text-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-none bg-transparent hover:bg-slate-800 text-slate-200 font-semibold  hover:border-white/40 transition-all cursor-pointer text-xs sm:text-sm"
               >
-                <Terminal className="w-4 h-4 text-red-400" />
+                <Terminal className="w-4 h-4 text-white" />
                 Explore Systems
               </a>
             </div>
           </div>
 
           {/* Right Column: 3D AI Engineering Terminal */}
-          <div className="lg:col-span-6 flex justify-center">
+          <div className="w-full flex justify-center mt-12 pointer-events-auto opacity-70 hover:opacity-100 transition-opacity">
             <AgentTerminal3D />
           </div>
         </div>
       </div>
 
-      {/* 2025.kitanga.dev Iconic Scroll Hint at Bottom Right */}
+      {/* Mechanical HUD Scroll Hint */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-end pt-8 z-10">
         <button
           onClick={handleScrollDown}
-          className="flex items-center gap-2 text-zinc-400 hover:text-white text-xs font-mono tracking-widest uppercase transition-colors cursor-pointer group"
+          className="flex flex-col items-center gap-2 text-gray-500 hover:text-white text-[10px] font-mono tracking-[0.3em] uppercase transition-colors cursor-pointer group"
           id="scroll-hint"
         >
-          {/* Animated Mouse Icon */}
-          <div className="w-4 h-6 rounded-full border border-zinc-500 group-hover:border-red-400 flex items-start justify-center p-1 transition-colors">
-            <div className="w-1 h-1.5 rounded-full bg-red-400 animate-bounce" />
+          <div className="flex gap-1 items-center">
+             <span className="w-1 h-1 bg-white/50 group-hover:bg-white transition-colors" />
+             <span>INITIATE_SCROLL</span>
+             <span className="w-1 h-1 bg-white/50 group-hover:bg-white transition-colors" />
           </div>
-          <span>Scroll</span>
+          {/* Scanline / HUD Target */}
+          <div className="w-[1px] h-12 bg-gradient-to-b from-white/0 via-white/50 to-white/0 group-hover:via-white transition-all overflow-hidden relative">
+             <div className="w-full h-4 bg-white absolute top-0 animate-[bounce_2s_infinite]" />
+          </div>
         </button>
       </div>
     </section>

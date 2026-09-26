@@ -14,7 +14,7 @@ interface Card3DProps {
 export default function Card3D({
   children,
   className = "",
-  glowColor = "rgba(239, 68, 68, 0.22)",
+  glowColor = "rgba(59, 130, 246, 0.22)",
   depth = 10,
 }: Card3DProps) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -75,7 +75,7 @@ export default function Card3D({
             rotateY,
             transformStyle: "preserve-3d",
           }}
-          className="w-full h-full relative rounded-2xl transition-shadow duration-300"
+          className="w-full h-full relative rounded-none transition-shadow duration-300"
         >
           {children}
 
@@ -86,7 +86,7 @@ export default function Card3D({
             style={{
               background: `radial-gradient(400px circle at ${mouseX.get()}px ${mouseY.get()}px, ${glowColor}, transparent 70%)`,
             }}
-            className="pointer-events-none absolute inset-0 rounded-2xl z-20 mix-blend-screen"
+            className="pointer-events-none absolute inset-0 rounded-none z-20 mix-blend-screen"
           />
 
           {/* Subtle border highlight following the cursor */}
@@ -94,9 +94,9 @@ export default function Card3D({
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.2 }}
             style={{
-              background: `radial-gradient(250px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(239, 68, 68, 0.45), transparent 60%)`,
+              background: `radial-gradient(250px circle at ${mouseX.get()}px ${mouseY.get()}px, rgba(59, 130, 246, 0.45), transparent 60%)`,
             }}
-            className="pointer-events-none absolute -inset-px rounded-2xl z-10 -z-10 blur-[1px]"
+            className="pointer-events-none absolute -inset-px rounded-none z-10 -z-10 blur-[1px]"
           />
         </motion.div>
       </div>

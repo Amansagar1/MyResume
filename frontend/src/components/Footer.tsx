@@ -18,17 +18,17 @@ export default function Footer({ personal }: FooterProps) {
   };
 
   return (
-    <footer className="bg-zinc-950 border-t border-zinc-900 py-12 relative overflow-hidden">
+    <footer className="bg-black border-t border-slate-900 py-12 relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Left: Branding & Tech Stack */}
         <div className="text-center md:text-left space-y-2">
-          <p className="text-sm text-zinc-400 font-medium">
+          <p className="text-sm text-gray-500 font-medium">
             &copy; {new Date().getFullYear()} {personal.name}. All rights reserved.
           </p>
-          <p className="text-xs text-zinc-650 font-light">
+          <p className="text-xs text-slate-650 font-light">
             Designed & Engineered using{" "}
-            <span className="text-red-400 font-semibold">Next.js</span> &{" "}
-            <span className="text-red-400 font-semibold">PHP REST API</span>
+            <span className="text-white font-semibold">Next.js</span> &{" "}
+            <span className="text-white font-semibold">PHP REST API</span>
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function Footer({ personal }: FooterProps) {
             href={personal.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-red-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
+            className="p-2.5 rounded-none bg-slate-900  text-slate-450 hover:text-white hover:border-white/40 hover:-translate-y-0.5 transition-all "
             id="footer-github-link"
             aria-label="GitHub"
           >
@@ -52,7 +52,7 @@ export default function Footer({ personal }: FooterProps) {
               href={personal.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-red-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
+              className="p-2.5 rounded-none bg-slate-900  text-slate-450 hover:text-white hover:border-white/40 hover:-translate-y-0.5 transition-all "
               id="footer-linkedin-link"
               aria-label="LinkedIn"
             >
@@ -61,7 +61,7 @@ export default function Footer({ personal }: FooterProps) {
           )}
           <a
             href={`mailto:${personal.email}`}
-            className="p-2.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-450 hover:text-white hover:border-red-500/40 hover:-translate-y-0.5 transition-all shadow-sm"
+            className="p-2.5 rounded-none bg-slate-900  text-slate-450 hover:text-white hover:border-white/40 hover:-translate-y-0.5 transition-all "
             id="footer-email-link"
             aria-label="Email"
           >
@@ -72,7 +72,7 @@ export default function Footer({ personal }: FooterProps) {
         {/* Right: Scroll to top */}
         <button
           onClick={scrollToTop}
-          className="p-2.5 rounded-full bg-zinc-900 border border-zinc-850 hover:border-red-500/40 hover:bg-zinc-850 text-zinc-400 hover:text-red-400 transition-all shadow-md group cursor-pointer"
+          className="p-2.5 rounded-none bg-slate-900 border border-slate-850 hover:border-white/40 hover:bg-slate-850 text-gray-500 hover:text-white transition-all  group cursor-pointer"
           aria-label="Scroll to top"
         >
           <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
