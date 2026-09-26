@@ -415,7 +415,7 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
         // Glitch some shards
         if (Math.random() > 0.995) {
             shard.scale.setScalar(Math.random() * 2 + 0.1);
-            shard.material.wireframe = Math.random() > 0.5;
+            (shard.material as THREE.MeshPhysicalMaterial).wireframe = Math.random() > 0.5;
         } else {
             shard.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
         }
