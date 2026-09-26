@@ -69,7 +69,7 @@ export default function Experience({ experience }: ExperienceProps) {
               <div className="absolute -left-[15px] top-3.5 w-7 h-7 rounded-none bg-white/20 scale-100 group-hover:scale-150 transition-transform duration-500 pointer-events-none -z-10" />
 
               {/* 3D Tilt Experience Card (Tighter padding & spacing) */}
-              <Card3D depth={6} glowColor="rgba(59, 130, 246, 0.15)">
+              <Card3D depth={25} glowColor="rgba(0, 170, 255, 0.4)">
                 <div className="p-4 sm:p-5 rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl  transition-all duration-300">
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 mb-3.5">
                     <div>

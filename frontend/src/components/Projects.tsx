@@ -97,7 +97,7 @@ export default function Projects({ projects }: ProjectsProps) {
           >
           {projects.map((project, index) => (
             <motion.div key={index} variants={cardVariants} className="h-full">
-              <Card3D depth={8} glowColor="rgba(59, 130, 246, 0.18)" className="h-full">
+              <Card3D depth={25} glowColor="rgba(0, 170, 255, 0.4)" className="h-full">
                 <div className="flex flex-col h-full rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl shadow-xl overflow-hidden p-5 sm:p-6 transition-all duration-300">
                   {/* Top Bar: Icon + Action Links */}
                   <div className="flex items-center justify-between pb-3.5 border-b border-slate-850 mb-4">

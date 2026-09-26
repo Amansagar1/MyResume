@@ -25,7 +25,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
   return (
     <div className="w-full space-y-5">
       {/* Kitanga-style Horizontal Expandable Accordion Grid (Tighter & Sleeker) */}
-      <div className="hidden lg:grid grid-cols-12 gap-2.5 h-[460px] w-full transition-all duration-500 ease-out">
+      <div className="hidden lg:flex gap-2.5 h-[460px] w-full transition-all duration-500 ease-out">
         {projects.map((project, index) => {
           const isActive = activeIndex === index;
           return (
@@ -35,8 +35,8 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
               onMouseEnter={() => setActiveIndex(index)}
               className={`relative rounded-none overflow-hidden border cursor-pointer transition-all duration-500 flex flex-col justify-between p-5 ${
                 isActive
-                  ? "col-span-6 bg-transparent border-white/40 "
-                  : "col-span-2 bg-black/60 border-white/20/40 hover:border-blue-500/30 hover:bg-slate-900/50"
+                  ? "flex-[3] bg-transparent border-white/40 "
+                  : "flex-[1] bg-black/60 border-white/20 hover:border-blue-500/30 hover:bg-slate-900/50"
               }`}
             >
               {/* Background ambient gradient */}
@@ -113,7 +113,7 @@ export default function WorkAccordion({ projects }: WorkAccordionProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-none text-xs font-medium bg-gradient-to-r bg-white text-black text-white hover:brightness-110 transition-all "
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-none text-xs font-medium bg-gradient-to-r bg-white text-black hover:brightness-110 transition-all "
                         >
                           Launch Demo
                           <ArrowUpRight className="w-3 h-3" />

@@ -110,7 +110,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                   const isAiCategory = category.toLowerCase().includes("ai");
                   return (
                     <div key={index} className={isAiCategory ? "md:col-span-2 lg:col-span-2" : ""}>
-                      <Card3D depth={8} glowColor={isAiCategory ? "rgba(59, 130, 246, 0.22)" : "rgba(59, 130, 246, 0.12)"} className="h-full">
+                      <Card3D depth={25} glowColor={isAiCategory ? "rgba(59, 130, 246, 0.22)" : "rgba(59, 130, 246, 0.12)"} className="h-full">
                         <div
                           className={`p-4 sm:p-5 rounded-none h-full flex flex-col justify-between bg-slate-900/60 border backdrop-blur-xl  transition-all duration-300 ${
                             isAiCategory
@@ -180,7 +180,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                 className="grid grid-cols-1 md:grid-cols-2 gap-5"
               >
                 {/* Certifications Block with 3D Tilt */}
-                <Card3D depth={8} glowColor="rgba(59, 130, 246, 0.15)">
+                <Card3D depth={25} glowColor="rgba(0, 170, 255, 0.4)">
                   <div className="p-5 sm:p-6 rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl  h-full flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2.5 mb-4 border-b border-slate-850 pb-3">
@@ -221,7 +221,7 @@ export default function Skills({ skills, certifications, education }: SkillsProp
                 </Card3D>
 
                 {/* Education Block with 3D Tilt */}
-                <Card3D depth={8} glowColor="rgba(59, 130, 246, 0.15)">
+                <Card3D depth={25} glowColor="rgba(0, 170, 255, 0.4)">
                   <div className="p-5 sm:p-6 rounded-none bg-slate-900/60 /40 hover:border-white/40 backdrop-blur-xl  h-full flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2.5 mb-4 border-b border-slate-850 pb-3">

@@ -89,7 +89,7 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     });
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
     ring1.rotation.x = Math.PI * 0.45;
-    ringGroup.add(ring1);
+    // ringGroup.add(ring1);
 
     // Ring 2: Polar Tech Orbit (Electric red)
     const ring2Geo = new THREE.TorusGeometry(4.2, 0.02, 4, 4);
@@ -99,19 +99,19 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     });
     const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
     ring2.rotation.y = Math.PI * 0.35;
-    ringGroup.add(ring2);
+    // ringGroup.add(ring2);
 
     // Ring 3: Tilted Outer Halo Ring (Neon red)
-    const ring3Geo = new THREE.TorusGeometry(4.8, 0.01, 4, 4);
+    
     const ring3Mat = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       transparent: true,
       opacity: 0.45,
     });
-    const ring3 = new THREE.Mesh(ring3Geo, ring3Mat);
-    ring3.rotation.x = -Math.PI * 0.25;
-    ring3.rotation.z = Math.PI * 0.15;
-    ringGroup.add(ring3);
+    
+    
+    
+    
 
     // Satellite Data Beads on Ring 1 (Cyber Amber Gold)
     const satelliteGroup = new THREE.Group();
@@ -226,7 +226,20 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       shardGroup.add(shard);
       shards.push(shard);
     }
-    rootGroup.add(shardGroup);
+    // rootGroup.add(shardGroup);
+
+    
+    // --- Massive Background Torus Knot ---
+    const knotGeo = new THREE.TorusKnotGeometry(8, 0.2, 128, 16);
+    const knotMat = new THREE.MeshBasicMaterial({
+      color: 0x0044ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.15,
+    });
+    const backgroundKnot = new THREE.Mesh(knotGeo, knotMat);
+    backgroundKnot.position.set(0, 0, -15); // Deep in the background
+    scene.add(backgroundKnot);
 
     // --- 6. Lighting (Cinematic Multi-Angle Studio Setup) ---
     const ambientLight = new THREE.AmbientLight(0x002266, 2.0);
@@ -299,32 +312,32 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       } else if (progress < 0.45) {
         // Work / Projects: Glides to the left side so project cards take center stage
         return {
-          posX: isMobile ? 0 : -3.6,
-          posY: isMobile ? -0.5 : 0.2,
-          posZ: -1.2,
-          rotX: 0.4,
-          rotY: -0.6,
-          scale: isMobile ? 0.7 : 0.9,
+          posX: isMobile ? 0 : -4.0,
+          posY: isMobile ? -0.5 : 0.5,
+          posZ: -1.0,
+          rotX: 1.2,
+          rotY: -1.5,
+          scale: isMobile ? 0.9 : 1.6,
         };
       } else if (progress < 0.75) {
         // Experience & Skills: Moves to right side, tilts dynamically
         return {
-          posX: isMobile ? 0 : 3.4,
+          posX: isMobile ? 0 : 4.0,
           posY: -0.2,
-          posZ: -0.8,
-          rotX: -0.2,
-          rotY: 0.8,
-          scale: isMobile ? 0.75 : 1.05,
+          posZ: 0.5,
+          rotX: -0.8,
+          rotY: 2.2,
+          scale: isMobile ? 0.9 : 1.7,
         };
       } else {
         // Contact: Centers and approaches camera
         return {
           posX: 0,
-          posY: 0.8,
-          posZ: isMobile ? -1 : 1.2,
-          rotX: 0.15,
+          posY: 0,
+          posZ: isMobile ? -1 : 3.5,
+          rotX: 3.14,
           rotY: 0,
-          scale: isMobile ? 0.8 : 1.15,
+          scale: isMobile ? 1.0 : 2.0,
         };
       }
     };
@@ -383,13 +396,13 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       wireMesh.rotation.copy(coreMesh.rotation);
 
       // Subtle breathing scale on inner energy sphere
-      const pulse = 1 + Math.sin(elapsedTime * 2.5) * 0.06;
+      const pulse = 1 + Math.sin(elapsedTime * 2.0) * 0.15;
       innerMesh.scale.set(pulse, pulse, pulse);
 
       // Asynchronous Orbital Rings Spin
       ring1.rotation.z = elapsedTime * 0.4;
       ring2.rotation.x = elapsedTime * 0.35;
-      ring3.rotation.y = -elapsedTime * 0.25;
+      
 
       
       // Animate Shards
@@ -409,6 +422,12 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
             shard.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
         }
       });
+
+      
+      // Animate Background Knot
+      backgroundKnot.rotation.z = elapsedTime * 0.05;
+      backgroundKnot.rotation.y = elapsedTime * 0.1;
+      backgroundKnot.rotation.x = Math.sin(elapsedTime * 0.05) * 0.2;
 
       // Swirl Particle Field
       particlePoints.rotation.y = elapsedTime * 0.08;
@@ -432,6 +451,8 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       window.removeEventListener("resize", handleResize);
 
       // Dispose geometries & materials
+      knotGeo.dispose();
+      knotMat.dispose();
       coreGeo.dispose();
       coreMat.dispose();
       wireGeo.dispose();
@@ -442,8 +463,8 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
       ring1Mat.dispose();
       ring2Geo.dispose();
       ring2Mat.dispose();
-      ring3Geo.dispose();
-      ring3Mat.dispose();
+      
+      
       beadGeo.dispose();
       beadMat.dispose();
       particleGeo.dispose();

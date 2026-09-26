@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PersonalInfo } from "../types/resume";
 import Card3D from "./Card3D";
 import Draggable from "./Draggable";
+import CyberCube3D from "./CyberCube3D";
 
 interface ContactProps {
   personal: PersonalInfo;
@@ -197,7 +198,10 @@ export default function Contact({ personal }: ContactProps) {
                   </div>
                 )}
                 
+              
+                
               </div>
+
             </Card3D>
           </div>
 
@@ -325,7 +329,7 @@ export default function Contact({ personal }: ContactProps) {
                       <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-none bg-gradient-to-r bg-white text-black text-white font-medium tracking-tight hover:brightness-110 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed  cursor-pointer text-xs sm:text-sm"
+                        className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-none bg-gradient-to-r bg-white text-black font-medium tracking-tight hover:brightness-110 active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed  cursor-pointer text-xs sm:text-sm"
                         id="contact-submit-btn"
                       >
                         {status === "loading" ? (
