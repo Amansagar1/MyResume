@@ -187,7 +187,7 @@ export default function Scene3D({ currentSection = "hero" }: Scene3DProps) {
     
     // --- Floating Shards Array ---
     const shardGroup = new THREE.Group();
-    const shards = [];
+    const shards: THREE.Mesh[] = [];
     const shardGeo = new THREE.TetrahedronGeometry(0.15, 0);
     const shardMat = new THREE.MeshPhysicalMaterial({
       color: 0x0033aa,
