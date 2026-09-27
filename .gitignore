@@ -19,7 +19,6 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # Local Environment Variables
-.env*
 !.env.example
 
 # Vercel Configuration
@@ -39,3 +38,4 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+config.bat
